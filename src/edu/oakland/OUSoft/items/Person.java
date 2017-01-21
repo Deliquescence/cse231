@@ -1,5 +1,7 @@
 package edu.oakland.OUSoft.items;
 
+import java.util.Date;
+
 /**
  * "The person class should include information such as id, first name, last name, etc."
  */
@@ -23,8 +25,8 @@ public class Person {
 	 * @param lastName  The last name of the Person
 	 */
 	public Person(String firstName, String lastName) {
-		this.FirstName = firstName;
-		this.LastName = lastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	
 	/**
@@ -36,8 +38,8 @@ public class Person {
 	 */
 	public Person(String ID, String firstName, String lastName) {
 		this.ID = ID;
-		this.FirstName = firstName;
-		this.LastName = lastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	
 	public String getID() {
@@ -49,19 +51,19 @@ public class Person {
 	}
 	
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 	
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 	
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 	
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 	
 	public Date getBirthday() {
