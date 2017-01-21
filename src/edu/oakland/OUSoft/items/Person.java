@@ -6,8 +6,8 @@ package edu.oakland.OUSoft.items;
 public class Person {
 	
 	private String ID;
-	private String FirstName;
-	private String LastName;
+	private String firstName;
+	private String lastName;
 	private Date Birthday;
 	
 	/**
