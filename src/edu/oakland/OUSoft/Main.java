@@ -1,8 +1,11 @@
 package edu.oakland.OUSoft;
 
+import edu.oakland.OUSoft.database.OUPeople;
 
-/**
- * GUI
- */
 public class Main {
+	
+	public static void main(String[] args) {
+		OUPeople people = new OUPeople();
+		
+	}
 }
