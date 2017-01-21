@@ -3,7 +3,7 @@ package edu.oakland.OUSoft.items;
 /**
  * "A student class should contain more information such as the number of years in college,"
  */
-public class Student {
+public class Student extends Person {
 	
 	private String major;
 	
@@ -29,7 +29,7 @@ public class Student {
 	/**
 	 * Create a Student with the specified major and number of years attended
 	 *
-	 * @param major The major of the Student
+	 * @param major         The major of the Student
 	 * @param yearsAttended The number of years the Student has been in attendance
 	 */
 	public Student(String major, int yearsAttended) {

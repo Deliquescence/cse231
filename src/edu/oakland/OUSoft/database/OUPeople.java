@@ -16,9 +16,9 @@ import java.util.ArrayList;
  */
 public class OUPeople {
 	
-	private ArrayList students;
-	private ArrayList instructors;
-	private ArrayList others;
+	private ArrayList<Student> students;
+	private ArrayList<Instructor> instructors;
+	private ArrayList<Person> others;
 	
 	/**
 	 * Retrieve a student using their ID
@@ -26,7 +26,7 @@ public class OUPeople {
 	 * @param ID The students ID
 	 * @return The student, or null if not found
 	 */
-	public Student retrieveStudentByID(int ID) {
+	public Student retrieveStudentByID(String ID) {
 		for (Student student : students) {
 			if (student.getID() == ID) {
 				return student;
@@ -41,7 +41,7 @@ public class OUPeople {
 	 * @param ID The instructors ID
 	 * @return The instructor, or null if not found
 	 */
-	public Student retrieveInstructorByID(int ID) {
+	public Instructor retrieveInstructorByID(String ID) {
 		for (Instructor instructor : instructors) {
 			if (instructor.getID() == ID) {
 				return instructor;
@@ -64,5 +64,63 @@ public class OUPeople {
 			this.others.add(person);
 		}
 		
+	}
+	
+	/**
+	 * Remove a student by reference
+	 *
+	 * @param student The Student to remove
+	 */
+	public void removeStudent(Student student) {
+		
+		this.students.remove(student);
+	}
+	
+	/**
+	 * Remove an instructor by reference
+	 *
+	 * @param instructor The Instructor to remove
+	 */
+	public void removeInstructor(Instructor instructor) {
+		
+		this.instructors.remove(instructor);
+	}
+	
+	/**
+	 * Remove a student by ID
+	 *
+	 * @param student The ID of the Student to remove
+	 */
+	public void removeStudentByID(String ID) {
+		
+		this.students.remove(retrieveStudentByID(ID));
+	}
+	
+	/**
+	 * Remove an instructor by ID
+	 *
+	 * @param instructor The ID of the Instructor to remove
+	 */
+	public void removeInstructorByID(String ID) {
+		
+		this.instructors.remove(retrieveInstructorByID(ID));
+	}
+	
+	/**
+	 * Print every student to standard output
+	 */
+	public void printAllStudents() {
+		for (Student student : students) {
+			System.out.println(student);
+		}
+	}
+	
+	/**
+	 * Print every instructor to standard output
+	 */
+	public void printAllInstructors() {
+		for (Instructor instructor : instructors) {
+			System.out.println(instructor);
+		}
 	}
 }
