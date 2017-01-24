@@ -2,6 +2,7 @@ package edu.oakland.OUSoft;
 
 import edu.oakland.OUSoft.database.OUPeople;
 import edu.oakland.OUSoft.items.Instructor;
+import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
 
 import java.util.Objects;
@@ -98,7 +99,7 @@ public class TextInterface {
 						this.db.add(student);
 						return true;
 					}
-					
+					return false;
 					
 				} else if (personType.startsWith("i")) {
 					Instructor instructor = new Instructor(ID, firstName, lastName);
@@ -112,9 +113,16 @@ public class TextInterface {
 						this.db.add(instructor);
 						return true;
 					}
-					
+					return false;
 				}
-				break;
+				Person person = new Person(ID, firstName, lastName);
+				//Confirmation
+				System.out.println("\nAdd this person?\n" + person.toString());
+				if (this.getBooleanInput()) {
+					this.db.add(person);
+					return true;
+				}
+				return false;
 			
 			case "get":
 			case "retrieve":
@@ -124,7 +132,7 @@ public class TextInterface {
 			case "rm":
 			case "delete":
 				break;
-				
+			
 			case "quit":
 			case "exit":
 				System.out.println("Goodbye");
