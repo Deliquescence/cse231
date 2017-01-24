@@ -28,8 +28,10 @@ public class TextInterface {
 		this.scan = new Scanner(System.in);
 	}
 	
+	/**
+	 * Print header and accept commands from the user in an infinite loop
+	 */
 	public void startup() {
-		
 		this.running = true;
 		System.out.print("Welcome to the OUSoft textual user interface.\nType 'help' for available commands\n");
 		while (this.running) {
@@ -75,7 +77,7 @@ public class TextInterface {
 				String firstName = this.getInput("First Name: ");
 				String lastName = this.getInput("Last Name: ");
 				
-				if (personType.startsWith("s")) {
+				if (personType.startsWith("s")) { //Student
 					Student student = new Student(ID, firstName, lastName);
 					student.setMajor(this.getInput("Major: "));
 					student.setNumYearsAttended(this.getIntegerInput("Years Attended: "));
@@ -101,7 +103,7 @@ public class TextInterface {
 					}
 					return false;
 					
-				} else if (personType.startsWith("i")) {
+				} else if (personType.startsWith("i")) { //Instructor
 					Instructor instructor = new Instructor(ID, firstName, lastName);
 					instructor.setOfficeBuilding(this.getInput("Office Building: "));
 					instructor.setOfficeNumber(this.getInput("Office Number: "));
@@ -115,6 +117,7 @@ public class TextInterface {
 					}
 					return false;
 				}
+				//Other (Not student or instructor)
 				Person person = new Person(ID, firstName, lastName);
 				//Confirmation
 				System.out.println("\nAdd this person?\n" + person.toString());
@@ -236,6 +239,7 @@ public class TextInterface {
 	
 	/**
 	 * Get the user's input, and make sure it's a boolean.
+	 * Use a default prompt of "y/n : "
 	 *
 	 * @return The user's boolean
 	 */
