@@ -112,7 +112,6 @@ public class OUPeople {
 	 * @param student The Student to remove
 	 */
 	public void removeStudent(Student student) {
-		
 		this.students.remove(student);
 	}
 	
@@ -122,8 +121,27 @@ public class OUPeople {
 	 * @param instructor The Instructor to remove
 	 */
 	public void removeInstructor(Instructor instructor) {
-		
 		this.instructors.remove(instructor);
+	}
+	
+	/**
+	 * Remove an other by reference
+	 *
+	 * @param other The other to remove
+	 */
+	public void removeInstructor(Person other) {
+		this.others.remove(other);
+	}
+	
+	/**
+	 * Remove someone from the database by reference
+	 *
+	 * @param ID The Person to remove
+	 */
+	public void remove(Person person){
+		this.students.remove(person);
+		this.instructors.remove(person);
+		this.others.remove(person);
 	}
 	
 	/**
@@ -132,7 +150,6 @@ public class OUPeople {
 	 * @param ID The ID of the Student to remove
 	 */
 	public void removeStudentByID(String ID) {
-		
 		this.students.remove(retrieveStudentByID(ID));
 	}
 	
@@ -142,8 +159,28 @@ public class OUPeople {
 	 * @param ID The ID of the Instructor to remove
 	 */
 	public void removeInstructorByID(String ID) {
-		
 		this.instructors.remove(retrieveInstructorByID(ID));
+	}
+	
+	/**
+	 * Remove an other by ID
+	 *
+	 * @param ID The ID of the other to remove
+	 */
+	public void removeOtherByID(String ID) {
+		this.others.remove(retrieveOtherByID(ID));
+	}
+	
+	/**
+	 * Remove someone from the database based on ID
+	 * Note they are removed from all sub-databases. This will not be a problem if IDs are unique.
+	 *
+	 * @param ID The persons ID
+	 */
+	public void removeByID(String ID) {
+		this.removeInstructorByID(ID);
+		this.removeStudentByID(ID);
+		this.removeOtherByID(ID);
 	}
 	
 	/**

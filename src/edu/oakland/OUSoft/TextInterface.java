@@ -142,7 +142,22 @@ public class TextInterface {
 			case "remove":
 			case "rm":
 			case "delete":
-				break;
+				if (tokens.length > 1) { //ID is given
+					Person p = this.db.retrieveByID(tokens[1]);
+					if (p != null) {
+						System.out.println("Really remove this person?\n" + p.toString());
+						if (this.getBooleanInput()) {
+							this.db.remove(p);
+							return true;
+						}
+						return false;
+					} else {
+						System.out.println("Could not find someone with that ID!");
+						return false;
+					}
+				}
+				System.out.println("Usage: remove <ID>");
+				return false;
 			
 			case "quit":
 			case "exit":
@@ -171,7 +186,6 @@ public class TextInterface {
 					return false;
 				}
 		}
-		return false;
 	}
 	
 	/**
