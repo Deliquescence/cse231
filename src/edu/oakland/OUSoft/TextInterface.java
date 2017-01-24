@@ -15,6 +15,7 @@ public class TextInterface {
 	private OUPeople db;
 	
 	private Scanner scan;
+	private boolean running;
 	
 	/**
 	 * Create a new Textual Interface that will interect with the user and the given database
@@ -28,9 +29,9 @@ public class TextInterface {
 	
 	public void startup() {
 		
-		boolean run = true;
+		this.running = true;
 		System.out.print("Welcome to the OUSoft textual user interface.\nType 'help' for available commands\n");
-		while (run) {
+		while (this.running) {
 			this.doCommand(this.getInput("OUSoft: "));
 		}
 	}
@@ -54,14 +55,10 @@ public class TextInterface {
 					} else if (tokens[1].startsWith("s")) { //Student
 						this.db.printAllStudents();
 						return true;
-					} else {
-						this.db.printAll();
-						return true;
 					}
-				} else {
-					this.db.printAll();
-					return true;
 				}
+				this.db.printAll();
+				return true;
 			
 			
 			case "add":
@@ -127,6 +124,12 @@ public class TextInterface {
 			case "rm":
 			case "delete":
 				break;
+				
+			case "quit":
+			case "exit":
+				System.out.println("Goodbye");
+				this.running = false;
+				return true;
 			
 			case "help":
 			case "?":
@@ -203,7 +206,7 @@ public class TextInterface {
 	 * @return The user's boolean
 	 */
 	public boolean getBooleanInput() {
-		return this.getBooleanInput("y/n :");
+		return this.getBooleanInput("y/n : ");
 	}
 	
 	/**
@@ -243,6 +246,7 @@ public class TextInterface {
 		helpBuilder.append("get <ID>\t\tRetrieve a person from the database\n");
 		helpBuilder.append("help [command]\tGet help\n");
 		helpBuilder.append("list [type]\t\tList people in the databse\n");
+		helpBuilder.append("quit\t\t\tExit the program\n");
 		helpBuilder.append("remove <ID>\t\tRemove a person from the database\n");
 		
 		System.out.print(helpBuilder.toString());
