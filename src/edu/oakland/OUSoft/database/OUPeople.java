@@ -20,7 +20,7 @@ public class OUPeople {
 	private ArrayList<Instructor> instructors;
 	private ArrayList<Person> others;
 	
-	public OUPeople(){
+	public OUPeople() {
 		
 		this.students = new ArrayList<>();
 		this.instructors = new ArrayList<>();
@@ -96,7 +96,7 @@ public class OUPeople {
 	/**
 	 * Remove a student by ID
 	 *
-	 * @param student The ID of the Student to remove
+	 * @param ID The ID of the Student to remove
 	 */
 	public void removeStudentByID(String ID) {
 		
@@ -106,7 +106,7 @@ public class OUPeople {
 	/**
 	 * Remove an instructor by ID
 	 *
-	 * @param instructor The ID of the Instructor to remove
+	 * @param ID The ID of the Instructor to remove
 	 */
 	public void removeInstructorByID(String ID) {
 		
@@ -116,7 +116,10 @@ public class OUPeople {
 	/**
 	 * Print every student to standard output
 	 */
-	public void printAllStudents() {
+	public void printAllStudents(boolean doHeader) {
+		if (doHeader) {
+			System.out.println("Students in the database: " + this.students.size());
+		}
 		for (Student student : this.students) {
 			System.out.println(student);
 		}
@@ -125,7 +128,10 @@ public class OUPeople {
 	/**
 	 * Print every instructor to standard output
 	 */
-	public void printAllInstructors() {
+	public void printAllInstructors(boolean doHeader) {
+		if (doHeader) {
+			System.out.println("Instructors in the database: " + this.instructors.size());
+		}
 		for (Instructor instructor : this.instructors) {
 			System.out.println(instructor);
 		}
@@ -134,7 +140,10 @@ public class OUPeople {
 	/**
 	 * Print every uncategorized person to standard output
 	 */
-	public void printAllOthers() {
+	public void printAllOthers(boolean doHeader) {
+		if (doHeader) {
+			System.out.println("There are " + this.others.size() + " others in the database");
+		}
 		for (Person person : this.others) {
 			System.out.println(person);
 		}
@@ -143,9 +152,13 @@ public class OUPeople {
 	/**
 	 * Print every person to standard output
 	 */
-	public void printAll(){
-		this.printAllInstructors();
-		this.printAllStudents();
-		this.printAllOthers();
+	public void printAll(boolean doHeader) {
+		if (doHeader) {
+			int count = this.students.size() + this.instructors.size() + this.others.size();
+			System.out.println("People in the database: " + count);
+		}
+		this.printAllInstructors(false);
+		this.printAllStudents(false);
+		this.printAllOthers(false);
 	}
 }

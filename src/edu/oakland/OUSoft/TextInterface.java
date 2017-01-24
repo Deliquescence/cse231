@@ -50,14 +50,14 @@ public class TextInterface {
 			case "ls":
 				if (tokens.length > 1) { //Type is given
 					if (tokens[1].startsWith("i")) { //Instructor
-						this.db.printAllInstructors();
+						this.db.printAllInstructors(true);
 						return true;
 					} else if (tokens[1].startsWith("s")) { //Student
-						this.db.printAllStudents();
+						this.db.printAllStudents(true);
 						return true;
 					}
 				}
-				this.db.printAll();
+				this.db.printAll(true);
 				return true;
 			
 			
