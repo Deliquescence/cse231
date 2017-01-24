@@ -28,6 +28,20 @@ public class OUPeople {
 	}
 	
 	/**
+	 * Retrieve a person using their ID
+	 *
+	 * @param ID The persons ID
+	 * @return The Person, or null if not found
+	 */
+	public Person retrieveByID(String ID) {
+		Person s = retrieveStudentByID(ID);
+		if (s != null) {
+			return s;
+		}
+		return retrieveInstructorByID(ID);
+	}
+	
+	/**
 	 * Retrieve a student using their ID
 	 *
 	 * @param ID The students ID

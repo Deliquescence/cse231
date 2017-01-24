@@ -126,7 +126,18 @@ public class TextInterface {
 			
 			case "get":
 			case "retrieve":
-				break;
+				if (tokens.length > 1) { //ID is given
+					Person p = this.db.retrieveByID(tokens[1]);
+					if (p != null) {
+						System.out.println("Found someone with this ID:\n" + p.toString());
+						return true;
+					} else {
+						System.out.println("Could not find someone with that ID!");
+						return false;
+					}
+				}
+				System.out.println("Usage: get <ID>");
+				return false;
 			
 			case "remove":
 			case "rm":
