@@ -38,7 +38,11 @@ public class OUPeople {
 		if (s != null) {
 			return s;
 		}
-		return retrieveInstructorByID(ID);
+		Person i = retrieveInstructorByID(ID);
+		if (i != null) {
+			return i;
+		}
+		return retrieveOtherByID(ID);
 	}
 	
 	/**
@@ -66,6 +70,21 @@ public class OUPeople {
 		for (Instructor instructor : instructors) {
 			if (instructor.getID().equals(ID)) {
 				return instructor;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Retrieve someone uncategorized using their ID
+	 *
+	 * @param ID The persons ID
+	 * @return The person, or null if not found
+	 */
+	public Person retrieveOtherByID(String ID) {
+		for (Person person : this.others) {
+			if (person.getID().equals(ID)) {
+				return person;
 			}
 		}
 		return null;
