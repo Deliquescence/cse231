@@ -20,6 +20,13 @@ public class OUPeople {
 	private ArrayList<Instructor> instructors;
 	private ArrayList<Person> others;
 	
+	public OUPeople(){
+		
+		this.students = new ArrayList<>();
+		this.instructors = new ArrayList<>();
+		this.others = new ArrayList<>();
+	}
+	
 	/**
 	 * Retrieve a student using their ID
 	 *
@@ -110,7 +117,7 @@ public class OUPeople {
 	 * Print every student to standard output
 	 */
 	public void printAllStudents() {
-		for (Student student : students) {
+		for (Student student : this.students) {
 			System.out.println(student);
 		}
 	}
@@ -119,7 +126,7 @@ public class OUPeople {
 	 * Print every instructor to standard output
 	 */
 	public void printAllInstructors() {
-		for (Instructor instructor : instructors) {
+		for (Instructor instructor : this.instructors) {
 			System.out.println(instructor);
 		}
 	}
