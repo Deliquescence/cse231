@@ -27,6 +27,11 @@ public class Instructor extends Person {
 		this.officeNumber = officeNumber;
 	}
 	
+	@Override
+	public String toString(){
+		return super.toString() + ", Instructor. Office " + this.officeNumber + " in " + this.officeBuilding;
+	}
+	
 	public String getOfficeBuilding() {
 		return officeBuilding;
 	}

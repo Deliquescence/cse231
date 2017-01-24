@@ -37,6 +37,11 @@ public class Student extends Person {
 		this.numYearsAttended = yearsAttended;
 	}
 	
+	@Override
+	public String toString(){
+		return super.toString() + ", Student. Major: " + this.major + " Years attended: " + this.numYearsAttended;
+	}
+	
 	public String getMajor() {
 		return major;
 	}

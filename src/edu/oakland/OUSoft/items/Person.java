@@ -42,6 +42,11 @@ public class Person {
 		this.lastName = lastName;
 	}
 	
+	@Override
+	public String toString() {
+		return this.ID + ": " + this.firstName + " " + this.lastName;
+	}
+	
 	public String getID() {
 		return ID;
 	}
