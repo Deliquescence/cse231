@@ -18,23 +18,24 @@ public class Student extends Person {
 	}
 	
 	/**
-	 * Create a Student with the specified major
+	 * Create a Student with a first name and last name.
 	 *
-	 * @param major The major of the Student
+	 * @param firstName The first name of the Student
+	 * @param lastName  The last name of the Student
 	 */
-	public Student(String major) {
-		this.major = major;
+	public Student(String firstName, String lastName) {
+		super(firstName, lastName);
 	}
 	
 	/**
-	 * Create a Student with the specified major and number of years attended
+	 * Create a Student with an ID, first name, and last name.
 	 *
-	 * @param major         The major of the Student
-	 * @param yearsAttended The number of years the Student has been in attendance
+	 * @param ID        The ID of the Student
+	 * @param firstName The first name of the Student
+	 * @param lastName  The last name of the Student
 	 */
-	public Student(String major, int yearsAttended) {
-		this.major = major;
-		this.numYearsAttended = yearsAttended;
+	public Student(String ID, String firstName, String lastName) {
+		super(ID, firstName, lastName);
 	}
 	
 	@Override

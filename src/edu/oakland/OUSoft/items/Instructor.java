@@ -11,20 +11,30 @@ public class Instructor extends Person {
 	private boolean hasTenure;
 	
 	/**
-	 * Create a blank Instructor
+	 * Create an empty Instructor
 	 */
 	public Instructor() {
 	}
 	
 	/**
-	 * Create an Instructor, specifing office location
+	 * Create an Instructor with a first name and last name.
 	 *
-	 * @param officeBuilding
-	 * @param officeNumber
+	 * @param firstName The first name of the Instructor
+	 * @param lastName  The last name of the Instructor
 	 */
-	public Instructor(String officeBuilding, String officeNumber) {
-		this.officeBuilding = officeBuilding;
-		this.officeNumber = officeNumber;
+	public Instructor(String firstName, String lastName) {
+		super(firstName, lastName);
+	}
+	
+	/**
+	 * Create an Instructor with an ID, first name, and last name.
+	 *
+	 * @param ID        The ID of the Instructor
+	 * @param firstName The first name of the Instructor
+	 * @param lastName  The last name of the Instructor
+	 */
+	public Instructor(String ID, String firstName, String lastName) {
+		super(ID, firstName, lastName);
 	}
 	
 	@Override
