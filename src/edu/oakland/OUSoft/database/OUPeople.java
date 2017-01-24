@@ -130,4 +130,22 @@ public class OUPeople {
 			System.out.println(instructor);
 		}
 	}
+	
+	/**
+	 * Print every uncategorized person to standard output
+	 */
+	public void printAllOthers() {
+		for (Person person : this.others) {
+			System.out.println(person);
+		}
+	}
+	
+	/**
+	 * Print every person to standard output
+	 */
+	public void printAll(){
+		this.printAllInstructors();
+		this.printAllStudents();
+		this.printAllOthers();
+	}
 }
