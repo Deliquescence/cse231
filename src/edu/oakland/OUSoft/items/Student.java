@@ -40,7 +40,7 @@ public class Student extends Person {
 	
 	@Override
 	public String toString(){
-		return super.toString() + ", Student. Major: " + this.major + " Years attended: " + this.numYearsAttended;
+		return super.toString() + ", Student. Major: " + this.major + ". Years attended: " + this.numYearsAttended;
 	}
 	
 	public String getMajor() {
