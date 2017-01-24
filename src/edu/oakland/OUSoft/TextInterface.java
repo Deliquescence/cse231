@@ -92,7 +92,7 @@ public class TextInterface {
 							student.setGPA(dGPA);
 							validGPA = true;
 						} catch (IllegalArgumentException ex) {
-							System.out.printf("Error parsing '%s' into GPA, try again", sGPA);
+							System.out.printf("Error parsing '%s' into GPA, try again\n", sGPA);
 						}
 					}
 					//Confirmation
@@ -151,6 +151,7 @@ public class TextInterface {
 						System.out.println("Really remove this person?\n" + p.toString());
 						if (this.getBooleanInput()) {
 							this.db.remove(p);
+							System.out.println("Removed!");
 							return true;
 						}
 						return false;
@@ -180,7 +181,6 @@ public class TextInterface {
 					this.printBigHelp();
 					return true;
 				}
-			
 			
 			default:
 				if (Objects.equals(tokens[0], "")) { //No command
