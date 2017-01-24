@@ -8,7 +8,7 @@ public class Instructor extends Person {
 	private String officeBuilding;
 	private String officeNumber;
 	
-	private boolean hasTenure;
+	private boolean tenured;
 	
 	/**
 	 * Create an empty Instructor
@@ -39,7 +39,7 @@ public class Instructor extends Person {
 	
 	@Override
 	public String toString(){
-		return super.toString() + ", Instructor. Office " + this.officeNumber + " in " + this.officeBuilding;
+		return super.toString() + ", Instructor. Office " + this.officeNumber + " in " + this.officeBuilding + ". Tenured: " + this.tenured;
 	}
 	
 	public String getOfficeBuilding() {
@@ -58,11 +58,11 @@ public class Instructor extends Person {
 		this.officeNumber = officeNumber;
 	}
 	
-	public boolean hasTenure() {
-		return hasTenure;
+	public boolean isTenured() {
+		return tenured;
 	}
 	
-	public void setHasTenure(boolean hasTenure) {
-		this.hasTenure = hasTenure;
+	public void setTenured(boolean tenured) {
+		this.tenured = tenured;
 	}
 }

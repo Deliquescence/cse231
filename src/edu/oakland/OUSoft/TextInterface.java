@@ -107,7 +107,7 @@ public class TextInterface {
 					Instructor instructor = new Instructor(ID, firstName, lastName);
 					instructor.setOfficeBuilding(this.getInput("Office Building: "));
 					instructor.setOfficeNumber(this.getInput("Office Number: "));
-					instructor.setHasTenure(this.getBooleanInput("Has tenure (y/n): "));
+					instructor.setTenured(this.getBooleanInput("Has tenure (y/n): "));
 					
 					//Confirmation
 					System.out.println("\nAdd this instructor?\n" + instructor.toString());
