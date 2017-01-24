@@ -35,7 +35,7 @@ public class OUPeople {
 	 */
 	public Student retrieveStudentByID(String ID) {
 		for (Student student : students) {
-			if (student.getID() == ID) {
+			if (student.getID().equals(ID)) {
 				return student;
 			}
 		}
@@ -50,7 +50,7 @@ public class OUPeople {
 	 */
 	public Instructor retrieveInstructorByID(String ID) {
 		for (Instructor instructor : instructors) {
-			if (instructor.getID() == ID) {
+			if (instructor.getID().equals(ID)) {
 				return instructor;
 			}
 		}
