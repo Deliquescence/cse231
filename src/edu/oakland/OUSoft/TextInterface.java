@@ -19,7 +19,7 @@ public class TextInterface {
 	private boolean running;
 	
 	/**
-	 * Create a new Textual Interface that will interect with the user and the given database
+	 * Create a new Textual Interface that will interact with the user and the given database
 	 *
 	 * @param db The OUPeople database to work with
 	 */
@@ -62,7 +62,6 @@ public class TextInterface {
 				}
 				this.db.printAll(true);
 				return true;
-			
 			
 			case "add":
 			case "new":
