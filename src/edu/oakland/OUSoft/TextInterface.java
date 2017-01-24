@@ -161,6 +161,7 @@ public class TextInterface {
 			
 			case "quit":
 			case "exit":
+			case "end":
 				System.out.println("Goodbye");
 				this.running = false;
 				return true;
@@ -278,7 +279,7 @@ public class TextInterface {
 		helpBuilder.append("add [type]\t\tAdd a person to the database\n");
 		helpBuilder.append("get <ID>\t\tRetrieve a person from the database\n");
 		helpBuilder.append("help [command]\tGet help\n");
-		helpBuilder.append("list [type]\t\tList people in the databse\n");
+		helpBuilder.append("list [type]\t\tList people in the database\n");
 		helpBuilder.append("quit\t\t\tExit the program\n");
 		helpBuilder.append("remove <ID>\t\tRemove a person from the database\n");
 		
