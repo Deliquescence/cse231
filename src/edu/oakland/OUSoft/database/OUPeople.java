@@ -283,7 +283,7 @@ public class OUPeople {
 	 *
 	 * @param other The other to remove
 	 */
-	public void removeInstructor(Person other) {
+	public void removeOther(Person other) {
 		this.others.remove(other);
 	}
 	
