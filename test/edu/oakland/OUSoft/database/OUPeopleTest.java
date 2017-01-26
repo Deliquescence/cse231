@@ -28,7 +28,7 @@ class OUPeopleTest {
 	
 	@Test
 	void retrieveStudentByID() {
-		assertEquals(null, db.retrievePersonByID("NULL"));
+		assertEquals(null, db.retrieveStudentByID("NULL"));
 		
 		Student testStudent = new Student("ID");
 		db.addPerson(testStudent);
@@ -41,7 +41,7 @@ class OUPeopleTest {
 	
 	@Test
 	void retrieveInstructorByID() {
-		assertEquals(null, db.retrievePersonByID("NULL"));
+		assertEquals(null, db.retrieveInstructorByID("NULL"));
 		
 		Instructor testInstructor = new Instructor("ID");
 		db.addPerson(testInstructor);
@@ -54,7 +54,7 @@ class OUPeopleTest {
 	
 	@Test
 	void retrieveOtherByID() {
-		assertEquals(null, db.retrievePersonByID("NULL"));
+		assertEquals(null, db.retrieveOtherByID("NULL"));
 		
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
