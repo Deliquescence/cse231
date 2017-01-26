@@ -49,4 +49,18 @@ public class Enrollment {
 	public void setLink(Enrollment link) {
 		this.link = link;
 	}
+	
+	@Override
+	public String toString() {
+		return "Enrollment of student " + this.student + " in course " + this.course;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Enrollment) {
+			Enrollment check = (Enrollment) obj;
+			return this.course.equals(check.getCourse()) && this.student.equals(check.getStudent());
+		}
+		return false;
+	}
 }
