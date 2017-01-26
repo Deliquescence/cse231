@@ -28,6 +28,8 @@ public class OUPeople {
 		this.students = new ArrayList<>();
 		this.instructors = new ArrayList<>();
 		this.others = new ArrayList<>();
+		this.courses = new ArrayList<>();
+		this.enrollments = new ArrayList<>();
 	}
 	
 	/**
