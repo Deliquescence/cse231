@@ -62,9 +62,12 @@ public class OUPeople {
 	 *
 	 * @param student The Student to enroll
 	 * @param course  The Course to enroll the Student in
+	 * @return The Enrollment object that indicates the students enrollment in the course
 	 */
-	public void enroll(Student student, Course course) {
-		this.enrollments.add(new Enrollment(course, student));
+	public Enrollment enroll(Student student, Course course) {
+		Enrollment e = new Enrollment(course, student);
+		this.enrollments.add(e);
+		return e;
 	}
 	
 	/**
