@@ -11,19 +11,12 @@ public class Instructor extends Person {
 	private boolean tenured;
 	
 	/**
-	 * Create an empty Instructor
-	 */
-	public Instructor() {
-	}
-	
-	/**
-	 * Create an Instructor with a first name and last name.
+	 * Create an Instructor with an ID
 	 *
-	 * @param firstName The first name of the Instructor
-	 * @param lastName  The last name of the Instructor
+	 * @param ID The ID of the Instructor
 	 */
-	public Instructor(String firstName, String lastName) {
-		super(firstName, lastName);
+	public Instructor(String ID) {
+		super(ID);
 	}
 	
 	/**
@@ -38,7 +31,7 @@ public class Instructor extends Person {
 	}
 	
 	@Override
-	public String toString(){
+	public String toString() {
 		return super.toString() + ", Instructor. Office " + this.officeNumber + " in " + this.officeBuilding + ". Tenured: " + this.tenured;
 	}
 	

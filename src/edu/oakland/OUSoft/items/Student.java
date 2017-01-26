@@ -12,19 +12,12 @@ public class Student extends Person {
 	private double GPA;
 	
 	/**
-	 * Create an empty Student
-	 */
-	public Student() {
-	}
-	
-	/**
-	 * Create a Student with a first name and last name.
+	 * Create a Student with an ID
 	 *
-	 * @param firstName The first name of the Student
-	 * @param lastName  The last name of the Student
+	 * @param ID The ID of the Student
 	 */
-	public Student(String firstName, String lastName) {
-		super(firstName, lastName);
+	public Student(String ID) {
+		super(ID);
 	}
 	
 	/**
@@ -39,7 +32,7 @@ public class Student extends Person {
 	}
 	
 	@Override
-	public String toString(){
+	public String toString() {
 		return super.toString() + ", Student. Major: " + this.major + ". Years attended: " + this.numYearsAttended;
 	}
 	

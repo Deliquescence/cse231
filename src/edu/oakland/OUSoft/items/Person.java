@@ -13,20 +13,12 @@ public class Person {
 	private Date Birthday;
 	
 	/**
-	 * Create an empty person
-	 */
-	public Person() {
-	}
-	
-	/**
-	 * Create a person with a first name and last name.
+	 * Create a Person with an ID
 	 *
-	 * @param firstName The first name of the Person
-	 * @param lastName  The last name of the Person
+	 * @param ID The ID of the Person
 	 */
-	public Person(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public Person(String ID) {
+		this.ID = ID;
 	}
 	
 	/**
