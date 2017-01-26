@@ -1,10 +1,12 @@
 package edu.oakland.OUSoft.database;
 
+import edu.oakland.OUSoft.items.Course;
 import edu.oakland.OUSoft.items.Instructor;
 import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * includes an array of references to all Students and an array of references to all Instructors,
@@ -19,12 +21,159 @@ public class OUPeople {
 	private ArrayList<Student> students;
 	private ArrayList<Instructor> instructors;
 	private ArrayList<Person> others;
+	private ArrayList<Course> courses;
+	private ArrayList<Enrollment> enrollments;
 	
 	public OUPeople() {
-		
 		this.students = new ArrayList<>();
 		this.instructors = new ArrayList<>();
 		this.others = new ArrayList<>();
+	}
+	
+	/**
+	 * Add a course to the database.
+	 * The course MUST have an instructor assigned.
+	 *
+	 * @param course The course to add
+	 * @throws IllegalArgumentException If the course does not have an instructor assigned
+	 */
+	public void addCourse(Course course) throws IllegalArgumentException {
+		if (course.getInstructor() == null) {
+			throw new IllegalArgumentException("Course did not have an instructor assigned.");
+		}
+		this.courses.add(course);
+	}
+	
+	/**
+	 * Add a course to the database, with the given Instructor assigned.
+	 *
+	 * @param course     The Course to add
+	 * @param instructor The Instructor to assign
+	 */
+	public void addCourse(Course course, Instructor instructor) {
+		course.setInstructor(instructor);
+		this.courses.add(course);
+	}
+	
+	/**
+	 * Enroll a Student in a Course.
+	 *
+	 * @param student The Student to enroll
+	 * @param course  The Course to enroll the Student in
+	 */
+	public void enroll(Student student, Course course) {
+		this.enrollments.add(new Enrollment(course, student));
+	}
+	
+	/**
+	 * Withdraw a Student from a Course.
+	 *
+	 * @param student The Student to withdraw
+	 * @param course  The Course to withdraw the Student from
+	 */
+	public void withdraw(Student student, Course course) {
+		this.enrollments.remove(getEnrollment(student, course));
+	}
+	
+	/**
+	 * Get the {@link Enrollment} of this Student and Course, if one exists.
+	 *
+	 * @param student The student to get Enrollment of
+	 * @param course  The course to get Enrollment of
+	 * @return The Enrollment, or null if none exists
+	 */
+	public Enrollment getEnrollment(Student student, Course course) {
+		for (Enrollment e : this.enrollments) {
+			if (e.getCourse() == course && e.getStudent() == student) {
+				return e;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Get any Enrollments that contain the given Course
+	 *
+	 * @param course The Course to get Enrollments of
+	 * @return Any Enrollments with this Course
+	 */
+	public List<Enrollment> getEnrollments(Course course) {
+		List<Enrollment> enrollmentList = new ArrayList<>();
+		for (Enrollment e : this.enrollments) {
+			if (e.getCourse() == course) {
+				enrollmentList.add(e);
+			}
+		}
+		return enrollmentList;
+	}
+	
+	/**
+	 * Get any Enrollments that contain the given Student
+	 *
+	 * @param student The Student to get Enrollments of
+	 * @return Any Enrollments with this Student
+	 */
+	public List<Enrollment> getEnrollments(Student student) {
+		List<Enrollment> enrollmentList = new ArrayList<>();
+		for (Enrollment e : this.enrollments) {
+			if (e.getStudent() == student) {
+				enrollmentList.add(e);
+			}
+		}
+		return enrollmentList;
+	}
+	
+	/**
+	 * Check whether a student is enrolled in a Course
+	 *
+	 * @param student The Student to check
+	 * @param course  The Course to check
+	 * @return If the student is enrolled
+	 */
+	public boolean studentIsEnrolled(Student student, Course course) {
+		return getEnrollment(student, course) != null;
+	}
+	
+	/**
+	 * Get the number of students enrolled in a course.
+	 *
+	 * @param course the Course to check
+	 * @return The number of Students enrolled
+	 */
+	public int numberStudentsEnrolled(Course course) {
+		return getEnrollments(course).size();
+	}
+	
+	/**
+	 * Get the number of courses a student is enrolled in.
+	 *
+	 * @param student The student to check
+	 * @return The number of courses the student is enrolled in
+	 */
+	public int numberCoursesEnrolled(Student student) {
+		return getEnrollments(student).size();
+	}
+	
+	/**
+	 * Print all the students who are enrolled in a course to standard output.
+	 *
+	 * @param course The Course to print students of
+	 */
+	public void printEnrolled(Course course) {
+		for (Enrollment enrollment : getEnrollments(course)) {
+			System.out.println(enrollment.getStudent().toString());
+		}
+	}
+	
+	/**
+	 * Print all the courses a student is enrolled in to standard output.
+	 *
+	 * @param student The Student to print courses of
+	 */
+	public void printCourses(Student student) {
+		for (Enrollment enrollment : getEnrollments(student)) {
+			System.out.println(enrollment.getCourse().toString());
+		}
 	}
 	
 	/**
