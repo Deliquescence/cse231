@@ -136,9 +136,9 @@ public class OUPeople {
 	/**
 	 * Remove someone from the database by reference
 	 *
-	 * @param ID The Person to remove
+	 * @param person The Person to remove
 	 */
-	public void remove(Person person){
+	public void remove(Person person) {
 		this.students.remove(person);
 		this.instructors.remove(person);
 		this.others.remove(person);
