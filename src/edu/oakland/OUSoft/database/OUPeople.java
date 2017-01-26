@@ -23,6 +23,7 @@ public class OUPeople {
 	private final ArrayList<Person> others;
 	private final ArrayList<Course> courses;
 	private final ArrayList<Enrollment> enrollments;
+	
 	public OUPeople() {
 		this.students = new ArrayList<>();
 		this.instructors = new ArrayList<>();
@@ -57,13 +58,17 @@ public class OUPeople {
 	}
 	
 	/**
-	 * Enroll a Student in a Course.
+	 * Enroll a Student in a Course. If they are already enrolled, return the {@link Enrollment} representing so.
 	 *
 	 * @param student The Student to enroll
 	 * @param course  The Course to enroll the Student in
 	 * @return The Enrollment object that indicates the students enrollment in the course
 	 */
 	public Enrollment enroll(Student student, Course course) {
+		if (studentIsEnrolled(student, course)) {
+			return getEnrollment(student, course);
+		}
+		
 		Enrollment e = new Enrollment(course, student);
 		this.enrollments.add(e);
 		return e;
