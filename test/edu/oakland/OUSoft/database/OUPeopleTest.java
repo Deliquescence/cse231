@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OUPeopleTest {
 	
@@ -67,47 +69,73 @@ class OUPeopleTest {
 	
 	@Test
 	void addPerson() {
-
+		Person testPerson = new Person("ID");
+		db.addPerson(testPerson);
+		assertTrue(db.getPeople().contains(testPerson));
 	}
 	
 	@Test
 	void removeStudent() {
-		
+		Student testStudent = new Student("ID");
+		db.addPerson(testStudent);
+		db.removeStudent(testStudent);
+		assertFalse(db.getStudents().contains(testStudent));
 	}
 	
 	@Test
 	void removeInstructor() {
-		
+		Instructor testInstructor = new Instructor("ID");
+		db.addPerson(testInstructor);
+		db.removeInstructor(testInstructor);
+		assertFalse(db.getInstructors().contains(testInstructor));
 	}
 	
 	@Test
 	void removeOther() {
-		
+		Person testPerson = new Person("ID");
+		db.addPerson(testPerson);
+		db.removeOther(testPerson);
+		assertFalse(db.getPeople().contains(testPerson));
 	}
 	
 	@Test
 	void removePerson() {
-		
+		Person testPerson = new Person("ID");
+		db.addPerson(testPerson);
+		db.removePerson(testPerson);
+		assertFalse(db.getPeople().contains(testPerson));
 	}
 	
 	@Test
 	void removeStudentByID() {
-		
+		Student testStudent = new Student("ID");
+		db.addPerson(testStudent);
+		db.removeStudentByID("ID");
+		assertFalse(db.getStudents().contains(testStudent));
 	}
 	
 	@Test
 	void removeInstructorByID() {
-		
+		Instructor testInstructor = new Instructor("ID");
+		db.addPerson(testInstructor);
+		db.removeInstructorByID("ID");
+		assertFalse(db.getInstructors().contains(testInstructor));
 	}
 	
 	@Test
 	void removeOtherByID() {
-		
+		Person testPerson = new Person("ID");
+		db.addPerson(testPerson);
+		db.removeOtherByID("ID");
+		assertFalse(db.getPeople().contains(testPerson));
 	}
 	
 	@Test
-	void removeByID() {
-		
+	void removePersonByID() {
+		Person testPerson = new Person("ID");
+		db.addPerson(testPerson);
+		db.removePersonByID("ID");
+		assertFalse(db.getPeople().contains(testPerson));
 	}
 	
 }
