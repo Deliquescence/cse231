@@ -174,57 +174,57 @@ class OUPeopleTest {
 	
 	@Test
 	void retrievePersonByID() {
-		assertEquals(null, db.retrievePersonByID("NULL"));
+		assertEquals(null, db.retrievePersonByID("NULL"), "Person magically appeared in database");
 		
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
-		assertEquals(testPerson, db.retrievePersonByID("ID"));
+		assertEquals(testPerson, db.retrievePersonByID("ID"), "Person retrieved by ID did not match person added");
 	}
 	
 	@Test
 	void retrieveStudentByID() {
-		assertEquals(null, db.retrieveStudentByID("NULL"));
+		assertEquals(null, db.retrieveStudentByID("NULL"), "Person magically appeared in database");
 		
 		Student testStudent = new Student("ID");
 		db.addPerson(testStudent);
-		assertEquals(testStudent, db.retrieveStudentByID("ID"));
+		assertEquals(testStudent, db.retrieveStudentByID("ID"), "Student retrieved by ID did not match person added");
 		
 		//Check not in wrong category
-		assertEquals(null, db.retrieveOtherByID("ID"));
-		assertEquals(null, db.retrieveInstructorByID("ID"));
+		assertEquals(null, db.retrieveOtherByID("ID"), "Retrieved a student from an improper sub-database");
+		assertEquals(null, db.retrieveInstructorByID("ID"), "Retrieved a student from an improper sub-database");
 	}
 	
 	@Test
 	void retrieveInstructorByID() {
-		assertEquals(null, db.retrieveInstructorByID("NULL"));
+		assertEquals(null, db.retrieveInstructorByID("NULL"), "Person magically appeared in database");
 		
 		Instructor testInstructor = new Instructor("ID");
 		db.addPerson(testInstructor);
-		assertEquals(testInstructor, db.retrieveInstructorByID("ID"));
+		assertEquals(testInstructor, db.retrieveInstructorByID("ID"), "Instructor retrieved by ID did not match person added");
 		
 		//Check not in wrong category
-		assertEquals(null, db.retrieveStudentByID("ID"));
-		assertEquals(null, db.retrieveOtherByID("ID"));
+		assertEquals(null, db.retrieveStudentByID("ID"), "Retrieved an instructor from an improper sub-database");
+		assertEquals(null, db.retrieveOtherByID("ID"), "Retrieved an instructor from an improper sub-database");
 	}
 	
 	@Test
 	void retrieveOtherByID() {
-		assertEquals(null, db.retrieveOtherByID("NULL"));
+		assertEquals(null, db.retrieveOtherByID("NULL"), "Person magically appeared in database");
 		
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
-		assertEquals(testPerson, db.retrieveOtherByID("ID"));
+		assertEquals(testPerson, db.retrieveOtherByID("ID"), "Other retrieved by ID did not match person added");
 		
 		//Check not in wrong category
-		assertEquals(null, db.retrieveStudentByID("ID"));
-		assertEquals(null, db.retrieveInstructorByID("ID"));
+		assertEquals(null, db.retrieveStudentByID("ID"), "Retrieved a person from an improper sub-database");
+		assertEquals(null, db.retrieveInstructorByID("ID"), "Retrieved a person from an improper sub-database");
 	}
 	
 	@Test
 	void addPerson() {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
-		assertTrue(db.getPeople().contains(testPerson));
+		assertTrue(db.getPeople().contains(testPerson), "Did not add a person");
 	}
 	
 	@Test
@@ -232,7 +232,7 @@ class OUPeopleTest {
 		Student testStudent = new Student("ID");
 		db.addPerson(testStudent);
 		db.removeStudent(testStudent);
-		assertFalse(db.getStudents().contains(testStudent));
+		assertFalse(db.getStudents().contains(testStudent), "Did not remove a student");
 	}
 	
 	@Test
@@ -240,7 +240,7 @@ class OUPeopleTest {
 		Instructor testInstructor = new Instructor("ID");
 		db.addPerson(testInstructor);
 		db.removeInstructor(testInstructor);
-		assertFalse(db.getInstructors().contains(testInstructor));
+		assertFalse(db.getInstructors().contains(testInstructor), "Did not remove an instructor");
 	}
 	
 	@Test
@@ -248,7 +248,7 @@ class OUPeopleTest {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		db.removeOther(testPerson);
-		assertFalse(db.getPeople().contains(testPerson));
+		assertFalse(db.getPeople().contains(testPerson), "Did not remove an other");
 	}
 	
 	@Test
@@ -256,7 +256,7 @@ class OUPeopleTest {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		db.removePerson(testPerson);
-		assertFalse(db.getPeople().contains(testPerson));
+		assertFalse(db.getPeople().contains(testPerson), "Did not remove a person");
 	}
 	
 	@Test
@@ -264,7 +264,7 @@ class OUPeopleTest {
 		Student testStudent = new Student("ID");
 		db.addPerson(testStudent);
 		db.removeStudentByID("ID");
-		assertFalse(db.getStudents().contains(testStudent));
+		assertFalse(db.getStudents().contains(testStudent), "Did not remove a student by ID");
 	}
 	
 	@Test
@@ -272,7 +272,7 @@ class OUPeopleTest {
 		Instructor testInstructor = new Instructor("ID");
 		db.addPerson(testInstructor);
 		db.removeInstructorByID("ID");
-		assertFalse(db.getInstructors().contains(testInstructor));
+		assertFalse(db.getInstructors().contains(testInstructor), "Did not remove an instructor by ID");
 	}
 	
 	@Test
@@ -280,7 +280,7 @@ class OUPeopleTest {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		db.removeOtherByID("ID");
-		assertFalse(db.getPeople().contains(testPerson));
+		assertFalse(db.getPeople().contains(testPerson), "Did not remove an other by ID");
 	}
 	
 	@Test
@@ -288,7 +288,7 @@ class OUPeopleTest {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		db.removePersonByID("ID");
-		assertFalse(db.getPeople().contains(testPerson));
+		assertFalse(db.getPeople().contains(testPerson), "Did not remove a person by ID");
 	}
 	
 }
