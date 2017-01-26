@@ -15,6 +15,17 @@ public class Enrollment {
 	
 	private Enrollment link;
 	
+	/**
+	 * Create a new Enrollment. Enrollments indicate a {@link Student} is enrolled in a {@link Course}.
+	 *
+	 * @param course The course of the Enrollment
+	 * @param student The student of the Enrollment
+	 */
+	public Enrollment(Course course, Student student) {
+		this.course = course;
+		this.student = student;
+	}
+	
 	public Course getCourse() {
 		return course;
 	}
