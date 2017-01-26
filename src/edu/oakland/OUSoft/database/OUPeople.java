@@ -23,7 +23,6 @@ public class OUPeople {
 	private final ArrayList<Person> others;
 	private final ArrayList<Course> courses;
 	private final ArrayList<Enrollment> enrollments;
-	
 	public OUPeople() {
 		this.students = new ArrayList<>();
 		this.instructors = new ArrayList<>();
@@ -168,6 +167,15 @@ public class OUPeople {
 		for (Enrollment enrollment : getEnrollments(course)) {
 			System.out.println(enrollment.getStudent().toString());
 		}
+	}
+	
+	/**
+	 * Get all the courses in the database.
+	 *
+	 * @return The courses in the database
+	 */
+	public ArrayList<Course> getCourses() {
+		return this.courses;
 	}
 	
 	/**
