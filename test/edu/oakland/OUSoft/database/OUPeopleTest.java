@@ -18,20 +18,20 @@ class OUPeopleTest {
 	}
 	
 	@Test
-	void retrieveByID() {
-		assertEquals(null, db.retrieveByID("NULL"));
+	void retrievePersonByID() {
+		assertEquals(null, db.retrievePersonByID("NULL"));
 		
 		Person testPerson = new Person("ID");
-		db.add(testPerson);
-		assertEquals(testPerson, db.retrieveByID("ID"));
+		db.addPerson(testPerson);
+		assertEquals(testPerson, db.retrievePersonByID("ID"));
 	}
 	
 	@Test
 	void retrieveStudentByID() {
-		assertEquals(null, db.retrieveByID("NULL"));
+		assertEquals(null, db.retrievePersonByID("NULL"));
 		
 		Student testStudent = new Student("ID");
-		db.add(testStudent);
+		db.addPerson(testStudent);
 		assertEquals(testStudent, db.retrieveStudentByID("ID"));
 		
 		//Check not in wrong category
@@ -41,10 +41,10 @@ class OUPeopleTest {
 	
 	@Test
 	void retrieveInstructorByID() {
-		assertEquals(null, db.retrieveByID("NULL"));
+		assertEquals(null, db.retrievePersonByID("NULL"));
 		
 		Instructor testInstructor = new Instructor("ID");
-		db.add(testInstructor);
+		db.addPerson(testInstructor);
 		assertEquals(testInstructor, db.retrieveInstructorByID("ID"));
 		
 		//Check not in wrong category
@@ -54,10 +54,10 @@ class OUPeopleTest {
 	
 	@Test
 	void retrieveOtherByID() {
-		assertEquals(null, db.retrieveByID("NULL"));
+		assertEquals(null, db.retrievePersonByID("NULL"));
 		
 		Person testPerson = new Person("ID");
-		db.add(testPerson);
+		db.addPerson(testPerson);
 		assertEquals(testPerson, db.retrieveOtherByID("ID"));
 		
 		//Check not in wrong category
@@ -66,7 +66,7 @@ class OUPeopleTest {
 	}
 	
 	@Test
-	void add() {
+	void addPerson() {
 
 	}
 	
@@ -86,7 +86,7 @@ class OUPeopleTest {
 	}
 	
 	@Test
-	void remove() {
+	void removePerson() {
 		
 	}
 	

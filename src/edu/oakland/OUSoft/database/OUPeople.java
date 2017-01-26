@@ -187,7 +187,7 @@ public class OUPeople {
 	 * @param ID The persons ID
 	 * @return The Person, or null if not found
 	 */
-	public Person retrieveByID(String ID) {
+	public Person retrievePersonByID(String ID) {
 		Person s = retrieveStudentByID(ID);
 		if (s != null) {
 			return s;
@@ -249,7 +249,7 @@ public class OUPeople {
 	 *
 	 * @param person The Person to add
 	 */
-	public void add(Person person) {
+	public void addPerson(Person person) {
 		if (person instanceof Student) {
 			this.students.add((Student) person);
 		} else if (person instanceof Instructor) {
@@ -292,7 +292,7 @@ public class OUPeople {
 	 *
 	 * @param person The Person to remove
 	 */
-	public void remove(Person person) {
+	public void removePerson(Person person) {
 		this.students.remove(person);
 		this.instructors.remove(person);
 		this.others.remove(person);
@@ -331,7 +331,7 @@ public class OUPeople {
 	 *
 	 * @param ID The persons ID
 	 */
-	public void removeByID(String ID) {
+	public void removePersonByID(String ID) {
 		this.removeInstructorByID(ID);
 		this.removeStudentByID(ID);
 		this.removeOtherByID(ID);
@@ -416,7 +416,7 @@ public class OUPeople {
 	/**
 	 * Print every person to standard output
 	 */
-	public void printAll(boolean doHeader) {
+	public void printAllPeople(boolean doHeader) {
 		if (doHeader) {
 			int count = this.students.size() + this.instructors.size() + this.others.size();
 			System.out.println("People in the database: " + count);
