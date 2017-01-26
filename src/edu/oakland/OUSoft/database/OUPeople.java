@@ -338,6 +338,46 @@ public class OUPeople {
 	}
 	
 	/**
+	 * Get all the students in the database.
+	 *
+	 * @return List of the students in the database
+	 */
+	public ArrayList<Student> getStudents() {
+		return students;
+	}
+	
+	/**
+	 * Get all the instructors in the database.
+	 *
+	 * @return List of the instructors in the database
+	 */
+	public ArrayList<Instructor> getInstructors() {
+		return instructors;
+	}
+	
+	/**
+	 * Get all the uncategorized people in the database.
+	 *
+	 * @return List of the uncategorized people in the database
+	 */
+	public ArrayList<Person> getOthers() {
+		return others;
+	}
+	
+	/**
+	 * Get all the people in the database.
+	 *
+	 * @return List of the people in the database
+	 */
+	public List<Person> getPeople() {
+		List<Person> people = new ArrayList<>();
+		people.addAll(this.instructors);
+		people.addAll(this.students);
+		people.addAll(this.others);
+		return people;
+	}
+	
+	/**
 	 * Print every student to standard output
 	 */
 	public void printAllStudents(boolean doHeader) {
