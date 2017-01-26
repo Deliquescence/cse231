@@ -18,11 +18,11 @@ import java.util.List;
  */
 public class OUPeople {
 	
-	private ArrayList<Student> students;
-	private ArrayList<Instructor> instructors;
-	private ArrayList<Person> others;
-	private ArrayList<Course> courses;
-	private ArrayList<Enrollment> enrollments;
+	private final ArrayList<Student> students;
+	private final ArrayList<Instructor> instructors;
+	private final ArrayList<Person> others;
+	private final ArrayList<Course> courses;
+	private final ArrayList<Enrollment> enrollments;
 	
 	public OUPeople() {
 		this.students = new ArrayList<>();

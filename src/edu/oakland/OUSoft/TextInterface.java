@@ -13,9 +13,9 @@ import java.util.Scanner;
  */
 public class TextInterface {
 	
-	private OUPeople db;
+	private final OUPeople db;
 	
-	private Scanner scan;
+	private final Scanner scan;
 	private boolean running;
 	
 	/**
