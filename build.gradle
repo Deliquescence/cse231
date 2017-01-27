@@ -1,0 +1,41 @@
+repositories {
+    mavenCentral()
+}
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+sourceSets {
+    test {
+        java {
+            srcDir 'test/'
+        }
+    }
+    main {
+        java {
+            srcDir 'src/'
+        }
+    }
+}
+
+test {
+    dependsOn 'cleanTest'
+
+    testLogging {
+        // Show that tests are run in the command-line output
+        events 'passed', 'failed', 'skipped'
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'edu.oakland.OUSoft.Main'
+    }
+}
