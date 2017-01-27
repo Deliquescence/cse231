@@ -4,42 +4,43 @@ import edu.oakland.OUSoft.items.Course;
 import edu.oakland.OUSoft.items.Instructor;
 import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class OUPeopleTest {
+
+public class OUPeopleTest {
 	private OUPeople db;
 	
-	@BeforeEach
-	void setUp() {
+	@Before
+	public void setUp() throws Exception {
 		db = new OUPeople();
 	}
 	
 	@Test
-	void addCourse() {
+	public void addCourse() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Instructor testInstructor = new Instructor("TestInstructorID");
 		testCourse.setInstructor(testInstructor);
 		
 		db.addCourse(testCourse);
-		assertTrue(db.getCourses().contains(testCourse), "addCourse did not add a course");
+		assertTrue("addCourse did not add a course", db.getCourses().contains(testCourse));
 	}
 	
 	@Test
-	void addCourseOverload() {
+	public void addCourseOverload() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Instructor testInstructor = new Instructor("TestInstructorID");
 		
 		db.addCourse(testCourse, testInstructor);
-		assertTrue(db.getCourses().contains(testCourse), "addCourse did not add a course when passed a course and instructor");
+		assertTrue("addCourse did not add a course when passed a course and instructor", db.getCourses().contains(testCourse));
 	}
 	
 	@Test
-	void addCourseNoInstructor() {
+	public void addCourseNoInstructor() throws Exception {
 		Course testCourse = new Course("testCourse");
 		
 		//Must have an instructor
@@ -49,246 +50,246 @@ class OUPeopleTest {
 		} catch (IllegalArgumentException shouldThrow) {
 			threwExceptionForNoInstructor = true;
 		}
-		assertTrue(threwExceptionForNoInstructor, "addCourse did not throw an exception for a course not having a valid Instructor");
+		assertTrue("addCourse did not throw an exception for a course not having a valid Instructor", threwExceptionForNoInstructor);
 	}
 	
 	@Test
-	void enroll() {
+	public void enroll() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
 		Enrollment testEnrollment = new Enrollment(testCourse, testStudent);
 		Enrollment returnedEnrollment = db.enroll(testStudent, testCourse);
 		
-		assertNotNull(returnedEnrollment, "enroll returned null");
-		assertEquals(testEnrollment, returnedEnrollment, "enroll return did not equal the expected Enrollment");
+		assertNotNull("enroll returned null", returnedEnrollment);
+		assertEquals("enroll return did not equal the expected Enrollment", testEnrollment, returnedEnrollment);
 	}
 	
 	@Test
-	void withdraw() {
+	public void withdraw() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
 		Enrollment enrollment = db.enroll(testStudent, testCourse);
-		assertNotNull(db.getEnrollment(testStudent, testCourse), "Enroll didn't work");
+		assertNotNull("Enroll didn't work", db.getEnrollment(testStudent, testCourse));
 		
 		db.withdraw(testStudent, testCourse);
-		assertNull(db.getEnrollment(testStudent, testCourse), "withdraw didn't withdraw");
+		assertNull("withdraw didn't withdraw", db.getEnrollment(testStudent, testCourse));
 	}
 	
 	@Test
-	void getEnrollment() {
+	public void getEnrollment() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
-		assertNull(db.getEnrollment(testStudent, testCourse), "Magically got enrolled somehow");
+		assertNull("Magically got enrolled somehow", db.getEnrollment(testStudent, testCourse));
 		
 		Enrollment returnedEnrollment = db.enroll(testStudent, testCourse);
 		
-		assertEquals(returnedEnrollment, db.getEnrollment(testStudent, testCourse), "getEnrollment did not return the same as enroll()");
+		assertEquals("getEnrollment did not return the same as enroll()", returnedEnrollment, db.getEnrollment(testStudent, testCourse));
 	}
 	
 	@Test
-	void getEnrollmentsForCourse() {
+	public void getEnrollmentsForCourse() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		Student testStudent2 = new Student("TestStudentID2");
 		
-		assertEquals(0, db.getEnrollments(testCourse).size(), "getEnrollments (for course) magically obtained an Enrollment");
+		assertEquals("getEnrollments (for course) magically obtained an Enrollment", 0, db.getEnrollments(testCourse).size());
 		
 		Enrollment returnedEnrollment = db.enroll(testStudent, testCourse);
 		Enrollment returnedEnrollment2 = db.enroll(testStudent2, testCourse);
 		
 		List<Enrollment> enrollments = db.getEnrollments(testCourse);
 		
-		assertTrue(enrollments.contains(returnedEnrollment), "getEnrollments (for course) did not contain an Enrollment it should have");
-		assertTrue(enrollments.contains(returnedEnrollment2), "getEnrollments (for course) did not contain an Enrollment it should have");
+		assertTrue("getEnrollments (for course) did not contain an Enrollment it should have", enrollments.contains(returnedEnrollment));
+		assertTrue("getEnrollments (for course) did not contain an Enrollment it should have", enrollments.contains(returnedEnrollment2));
 	}
 	
 	@Test
-	void getEnrollmentsForStudent() {
+	public void getEnrollmentsForStudent() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Course testCourse2 = new Course("testCourse2");
 		Student testStudent = new Student("TestStudentID");
 		
-		assertEquals(0, db.getEnrollments(testStudent).size(), "getEnrollments (for student) magically obtained an Enrollment");
+		assertEquals("getEnrollments (for student) magically obtained an Enrollment", 0, db.getEnrollments(testStudent).size());
 		
 		Enrollment returnedEnrollment = db.enroll(testStudent, testCourse);
 		Enrollment returnedEnrollment2 = db.enroll(testStudent, testCourse2);
 		
 		List<Enrollment> enrollments = db.getEnrollments(testStudent);
 		
-		assertTrue(enrollments.contains(returnedEnrollment), "getEnrollments (for student) did not contain an Enrollment it should have");
-		assertTrue(enrollments.contains(returnedEnrollment2), "getEnrollments (for student) did not contain an Enrollment it should have");
+		assertTrue("getEnrollments (for student) did not contain an Enrollment it should have", enrollments.contains(returnedEnrollment));
+		assertTrue("getEnrollments (for student) did not contain an Enrollment it should have", enrollments.contains(returnedEnrollment2));
 	}
 	
 	@Test
-	void studentIsEnrolled() {
+	public void studentIsEnrolled() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
-		assertFalse(db.studentIsEnrolled(testStudent, testCourse), "Student magically got enrolled");
+		assertFalse("Student magically got enrolled", db.studentIsEnrolled(testStudent, testCourse));
 		
 		db.enroll(testStudent, testCourse);
 		
-		assertTrue(db.studentIsEnrolled(testStudent, testCourse), "Student did not get enrolled");
+		assertTrue("Student did not get enrolled", db.studentIsEnrolled(testStudent, testCourse));
 	}
 	
 	@Test
-	void numberStudentsEnrolled() {
+	public void numberStudentsEnrolled() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		Student testStudent2 = new Student("TestStudentID2");
 		
-		assertEquals(0, db.numberStudentsEnrolled(testCourse), "Should be no one enrolled");
+		assertEquals(0, db.numberStudentsEnrolled(testCourse));
 		db.enroll(testStudent, testCourse);
-		assertEquals(1, db.numberStudentsEnrolled(testCourse), "Should be one person enrolled");
+		assertEquals(1, db.numberStudentsEnrolled(testCourse));
 		db.enroll(testStudent2, testCourse);
-		assertEquals(2, db.numberStudentsEnrolled(testCourse), "Should be two people enrolled");
+		assertEquals(2, db.numberStudentsEnrolled(testCourse));
 		db.withdraw(testStudent, testCourse);
-		assertEquals(1, db.numberStudentsEnrolled(testCourse), "Should be one person enrolled");
+		assertEquals(1, db.numberStudentsEnrolled(testCourse));
 		
 		//Call enroll again when they are already enrolled that course
 		db.enroll(testStudent2, testCourse);
-		assertEquals(1, db.numberStudentsEnrolled(testCourse), "numberStudentsEnrolled says more students got enrolled after the same person was enrolled again");
+		assertEquals("numberStudentsEnrolled says more students got enrolled after the same person was enrolled again", 1, db.numberStudentsEnrolled(testCourse));
 	}
 	
 	@Test
-	void numberCoursesEnrolled() {
+	public void numberCoursesEnrolled() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Course testCourse2 = new Course("testCourse2");
 		Student testStudent = new Student("TestStudentID");
 		
-		assertEquals(0, db.numberCoursesEnrolled(testStudent), "Should be no courses enrolled");
+		assertEquals(0, db.numberCoursesEnrolled(testStudent));
 		db.enroll(testStudent, testCourse);
-		assertEquals(1, db.numberCoursesEnrolled(testStudent), "Should be one course enrolled");
+		assertEquals(1, db.numberCoursesEnrolled(testStudent));
 		db.enroll(testStudent, testCourse2);
-		assertEquals(2, db.numberCoursesEnrolled(testStudent), "Should be two courses enrolled");
+		assertEquals(2, db.numberCoursesEnrolled(testStudent));
 		db.withdraw(testStudent, testCourse);
-		assertEquals(1, db.numberCoursesEnrolled(testStudent), "Should be one course enrolled");
+		assertEquals(1, db.numberCoursesEnrolled(testStudent));
 		
 		//Call enroll again when they are already enrolled that course
 		db.enroll(testStudent, testCourse2);
-		assertEquals(1, db.numberCoursesEnrolled(testStudent), "numberCoursesEnrolled says more courses got enrolled after the same course was enrolled again");
+		assertEquals("numberCoursesEnrolled says more courses got enrolled after the same course was enrolled again", 1, db.numberCoursesEnrolled(testStudent));
 	}
 	
 	@Test
-	void retrievePersonByID() {
-		assertNull(db.retrievePersonByID("NULL"), "Person magically appeared in database");
+	public void retrievePersonByID() throws Exception {
+		assertNull(db.retrievePersonByID("NULL"));
 		
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
-		assertEquals(testPerson, db.retrievePersonByID("ID"), "Person retrieved by ID did not match person added");
+		assertEquals("Person retrieved by ID did not match person added", testPerson, db.retrievePersonByID("ID"));
 	}
 	
 	@Test
-	void retrieveStudentByID() {
-		assertNull(db.retrieveStudentByID("NULL"), "Person magically appeared in database");
+	public void retrieveStudentByID() throws Exception {
+		assertNull(db.retrieveStudentByID("NULL"));
 		
 		Student testStudent = new Student("ID");
 		db.addPerson(testStudent);
-		assertEquals(testStudent, db.retrieveStudentByID("ID"), "Student retrieved by ID did not match person added");
+		assertEquals("Student retrieved by ID did not match person added", testStudent, db.retrieveStudentByID("ID"));
 		
 		//Check not in wrong category
-		assertNull(db.retrieveOtherByID("ID"), "Retrieved a student from an improper sub-database");
-		assertNull(db.retrieveInstructorByID("ID"), "Retrieved a student from an improper sub-database");
+		assertNull("Retrieved a student from an improper sub-database", db.retrieveOtherByID("ID"));
+		assertNull("Retrieved a student from an improper sub-database", db.retrieveInstructorByID("ID"));
 	}
 	
 	@Test
-	void retrieveInstructorByID() {
-		assertNull(db.retrieveInstructorByID("NULL"), "Person magically appeared in database");
+	public void retrieveInstructorByID() throws Exception {
+		assertNull(db.retrieveInstructorByID("NULL"));
 		
 		Instructor testInstructor = new Instructor("ID");
 		db.addPerson(testInstructor);
-		assertEquals(testInstructor, db.retrieveInstructorByID("ID"), "Instructor retrieved by ID did not match person added");
+		assertEquals("Instructor retrieved by ID did not match person added", testInstructor, db.retrieveInstructorByID("ID"));
 		
 		//Check not in wrong category
-		assertNull(db.retrieveStudentByID("ID"), "Retrieved an instructor from an improper sub-database");
-		assertNull(db.retrieveOtherByID("ID"), "Retrieved an instructor from an improper sub-database");
+		assertNull("Retrieved an instructor from an improper sub-database", db.retrieveStudentByID("ID"));
+		assertNull("Retrieved an instructor from an improper sub-database", db.retrieveOtherByID("ID"));
 	}
 	
 	@Test
-	void retrieveOtherByID() {
-		assertNull(db.retrieveOtherByID("NULL"), "Person magically appeared in database");
+	public void retrieveOtherByID() throws Exception {
+		assertNull(db.retrieveOtherByID("NULL"));
 		
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
-		assertEquals(testPerson, db.retrieveOtherByID("ID"), "Other retrieved by ID did not match person added");
+		assertEquals("Other retrieved by ID did not match person added", testPerson, db.retrieveOtherByID("ID"));
 		
 		//Check not in wrong category
-		assertNull(db.retrieveStudentByID("ID"), "Retrieved a person from an improper sub-database");
-		assertNull(db.retrieveInstructorByID("ID"), "Retrieved a person from an improper sub-database");
+		assertNull("Retrieved a person from an improper sub-database", db.retrieveStudentByID("ID"));
+		assertNull("Retrieved a person from an improper sub-database", db.retrieveInstructorByID("ID"));
 	}
 	
 	@Test
-	void addPerson() {
+	public void addPerson() throws Exception {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
-		assertTrue(db.getPeople().contains(testPerson), "Did not add a person");
+		assertTrue("Did not add a person", db.getPeople().contains(testPerson));
 	}
 	
 	@Test
-	void removeStudent() {
+	public void removeStudent() throws Exception {
 		Student testStudent = new Student("ID");
 		db.addPerson(testStudent);
 		db.removeStudent(testStudent);
-		assertFalse(db.getStudents().contains(testStudent), "Did not remove a student");
+		assertFalse("Did not remove a student", db.getStudents().contains(testStudent));
 	}
 	
 	@Test
-	void removeInstructor() {
+	public void removeInstructor() throws Exception {
 		Instructor testInstructor = new Instructor("ID");
 		db.addPerson(testInstructor);
 		db.removeInstructor(testInstructor);
-		assertFalse(db.getInstructors().contains(testInstructor), "Did not remove an instructor");
+		assertFalse("Did not remove an instructor", db.getInstructors().contains(testInstructor));
 	}
 	
 	@Test
-	void removeOther() {
+	public void removeOther() throws Exception {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		db.removeOther(testPerson);
-		assertFalse(db.getPeople().contains(testPerson), "Did not remove an other");
+		assertFalse("Did not remove an other", db.getPeople().contains(testPerson));
 	}
 	
 	@Test
-	void removePerson() {
+	public void removePerson() throws Exception {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		db.removePerson(testPerson);
-		assertFalse(db.getPeople().contains(testPerson), "Did not remove a person");
+		assertFalse("Did not remove a person", db.getPeople().contains(testPerson));
 	}
 	
 	@Test
-	void removeStudentByID() {
+	public void removeStudentByID() throws Exception {
 		Student testStudent = new Student("ID");
 		db.addPerson(testStudent);
 		db.removeStudentByID("ID");
-		assertFalse(db.getStudents().contains(testStudent), "Did not remove a student by ID");
+		assertFalse("Did not remove a student by ID", db.getStudents().contains(testStudent));
 	}
 	
 	@Test
-	void removeInstructorByID() {
+	public void removeInstructorByID() throws Exception {
 		Instructor testInstructor = new Instructor("ID");
 		db.addPerson(testInstructor);
 		db.removeInstructorByID("ID");
-		assertFalse(db.getInstructors().contains(testInstructor), "Did not remove an instructor by ID");
+		assertFalse("Did not remove an instructor by ID", db.getInstructors().contains(testInstructor));
 	}
 	
 	@Test
-	void removeOtherByID() {
+	public void removeOtherByID() throws Exception {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		db.removeOtherByID("ID");
-		assertFalse(db.getPeople().contains(testPerson), "Did not remove an other by ID");
+		assertFalse("Did not remove an other by ID", db.getPeople().contains(testPerson));
 	}
 	
 	@Test
-	void removePersonByID() {
+	public void removePersonByID() throws Exception {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		db.removePersonByID("ID");
-		assertFalse(db.getPeople().contains(testPerson), "Did not remove a person by ID");
+		assertFalse("Did not remove a person by ID", db.getPeople().contains(testPerson));
 	}
 	
 }
