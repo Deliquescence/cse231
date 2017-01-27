@@ -174,7 +174,7 @@ class OUPeopleTest {
 	
 	@Test
 	void retrievePersonByID() {
-		assertEquals(null, db.retrievePersonByID("NULL"), "Person magically appeared in database");
+		assertNull(db.retrievePersonByID("NULL"), "Person magically appeared in database");
 		
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
@@ -183,41 +183,41 @@ class OUPeopleTest {
 	
 	@Test
 	void retrieveStudentByID() {
-		assertEquals(null, db.retrieveStudentByID("NULL"), "Person magically appeared in database");
+		assertNull(db.retrieveStudentByID("NULL"), "Person magically appeared in database");
 		
 		Student testStudent = new Student("ID");
 		db.addPerson(testStudent);
 		assertEquals(testStudent, db.retrieveStudentByID("ID"), "Student retrieved by ID did not match person added");
 		
 		//Check not in wrong category
-		assertEquals(null, db.retrieveOtherByID("ID"), "Retrieved a student from an improper sub-database");
-		assertEquals(null, db.retrieveInstructorByID("ID"), "Retrieved a student from an improper sub-database");
+		assertNull(db.retrieveOtherByID("ID"), "Retrieved a student from an improper sub-database");
+		assertNull(db.retrieveInstructorByID("ID"), "Retrieved a student from an improper sub-database");
 	}
 	
 	@Test
 	void retrieveInstructorByID() {
-		assertEquals(null, db.retrieveInstructorByID("NULL"), "Person magically appeared in database");
+		assertNull(db.retrieveInstructorByID("NULL"), "Person magically appeared in database");
 		
 		Instructor testInstructor = new Instructor("ID");
 		db.addPerson(testInstructor);
 		assertEquals(testInstructor, db.retrieveInstructorByID("ID"), "Instructor retrieved by ID did not match person added");
 		
 		//Check not in wrong category
-		assertEquals(null, db.retrieveStudentByID("ID"), "Retrieved an instructor from an improper sub-database");
-		assertEquals(null, db.retrieveOtherByID("ID"), "Retrieved an instructor from an improper sub-database");
+		assertNull(db.retrieveStudentByID("ID"), "Retrieved an instructor from an improper sub-database");
+		assertNull(db.retrieveOtherByID("ID"), "Retrieved an instructor from an improper sub-database");
 	}
 	
 	@Test
 	void retrieveOtherByID() {
-		assertEquals(null, db.retrieveOtherByID("NULL"), "Person magically appeared in database");
+		assertNull(db.retrieveOtherByID("NULL"), "Person magically appeared in database");
 		
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		assertEquals(testPerson, db.retrieveOtherByID("ID"), "Other retrieved by ID did not match person added");
 		
 		//Check not in wrong category
-		assertEquals(null, db.retrieveStudentByID("ID"), "Retrieved a person from an improper sub-database");
-		assertEquals(null, db.retrieveInstructorByID("ID"), "Retrieved a person from an improper sub-database");
+		assertNull(db.retrieveStudentByID("ID"), "Retrieved a person from an improper sub-database");
+		assertNull(db.retrieveInstructorByID("ID"), "Retrieved a person from an improper sub-database");
 	}
 	
 	@Test
