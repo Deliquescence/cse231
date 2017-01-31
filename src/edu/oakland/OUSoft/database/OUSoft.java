@@ -63,8 +63,14 @@ public class OUSoft {
 	 * @param student The Student to enroll
 	 * @param course  The Course to enroll the Student in
 	 * @return The Enrollment object that indicates the students enrollment in the course
+	 * @throws IllegalArgumentException If the student is not in the database
 	 */
-	public Enrollment enroll(Student student, Course course) {
+	public Enrollment enroll(Student student, Course course) throws IllegalArgumentException {
+		//"The program should only allow enrolling a student who is already in the student array"
+		if (getStudentByID(student.getID()) == null) {
+			throw new IllegalArgumentException("Cannot enroll a student not in the database");
+		}
+		//"can only enroll a student in a course once"
 		if (studentIsEnrolled(student, course)) {
 			return getEnrollment(student, course);
 		}
