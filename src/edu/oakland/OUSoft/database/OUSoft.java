@@ -259,10 +259,16 @@ public class OUSoft {
 	
 	/**
 	 * Add a person to the database, automatically determining type
+	 * The persons ID must be unique
 	 *
 	 * @param person The Person to add
+	 * @throws IllegalArgumentException If the persons ID is not unique
 	 */
-	public void addPerson(Person person) {
+	public void addPerson(Person person) throws IllegalArgumentException {
+		if (retrievePersonByID(person.getID()) != null) { //Person is already in DB
+			throw new IllegalArgumentException("A Person with this ID is already in the database");
+		}
+		
 		if (person instanceof Student) {
 			this.students.add((Student) person);
 		} else if (person instanceof Instructor) {
@@ -270,7 +276,6 @@ public class OUSoft {
 		} else {
 			this.others.add(person);
 		}
-		
 	}
 	
 	/**
