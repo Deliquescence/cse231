@@ -200,16 +200,16 @@ public class OUSoft {
 	 * @param ID The persons ID
 	 * @return The Person, or null if not found
 	 */
-	public Person retrievePersonByID(String ID) {
-		Person s = retrieveStudentByID(ID);
+	public Person getPersonByID(String ID) {
+		Person s = getStudentByID(ID);
 		if (s != null) {
 			return s;
 		}
-		Person i = retrieveInstructorByID(ID);
+		Person i = getInstructorByID(ID);
 		if (i != null) {
 			return i;
 		}
-		return retrieveOtherByID(ID);
+		return getOtherByID(ID);
 	}
 	
 	/**
@@ -218,7 +218,7 @@ public class OUSoft {
 	 * @param ID The students ID
 	 * @return The student, or null if not found
 	 */
-	public Student retrieveStudentByID(String ID) {
+	public Student getStudentByID(String ID) {
 		for (Student student : students) {
 			if (student.getID().equals(ID)) {
 				return student;
@@ -233,7 +233,7 @@ public class OUSoft {
 	 * @param ID The instructors ID
 	 * @return The instructor, or null if not found
 	 */
-	public Instructor retrieveInstructorByID(String ID) {
+	public Instructor getInstructorByID(String ID) {
 		for (Instructor instructor : instructors) {
 			if (instructor.getID().equals(ID)) {
 				return instructor;
@@ -248,7 +248,7 @@ public class OUSoft {
 	 * @param ID The persons ID
 	 * @return The person, or null if not found
 	 */
-	public Person retrieveOtherByID(String ID) {
+	public Person getOtherByID(String ID) {
 		for (Person person : this.others) {
 			if (person.getID().equals(ID)) {
 				return person;
@@ -265,7 +265,7 @@ public class OUSoft {
 	 * @throws IllegalArgumentException If the persons ID is not unique
 	 */
 	public void addPerson(Person person) throws IllegalArgumentException {
-		if (retrievePersonByID(person.getID()) != null) { //Person is already in DB
+		if (getPersonByID(person.getID()) != null) { //Person is already in DB
 			throw new IllegalArgumentException("A Person with this ID is already in the database");
 		}
 		
@@ -322,7 +322,7 @@ public class OUSoft {
 	 * @param ID The ID of the Student to remove
 	 */
 	public void removeStudentByID(String ID) {
-		this.students.remove(retrieveStudentByID(ID));
+		this.students.remove(getStudentByID(ID));
 	}
 	
 	/**
@@ -331,7 +331,7 @@ public class OUSoft {
 	 * @param ID The ID of the Instructor to remove
 	 */
 	public void removeInstructorByID(String ID) {
-		this.instructors.remove(retrieveInstructorByID(ID));
+		this.instructors.remove(getInstructorByID(ID));
 	}
 	
 	/**
@@ -340,7 +340,7 @@ public class OUSoft {
 	 * @param ID The ID of the other to remove
 	 */
 	public void removeOtherByID(String ID) {
-		this.others.remove(retrieveOtherByID(ID));
+		this.others.remove(getOtherByID(ID));
 	}
 	
 	/**

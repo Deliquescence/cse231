@@ -129,7 +129,7 @@ public class TextInterface {
 			case "get":
 			case "retrieve":
 				if (tokens.length > 1) { //ID is given
-					Person p = this.db.retrievePersonByID(tokens[1]);
+					Person p = this.db.getPersonByID(tokens[1]);
 					if (p != null) {
 						System.out.println("Found someone with this ID:\n" + p.toString());
 						return true;
@@ -145,7 +145,7 @@ public class TextInterface {
 			case "rm":
 			case "delete":
 				if (tokens.length > 1) { //ID is given
-					Person p = this.db.retrievePersonByID(tokens[1]);
+					Person p = this.db.getPersonByID(tokens[1]);
 					if (p != null) {
 						System.out.println("Really remove this person?\n" + p.toString());
 						if (this.getBooleanInput()) {
