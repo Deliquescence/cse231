@@ -58,6 +58,8 @@ public class OUSoftTest {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
+		db.addPerson(testStudent);
+		
 		Enrollment testEnrollment = new Enrollment(testCourse, testStudent);
 		Enrollment returnedEnrollment = db.enroll(testStudent, testCourse);
 		
@@ -66,10 +68,25 @@ public class OUSoftTest {
 	}
 	
 	@Test
+	public void enrollStudentNotInDB() throws Exception {
+		Course testCourse = new Course("testCourse");
+		Student testStudent = new Student("TestStudentID");
+		
+		try {
+			db.enroll(testStudent, testCourse);
+		} catch (IllegalArgumentException shouldThrow) {
+			
+		}
+		
+		assertNull("enroll allowed enrolling a student not in the database", db.getEnrollment(testStudent, testCourse));
+	}
+	
+	@Test
 	public void withdraw() throws Exception {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
+		db.addPerson(testStudent);
 		Enrollment enrollment = db.enroll(testStudent, testCourse);
 		assertNotNull("Enroll didn't work", db.getEnrollment(testStudent, testCourse));
 		
@@ -84,6 +101,7 @@ public class OUSoftTest {
 		
 		assertNull("Magically got enrolled somehow", db.getEnrollment(testStudent, testCourse));
 		
+		db.addPerson(testStudent);
 		Enrollment returnedEnrollment = db.enroll(testStudent, testCourse);
 		
 		assertEquals("getEnrollment did not return the same as enroll()", returnedEnrollment, db.getEnrollment(testStudent, testCourse));
@@ -96,6 +114,9 @@ public class OUSoftTest {
 		Student testStudent2 = new Student("TestStudentID2");
 		
 		assertEquals("getEnrollments (for course) magically obtained an Enrollment", 0, db.getEnrollments(testCourse).size());
+		
+		db.addPerson(testStudent);
+		db.addPerson(testStudent2);
 		
 		Enrollment returnedEnrollment = db.enroll(testStudent, testCourse);
 		Enrollment returnedEnrollment2 = db.enroll(testStudent2, testCourse);
@@ -114,6 +135,7 @@ public class OUSoftTest {
 		
 		assertEquals("getEnrollments (for student) magically obtained an Enrollment", 0, db.getEnrollments(testStudent).size());
 		
+		db.addPerson(testStudent);
 		Enrollment returnedEnrollment = db.enroll(testStudent, testCourse);
 		Enrollment returnedEnrollment2 = db.enroll(testStudent, testCourse2);
 		
@@ -130,6 +152,7 @@ public class OUSoftTest {
 		
 		assertFalse("Student magically got enrolled", db.studentIsEnrolled(testStudent, testCourse));
 		
+		db.addPerson(testStudent);
 		db.enroll(testStudent, testCourse);
 		
 		assertTrue("Student did not get enrolled", db.studentIsEnrolled(testStudent, testCourse));
@@ -140,6 +163,9 @@ public class OUSoftTest {
 		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		Student testStudent2 = new Student("TestStudentID2");
+		
+		db.addPerson(testStudent);
+		db.addPerson(testStudent2);
 		
 		assertEquals(0, db.numberStudentsEnrolled(testCourse));
 		db.enroll(testStudent, testCourse);
@@ -159,6 +185,8 @@ public class OUSoftTest {
 		Course testCourse = new Course("testCourse");
 		Course testCourse2 = new Course("testCourse2");
 		Student testStudent = new Student("TestStudentID");
+		
+		db.addPerson(testStudent);
 		
 		assertEquals(0, db.numberCoursesEnrolled(testStudent));
 		db.enroll(testStudent, testCourse);
@@ -226,6 +254,13 @@ public class OUSoftTest {
 		Person testPerson = new Person("ID");
 		db.addPerson(testPerson);
 		assertTrue("Did not add a person", db.getPeople().contains(testPerson));
+		assertEquals(1, db.getPeople().size());
+		
+		try{
+			db.addPerson(testPerson);
+		} catch (IllegalArgumentException ignore) {
+		}
+		assertEquals("People in database increased after adding the same person again",1, db.getPeople().size());
 	}
 	
 	@Test
