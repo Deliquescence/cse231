@@ -16,7 +16,7 @@ import java.util.List;
  * methods for printing all students or instructors,
  * methods for taking input from command line
  */
-public class OUPeople {
+public class OUSoft {
 	
 	private final ArrayList<Student> students;
 	private final ArrayList<Instructor> instructors;
@@ -24,7 +24,7 @@ public class OUPeople {
 	private final ArrayList<Course> courses;
 	private final ArrayList<Enrollment> enrollments;
 	
-	public OUPeople() {
+	public OUSoft() {
 		this.students = new ArrayList<>();
 		this.instructors = new ArrayList<>();
 		this.others = new ArrayList<>();

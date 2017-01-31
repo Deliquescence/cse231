@@ -12,12 +12,12 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 
-public class OUPeopleTest {
-	private OUPeople db;
+public class OUSoftTest {
+	private OUSoft db;
 	
 	@Before
 	public void setUp() throws Exception {
-		db = new OUPeople();
+		db = new OUSoft();
 	}
 	
 	@Test

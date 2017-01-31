@@ -1,6 +1,6 @@
 package edu.oakland.OUSoft;
 
-import edu.oakland.OUSoft.database.OUPeople;
+import edu.oakland.OUSoft.database.OUSoft;
 import edu.oakland.OUSoft.items.Instructor;
 import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class TextInterface {
 	
-	private final OUPeople db;
+	private final OUSoft db;
 	
 	private final Scanner scan;
 	private boolean running;
@@ -21,9 +21,9 @@ public class TextInterface {
 	/**
 	 * Create a new Textual Interface that will interact with the user and the given database
 	 *
-	 * @param db The OUPeople database to work with
+	 * @param db The OUSoft database to work with
 	 */
-	public TextInterface(OUPeople db) {
+	public TextInterface(OUSoft db) {
 		this.db = db;
 		this.scan = new Scanner(System.in);
 	}
