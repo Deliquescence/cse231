@@ -13,10 +13,12 @@ public class Enrollment {
 	private Course course;
 	private Student student;
 	
+	private Enrollment link;
+	
 	/**
 	 * Create a new Enrollment. Enrollments indicate a {@link Student} is enrolled in a {@link Course}.
 	 *
-	 * @param course  The course of the Enrollment
+	 * @param course The course of the Enrollment
 	 * @param student The student of the Enrollment
 	 */
 	public Enrollment(Course course, Student student) {
@@ -38,6 +40,14 @@ public class Enrollment {
 	
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	
+	public Enrollment getLink() {
+		return link;
+	}
+	
+	public void setLink(Enrollment link) {
+		this.link = link;
 	}
 	
 	@Override
