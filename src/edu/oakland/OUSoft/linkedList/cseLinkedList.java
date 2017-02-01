@@ -16,9 +16,9 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	@Override
 	public int size() {
 		int count = 0;
-		E item = this.indexZero;
-		while (item != null) {
-			item = item.getLink();
+		Iterator<E> it = this.iterator();
+		while (it.hasNext()) {
+			it.next();
 			count++;
 		}
 		return count;
@@ -62,7 +62,19 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		Iterator<E> iterator = new Iterator<E>() {
+			@Override
+			public boolean hasNext() {
+				return cseLinkedList.this.indexZero.getLink() != null;
+			}
+			
+			@Override
+			public E next() {
+				return cseLinkedList.this.indexZero.getLink();
+			}
+		};
+		
+		return iterator;
 	}
 	
 	/**
