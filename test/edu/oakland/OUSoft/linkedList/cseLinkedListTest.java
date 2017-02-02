@@ -250,6 +250,7 @@ public class cseLinkedListTest {
 		list.add(testEnrollment1);
 		list.add(testEnrollment2);
 		
+		list.clear();
 		assertEquals(0, list.size());
 		assertTrue(list.isEmpty());
 		assertFalse(list.contains(testEnrollment2));
