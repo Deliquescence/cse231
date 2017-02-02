@@ -106,8 +106,12 @@ public class cseLinkedListTest {
 		assertEquals(2, list.size());
 		
 		//Do not allow duplicate
-		assertFalse("Added a duplicate element", list.add(testEnrollment1));
-		assertEquals("Added a duplicate element", 2, list.size());
+		try {
+			list.add(testEnrollment1);
+			assertTrue("Added a duplicate element", false);
+			
+		} catch (IllegalArgumentException ex) {
+		}
 		
 		//Do not allow null
 		try {
@@ -120,11 +124,6 @@ public class cseLinkedListTest {
 	
 	@Test
 	public void remove() throws Exception {
-		try {
-			list.remove(null);
-			assertTrue("Should have thrown NullPointerException", false);
-		} catch (NullPointerException shouldThrow) {
-		}
 		assertFalse(list.remove(testEnrollment1));
 		list.add(testEnrollment1);
 		assertTrue(list.remove(testEnrollment1));
@@ -139,6 +138,12 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment1, list.get(0));
 		assertEquals(testEnrollment3, list.get(1));
 		assertFalse(list.contains(testEnrollment2));
+		
+		try {
+			list.remove(null);
+			assertTrue("Did not throw exception for null remove", false);
+		} catch (NullPointerException shouldThrow) {
+		}
 	}
 	
 	@Test
@@ -164,6 +169,19 @@ public class cseLinkedListTest {
 		
 		list.remove(testEnrollment3);
 		assertFalse(list.containsAll(testCollection2));
+		
+		try {
+			list.containsAll(null);
+			assertTrue("Did not throw exception for null containsAll", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		testCollection2.add(null);
+		try {
+			list.containsAll(testCollection2);
+			assertTrue("Did not throw exception for null element in containsAll", false);
+		} catch (NullPointerException shouldThrow) {
+		}
 	}
 	
 	@Test
@@ -177,7 +195,30 @@ public class cseLinkedListTest {
 		assertTrue(list.addAll(testCollection1));
 		assertTrue(list.containsAll(testCollection1));
 		
-		assertFalse(list.addAll(testCollection1)); //List Should not change as a result of this (duplicates)
+		
+		Collection<Enrollment> testCollection2 = new ArrayList<>();
+		testCollection2.add(null);
+		
+		try {
+			list.addAll(null);
+			assertTrue("Did not throw exception for null addAll", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		try {
+			list.addAll(testCollection2);
+			assertTrue("Did not throw exception for null element in addAll", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		testCollection2.clear();
+		testCollection2.add(testEnrollment1);
+		
+		try {
+			list.addAll(testCollection2);
+			assertTrue("Did not throw exception for duplicate element in addAll", false);
+		} catch (IllegalArgumentException shouldThrow) {
+		}
 	}
 	
 	@Test
@@ -196,16 +237,40 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment4, list.get(2));
 		assertEquals(testEnrollment2, list.get(3));
 		
+		Collection<Enrollment> testCollection2 = new ArrayList<>();
+		testCollection2.add(null);
+		
+		try {
+			list.addAll(1, null);
+			assertTrue("Did not throw exception for null addAll", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		try {
+			list.addAll(1, testCollection2);
+			assertTrue("Did not throw exception for null element in addAll", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		testCollection2.clear();
+		testCollection2.add(testEnrollment1);
+		
+		try {
+			list.addAll(1, testCollection2);
+			assertTrue("Did not throw exception for duplicate element in addAll", false);
+		} catch (IllegalArgumentException shouldThrow) {
+		}
+		
 		try {
 			list.addAll(99, testCollection1);
-			assertTrue("Did not throw exception for out of bounds index",false);
+			assertTrue("Did not throw exception for out of bounds index", false);
 		} catch (IndexOutOfBoundsException shouldThrow) {
 		}
 		
 		try {
 			list.addAll(-1, testCollection1);
 			assertTrue("Did not throw exception for negative index", false);
-		} catch (IndexOutOfBoundsException shouldThrow){
+		} catch (IndexOutOfBoundsException shouldThrow) {
 		}
 	}
 	
@@ -224,6 +289,20 @@ public class cseLinkedListTest {
 		
 		assertTrue(list.removeAll(testCollection1));
 		assertFalse(list.contains(testEnrollment1));
+		
+		try {
+			list.removeAll(null);
+			assertTrue("Did not throw exception for null remove", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		Collection<Enrollment> testCollection2 = new ArrayList<>();
+		testCollection1.add(null);
+		try {
+			list.removeAll(testCollection2);
+			assertTrue("Did not throw exception for null element in remove", false);
+		} catch (NullPointerException shouldThrow) {
+		}
 	}
 	
 	@Test
@@ -248,6 +327,20 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment1, list.get(0));
 		assertEquals(testEnrollment3, list.get(1));
 		assertEquals(2, list.size());
+		
+		try {
+			list.retainAll(null);
+			assertTrue("Did not throw exception for null retain", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		Collection<Enrollment> testCollection2 = new ArrayList<>();
+		testCollection1.add(null);
+		try {
+			list.retainAll(testCollection2);
+			assertTrue("Did not throw exception for null element in retain", false);
+		} catch (NullPointerException shouldThrow) {
+		}
 	}
 	
 	@Test
@@ -279,13 +372,13 @@ public class cseLinkedListTest {
 		try {
 			list.get(-1);
 			assertTrue("Did not throw exception for negative index", false);
-		} catch (IndexOutOfBoundsException shouldThrow){
+		} catch (IndexOutOfBoundsException shouldThrow) {
 		}
 		
 		try {
 			list.get(99);
 			assertTrue("Did not throw exception for out of bounds index", false);
-		} catch (IndexOutOfBoundsException shouldThrow){
+		} catch (IndexOutOfBoundsException shouldThrow) {
 		}
 	}
 	
@@ -304,6 +397,30 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment1, list.get(0));
 		assertEquals(testEnrollment4, list.get(1));
 		assertEquals(testEnrollment3, list.get(2));
+		
+		try {
+			list.set(2, null);
+			assertTrue("Did not throw exception for null element", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		try {
+			list.set(2, testEnrollment1);
+			assertTrue("Did not throw exception for duplicate element", false);
+		} catch (IllegalArgumentException shouldThrow) {
+		}
+		
+		try {
+			list.set(-1, testEnrollment4);
+			assertTrue("Did not throw exception for negative index", false);
+		} catch (IndexOutOfBoundsException shouldThrow) {
+		}
+		
+		try {
+			list.set(99, testEnrollment4);
+			assertTrue("Did not throw exception for out of bounds index", false);
+		} catch (IndexOutOfBoundsException shouldThrow) {
+		}
 	}
 	
 	@Test
@@ -317,15 +434,27 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment2, list.get(2));
 		
 		try {
+			list.add(1, testEnrollment1);
+			assertTrue("Did not throw exception for duplicate element", false);
+		} catch (IllegalArgumentException shouldThrow) {
+		}
+		
+		try {
+			list.add(1, null);
+			assertTrue("Did not throw exception for null element", false);
+		} catch (NullPointerException shouldThrow) {
+		}
+		
+		try {
 			list.add(-1, testEnrollment4);
 			assertTrue("Did not throw exception for negative index", false);
-		} catch (IndexOutOfBoundsException shouldThrow){
+		} catch (IndexOutOfBoundsException shouldThrow) {
 		}
 		
 		try {
 			list.add(99, testEnrollment4);
 			assertTrue("Did not throw exception for out of bounds index", false);
-		} catch (IndexOutOfBoundsException shouldThrow){
+		} catch (IndexOutOfBoundsException shouldThrow) {
 		}
 	}
 	
@@ -348,13 +477,13 @@ public class cseLinkedListTest {
 		try {
 			list.remove(-1);
 			assertTrue("Did not throw exception for negative index", false);
-		} catch (IndexOutOfBoundsException shouldThrow){
+		} catch (IndexOutOfBoundsException shouldThrow) {
 		}
 		
 		try {
 			list.remove(99);
 			assertTrue("Did not throw exception for out of bounds index", false);
-		} catch (IndexOutOfBoundsException shouldThrow){
+		} catch (IndexOutOfBoundsException shouldThrow) {
 		}
 	}
 	
