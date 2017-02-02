@@ -187,12 +187,6 @@ public class cseLinkedListTest {
 		testCollection1.add(testEnrollment3);
 		testCollection1.add(testEnrollment4);
 		
-		try {
-			assertFalse(list.addAll(1, testCollection1));
-		} catch (IndexOutOfBoundsException shouldThrow) {
-		}
-		
-		
 		list.add(testEnrollment1);
 		list.add(testEnrollment2);
 		assertTrue(list.addAll(1, testCollection1));
@@ -202,6 +196,17 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment4, list.get(2));
 		assertEquals(testEnrollment2, list.get(3));
 		
+		try {
+			list.addAll(99, testCollection1);
+			assertTrue("Did not throw exception for out of bounds index",false);
+		} catch (IndexOutOfBoundsException shouldThrow) {
+		}
+		
+		try {
+			list.addAll(-1, testCollection1);
+			assertTrue("Did not throw exception for negative index", false);
+		} catch (IndexOutOfBoundsException shouldThrow){
+		}
 	}
 	
 	@Test
@@ -270,6 +275,18 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment2, list.get(1));
 		list.add(testEnrollment3);
 		assertEquals(testEnrollment3, list.get(2));
+		
+		try {
+			list.get(-1);
+			assertTrue("Did not throw exception for negative index", false);
+		} catch (IndexOutOfBoundsException shouldThrow){
+		}
+		
+		try {
+			list.get(99);
+			assertTrue("Did not throw exception for out of bounds index", false);
+		} catch (IndexOutOfBoundsException shouldThrow){
+		}
 	}
 	
 	@Test
@@ -298,6 +315,18 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment1, list.get(0));
 		assertEquals(testEnrollment3, list.get(1));
 		assertEquals(testEnrollment2, list.get(2));
+		
+		try {
+			list.add(-1, testEnrollment4);
+			assertTrue("Did not throw exception for negative index", false);
+		} catch (IndexOutOfBoundsException shouldThrow){
+		}
+		
+		try {
+			list.add(99, testEnrollment4);
+			assertTrue("Did not throw exception for out of bounds index", false);
+		} catch (IndexOutOfBoundsException shouldThrow){
+		}
 	}
 	
 	@Test
@@ -315,6 +344,18 @@ public class cseLinkedListTest {
 		assertEquals(testEnrollment1, list.remove(0));
 		assertEquals(testEnrollment2, list.get(0));
 		assertEquals(testEnrollment4, list.get(1));
+		
+		try {
+			list.remove(-1);
+			assertTrue("Did not throw exception for negative index", false);
+		} catch (IndexOutOfBoundsException shouldThrow){
+		}
+		
+		try {
+			list.remove(99);
+			assertTrue("Did not throw exception for out of bounds index", false);
+		} catch (IndexOutOfBoundsException shouldThrow){
+		}
 	}
 	
 	@Test
