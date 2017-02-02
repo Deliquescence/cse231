@@ -51,8 +51,12 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public boolean contains(Object o) {
-		
-		throw new UnsupportedOperationException("Not implemented yet.");
+		for (E e : this) {
+			if (e.equals(o)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -99,7 +103,11 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public Object[] toArray() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		Object[] array = new Object[this.size()];
+		for (int i = 0; i < array.length; i++) {
+			array[i] = this.get(i);
+		}
+		return array;
 	}
 	
 	/**
@@ -147,8 +155,8 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	}
 	
 	/**
-	 * Appends the specified element to the end of this list (optional
-	 * operation).
+	 * Appends the specified element to the end of this list.
+	 * No null or duplicate elements are allowed.
 	 * <p>
 	 * <p>Lists that support this operation may place limitations on what
 	 * elements may be added to this list.  In particular, some
@@ -170,7 +178,23 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public boolean add(E e) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (e == null) {
+			throw new NullPointerException("Cannot add a null element");
+		}
+		if (this.contains(e)) {
+			throw new IllegalArgumentException("Cannot add a duplicate element");
+		}
+		e.setLink(null);
+		if (this.indexZero == null) {
+			this.indexZero = e;
+			return true;
+		}
+		E element = this.indexZero;
+		while (element.getLink() != null) {
+			element = element.getLink();
+		}
+		element.setLink(e);
+		return true;
 	}
 	
 	/**
