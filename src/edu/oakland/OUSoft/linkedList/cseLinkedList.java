@@ -415,7 +415,15 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public E get(int index) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		E element = this.indexZero;
+		for (int i = 0; i < index; i++) {
+			element = element.getLink();
+		}
+		return element;
 	}
 	
 	/**
