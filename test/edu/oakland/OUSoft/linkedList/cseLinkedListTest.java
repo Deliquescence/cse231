@@ -84,9 +84,14 @@ public class cseLinkedListTest {
 		list.add(testEnrollment1);
 		list.add(testEnrollment2);
 		
-		Object[] array = list.toArray(new Enrollment[0]);
+		Enrollment[] array = list.toArray(new Enrollment[0]);
 		assertEquals(testEnrollment1, array[0]);
 		assertEquals(testEnrollment2, array[1]);
+		
+		Enrollment[] array2 = new Enrollment[2];
+		list.toArray(array2);
+		assertEquals(testEnrollment1, array2[0]);
+		assertEquals(testEnrollment2, array2[1]);
 	}
 	
 	@Test
