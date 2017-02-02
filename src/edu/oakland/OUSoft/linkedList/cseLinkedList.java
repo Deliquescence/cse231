@@ -63,14 +63,18 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	@Override
 	public Iterator<E> iterator() {
 		Iterator<E> iterator = new Iterator<E>() {
+			E current = cseLinkedList.this.indexZero;
+			
 			@Override
 			public boolean hasNext() {
-				return cseLinkedList.this.indexZero.getLink() != null;
+				return current != null;
 			}
 			
 			@Override
 			public E next() {
-				return cseLinkedList.this.indexZero.getLink();
+				E previous = current;
+				current = current.getLink();
+				return previous;
 			}
 		};
 		
