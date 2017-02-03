@@ -342,7 +342,7 @@ public class cseLinkedListTest {
 		}
 		
 		Collection<Enrollment> testCollection2 = new ArrayList<>();
-		testCollection1.add(null);
+		testCollection2.add(null);
 		try {
 			list.retainAll(testCollection2);
 			assertTrue("Did not throw exception for null element in retain", false);
