@@ -220,7 +220,23 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public boolean remove(Object o) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (o == null) {
+			throw new NullPointerException("Cannot add a null element");
+		}
+		
+		E previous = null;
+		for (E e : this) {
+			if (e.equals(o)) {
+				if (this.indexOf(e) == 0) {
+					this.indexZero = this.indexZero.getLink();
+					return true;
+				}
+				previous.setLink(e.getLink());
+				return true;
+			}
+			previous = e;
+		}
+		return false;
 	}
 	
 	/**
@@ -516,7 +532,24 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public E remove(int index) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		if (index == 0) {
+			E old = this.indexZero;
+			this.indexZero = this.indexZero.getLink();
+			return old;
+		}
+		
+		E elem = this.indexZero;
+		for (int i = 0; i < index - 1; i++) {
+			elem = elem.getLink();
+		}
+		
+		E old = elem.getLink();
+		elem.setLink(old.getLink());
+		return old;
 	}
 	
 	/**
