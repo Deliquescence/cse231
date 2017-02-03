@@ -54,6 +54,8 @@ public class cseLinkedListTest {
 		assertFalse(list.contains(testEnrollment1));
 		list.add(testEnrollment1);
 		assertTrue(list.contains(testEnrollment1));
+		assertFalse(list.contains("Some object"));
+		assertFalse(list.contains(null));
 	}
 	
 	@Test
@@ -169,6 +171,10 @@ public class cseLinkedListTest {
 		
 		list.remove(testEnrollment3);
 		assertFalse(list.containsAll(testCollection2));
+		
+		List<String> wrongType = new ArrayList<>();
+		wrongType.add("Checking for typing exceptions");
+		assertFalse(list.containsAll(wrongType));
 		
 		try {
 			list.containsAll(null);
