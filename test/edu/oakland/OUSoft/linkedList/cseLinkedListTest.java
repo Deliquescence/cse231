@@ -288,11 +288,12 @@ public class cseLinkedListTest {
 		testCollection1.add(testEnrollment2);
 		testCollection1.add(testEnrollment3);
 		
-		assertFalse(list.removeAll(testCollection1)); //List should not have changed because of this
+		assertFalse("List should not have changed", list.removeAll(testCollection1));
 		
 		assertTrue(list.addAll(testCollection1));
 		assertTrue(list.containsAll(testCollection1));
 		
+		testCollection1.add(testEnrollment4); //Not removed because not in list, but removeAll should still return true
 		assertTrue(list.removeAll(testCollection1));
 		assertFalse(list.contains(testEnrollment1));
 		
@@ -303,7 +304,7 @@ public class cseLinkedListTest {
 		}
 		
 		Collection<Enrollment> testCollection2 = new ArrayList<>();
-		testCollection1.add(null);
+		testCollection2.add(null);
 		try {
 			list.removeAll(testCollection2);
 			assertTrue("Did not throw exception for null element in remove", false);
