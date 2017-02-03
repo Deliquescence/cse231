@@ -294,7 +294,15 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null || c.contains(null)) {
+			throw new NullPointerException();
+		}
+		
+		Iterator it = c.iterator();
+		while (it.hasNext()) {
+			this.add((E) it.next());
+		}
+		return true;
 	}
 	
 	/**
@@ -326,7 +334,15 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null || c.contains(null)) {
+			throw new NullPointerException();
+		}
+		
+		Iterator it = c.iterator();
+		while (it.hasNext()) {
+			this.add(index++, (E) it.next());
+		}
+		return true;
 	}
 	
 	/**
