@@ -446,7 +446,22 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public E set(int index, E element) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (this.contains(element)) {
+			throw new IllegalArgumentException("Cannot add a duplicate element");
+		}
+		
+		E elem = this.indexZero;
+		for (int i = 0; i < index - 1; i++) {
+			elem = elem.getLink();
+		}
+		
+		E old = elem.getLink();
+		element.setLink(old.getLink());
+		elem.setLink(element);
+		return old;
 	}
 	
 	/**
@@ -470,7 +485,20 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public void add(int index, E element) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (this.contains(element)) {
+			throw new IllegalArgumentException("Cannot add a duplicate element");
+		}
+		
+		E elem = this.indexZero;
+		for (int i = 0; i < index - 1; i++) {
+			elem = elem.getLink();
+		}
+		
+		element.setLink(elem.getLink());
+		elem.setLink(element);
 	}
 	
 	/**
