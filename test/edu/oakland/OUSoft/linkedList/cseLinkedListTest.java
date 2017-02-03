@@ -94,6 +94,13 @@ public class cseLinkedListTest {
 		list.toArray(array2);
 		assertEquals(testEnrollment1, array2[0]);
 		assertEquals(testEnrollment2, array2[1]);
+		
+		Enrollment[] array3 = new Enrollment[3];
+		array3[2] = testEnrollment4;
+		list.toArray(array3);
+		assertEquals(testEnrollment1, array3[0]);
+		assertEquals(testEnrollment2, array3[1]);
+		assertNull(array3[2]);
 	}
 	
 	@Test

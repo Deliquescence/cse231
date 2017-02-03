@@ -151,7 +151,16 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public <T> T[] toArray(T[] a) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		//Stolen from ArrayList's implementation
+		Object[] elementData = this.toArray();
+		if (a.length < this.size()) {
+			return (T[]) Arrays.copyOf(elementData, this.size(), a.getClass());
+		}
+		System.arraycopy(elementData, 0, a, 0, this.size());
+		if (a.length > this.size()) {
+			a[this.size()] = null;
+		}
+		return a;
 	}
 	
 	/**
