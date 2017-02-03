@@ -365,7 +365,17 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null || c.contains(null)) {
+			throw new NullPointerException();
+		}
+		boolean dirty = false;
+		
+		for (Object item : c) {
+			if (this.remove(item)) {
+				dirty = true;
+			}
+		}
+		return dirty;
 	}
 	
 	/**
@@ -390,7 +400,20 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	 */
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null || c.contains(null)) {
+			throw new NullPointerException();
+		}
+		boolean dirty = false;
+		
+		for (E element : this) {
+			if (!c.contains(element)) {
+				if (this.remove(element)) {
+					dirty = true;
+				}
+			}
+		}
+		
+		return dirty;
 	}
 	
 	/**
