@@ -1,5 +1,10 @@
 package edu.oakland.OUSoft.linkedList;
 
+/**
+ * A class that implements this can be used as a node in a {@link cseLinkedList}.
+ *
+ * @param <E> Must be the same as the implementing class
+ */
 public interface LLNode<E> {
 	
 	/**

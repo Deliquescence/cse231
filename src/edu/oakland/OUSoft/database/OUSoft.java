@@ -4,6 +4,7 @@ import edu.oakland.OUSoft.items.Course;
 import edu.oakland.OUSoft.items.Instructor;
 import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
+import edu.oakland.OUSoft.linkedList.cseLinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +19,18 @@ import java.util.List;
  */
 public class OUSoft {
 	
-	private final ArrayList<Student> students;
-	private final ArrayList<Instructor> instructors;
-	private final ArrayList<Person> others;
-	private final ArrayList<Course> courses;
-	private final ArrayList<Enrollment> enrollments;
+	private final cseLinkedList<Student> students;
+	private final cseLinkedList<Instructor> instructors;
+	private final cseLinkedList<Person> others;
+	private final cseLinkedList<Course> courses;
+	private final cseLinkedList<Enrollment> enrollments;
 	
 	public OUSoft() {
-		this.students = new ArrayList<>();
-		this.instructors = new ArrayList<>();
-		this.others = new ArrayList<>();
-		this.courses = new ArrayList<>();
-		this.enrollments = new ArrayList<>();
+		this.students = new cseLinkedList<>();
+		this.instructors = new cseLinkedList<>();
+		this.others = new cseLinkedList<>();
+		this.courses = new cseLinkedList<>();
+		this.enrollments = new cseLinkedList<>();
 	}
 	
 	/**
@@ -185,7 +186,7 @@ public class OUSoft {
 	 *
 	 * @return The courses in the database
 	 */
-	public ArrayList<Course> getCourses() {
+	public List<Course> getCourses() {
 		return this.courses;
 	}
 	
@@ -366,7 +367,7 @@ public class OUSoft {
 	 *
 	 * @return List of the students in the database
 	 */
-	public ArrayList<Student> getStudents() {
+	public List<Student> getStudents() {
 		return students;
 	}
 	
@@ -375,7 +376,7 @@ public class OUSoft {
 	 *
 	 * @return List of the instructors in the database
 	 */
-	public ArrayList<Instructor> getInstructors() {
+	public List<Instructor> getInstructors() {
 		return instructors;
 	}
 	
@@ -384,7 +385,7 @@ public class OUSoft {
 	 *
 	 * @return List of the uncategorized people in the database
 	 */
-	public ArrayList<Person> getOthers() {
+	public List<Person> getOthers() {
 		return others;
 	}
 	

@@ -2,7 +2,7 @@ package edu.oakland.OUSoft.linkedList;
 
 import java.util.*;
 
-public class cseLinkedList<E extends LLNode<E>> implements List<E> {
+public class cseLinkedList<E extends LLNode> implements List<E> {
 	
 	private E indexZero;
 	
@@ -77,7 +77,7 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 			@Override
 			public E next() {
 				E previous = current;
-				current = current.getLink();
+				current = (E) current.getLink();
 				return previous;
 			}
 		};
@@ -200,7 +200,7 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 		}
 		E element = this.indexZero;
 		while (element.getLink() != null) {
-			element = element.getLink();
+			element = (E) element.getLink();
 		}
 		element.setLink(e);
 		return true;
@@ -237,7 +237,7 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 		for (E e : this) {
 			if (e.equals(o)) {
 				if (this.indexOf(e) == 0) {
-					this.indexZero = this.indexZero.getLink();
+					this.indexZero = (E) this.indexZero.getLink();
 					return true;
 				}
 				previous.setLink(e.getLink());
@@ -494,7 +494,7 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 		
 		E element = this.indexZero;
 		for (int i = 0; i < index; i++) {
-			element = element.getLink();
+			element = (E) element.getLink();
 		}
 		return element;
 	}
@@ -528,10 +528,10 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 		
 		E elem = this.indexZero;
 		for (int i = 0; i < index - 1; i++) {
-			elem = elem.getLink();
+			elem = (E) elem.getLink();
 		}
 		
-		E old = elem.getLink();
+		E old = (E) elem.getLink();
 		element.setLink(old.getLink());
 		elem.setLink(element);
 		return old;
@@ -567,7 +567,7 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 		
 		E elem = this.indexZero;
 		for (int i = 0; i < index - 1; i++) {
-			elem = elem.getLink();
+			elem = (E) elem.getLink();
 		}
 		
 		element.setLink(elem.getLink());
@@ -595,16 +595,16 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 		
 		if (index == 0) {
 			E old = this.indexZero;
-			this.indexZero = this.indexZero.getLink();
+			this.indexZero = (E) this.indexZero.getLink();
 			return old;
 		}
 		
 		E elem = this.indexZero;
 		for (int i = 0; i < index - 1; i++) {
-			elem = elem.getLink();
+			elem = (E) elem.getLink();
 		}
 		
-		E old = elem.getLink();
+		E old = (E) elem.getLink();
 		elem.setLink(old.getLink());
 		return old;
 	}
