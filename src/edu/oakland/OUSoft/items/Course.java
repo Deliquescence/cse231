@@ -1,12 +1,16 @@
 package edu.oakland.OUSoft.items;
 
+import edu.oakland.OUSoft.linkedList.LLNode;
+
 import java.time.LocalTime;
 
 /**
  * "includes information for a course such as course name, instructor, class meeting time, etc.
  * The instructor field of a Course object should reference to a valid Instructor object."
  */
-public class Course {
+public class Course implements LLNode<Course> {
+	
+	private Course link;
 	
 	private String name;
 	private Instructor instructor;
@@ -53,5 +57,25 @@ public class Course {
 	
 	public void setTimeEnd(LocalTime timeEnd) {
 		this.timeEnd = timeEnd;
+	}
+	
+	/**
+	 * Get the link to the next object
+	 *
+	 * @return The next object in the list
+	 */
+	@Override
+	public Course getLink() {
+		return this.link;
+	}
+	
+	/**
+	 * Set the link to the next object
+	 *
+	 * @param Link The next object in the list
+	 */
+	@Override
+	public void setLink(Course Link) {
+		this.link = Link;
 	}
 }

@@ -1,11 +1,15 @@
 package edu.oakland.OUSoft.items;
 
+import edu.oakland.OUSoft.linkedList.LLNode;
+
 import java.util.Date;
 
 /**
  * "The person class should include information such as id, first name, last name, etc."
  */
-public class Person {
+public class Person implements LLNode<Person> {
+	
+	private Person link;
 	
 	private String ID;
 	private String firstName;
@@ -69,5 +73,25 @@ public class Person {
 	
 	public void setBirthday(Date birthday) {
 		Birthday = birthday;
+	}
+	
+	/**
+	 * Get the link to the next object
+	 *
+	 * @return The next object in the list
+	 */
+	@Override
+	public Person getLink() {
+		return this.link;
+	}
+	
+	/**
+	 * Set the link to the next object
+	 *
+	 * @param Link The next object in the list
+	 */
+	@Override
+	public void setLink(Person Link) {
+		this.link = Link;
 	}
 }
