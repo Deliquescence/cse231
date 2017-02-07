@@ -129,11 +129,12 @@ public class cseLinkedListTest {
 		}
 		
 		//Do not allow null
+		int countBeforeAddNull = list.size();
 		try {
 			list.add(null);
-			assertEquals("Added a null element", 2, list.size());
+			assertEquals("Added a null element", countBeforeAddNull, list.size());
 		} catch (NullPointerException e) {
-			assertEquals("Added a null element", 2, list.size());
+			assertEquals("Added a null element", countBeforeAddNull, list.size());
 		}
 	}
 	
