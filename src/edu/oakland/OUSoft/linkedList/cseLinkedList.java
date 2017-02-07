@@ -230,7 +230,7 @@ public class cseLinkedList<E extends LLNode<E>> implements List<E> {
 	@Override
 	public boolean remove(Object o) {
 		if (o == null) {
-			throw new NullPointerException("Cannot add a null element");
+			return false;
 		}
 		
 		E previous = null;

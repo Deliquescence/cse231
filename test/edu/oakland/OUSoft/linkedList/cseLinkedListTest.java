@@ -149,9 +149,8 @@ public class cseLinkedListTest {
 		assertFalse(list.contains(testEnrollment2));
 		
 		try {
-			list.remove(null);
-			assertTrue("Did not throw exception for null remove", false);
-		} catch (NullPointerException shouldThrow) {
+			assertFalse("Should have returned false for null remove", list.remove(null));
+		} catch (NullPointerException mayThrow) {
 		}
 	}
 	
