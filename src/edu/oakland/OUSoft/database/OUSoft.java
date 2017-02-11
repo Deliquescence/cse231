@@ -233,6 +233,15 @@ public class OUSoft {
 	}
 	
 	/**
+	 * Print all the courses to standard output.
+	 */
+	public void printAllCourses() {
+		for (Course course : this.courses) {
+			System.out.println(course.toString());
+		}
+	}
+	
+	/**
 	 * Retrieve a person using their ID
 	 *
 	 * @param ID The persons ID
