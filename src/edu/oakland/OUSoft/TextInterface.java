@@ -1,6 +1,7 @@
 package edu.oakland.OUSoft;
 
 import edu.oakland.OUSoft.database.OUSoft;
+import edu.oakland.OUSoft.items.Course;
 import edu.oakland.OUSoft.items.Instructor;
 import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
@@ -271,6 +272,72 @@ public class TextInterface {
 			
 			System.out.println("Enter 'y' or 'n'");
 		}
+	}
+	
+	/**
+	 * Get an instructor from the ID the user enters.
+	 * If they enter a bad ID, try again.
+	 * If they give up, they can enter 'abort' and this will return null.
+	 *
+	 * @return An Instructor, or null
+	 */
+	public Instructor getInstructorFromID(String prompt) {
+		Instructor instructor = null;
+		while (instructor == null) {
+			String instructorID = this.getInput(prompt);
+			if (instructorID.equalsIgnoreCase("abort")) {
+				return null;
+			}
+			instructor = db.getInstructorByID(instructorID);
+			if (instructor == null) {
+				System.out.println("Could not find that instructor! (Enter 'abort' if you need)");
+			}
+		}
+		return instructor;
+	}
+	
+	/**
+	 * Get a student from the ID the user enters.
+	 * If they enter a bad ID, try again.
+	 * If they give up, they can enter 'abort' and this will return null.
+	 *
+	 * @return A Student, or null
+	 */
+	public Student getStudentFromID(String prompt) {
+		Student student = null;
+		while (student == null) {
+			String studentID = this.getInput(prompt);
+			if (studentID.equalsIgnoreCase("abort")) {
+				return null;
+			}
+			student = db.getStudentByID(studentID);
+			if (student == null) {
+				System.out.println("Could not find that student! (Enter 'abort' if you need)");
+			}
+		}
+		return student;
+	}
+	
+	/**
+	 * Get a course from the ID the user enters.
+	 * If they enter a bad ID, try again.
+	 * If they give up, they can enter 'abort' and this will return null.
+	 *
+	 * @return A Course, or null
+	 */
+	public Course getCourseFromID(String prompt) {
+		Course course = null;
+		while (course == null) {
+			String courseID = this.getInput(prompt);
+			if (courseID.equalsIgnoreCase("abort")) {
+				return null;
+			}
+			course = db.getCourseByID(courseID);
+			if (course == null) {
+				System.out.println("Could not find that course! (Enter 'abort' if you need)");
+			}
+		}
+		return course;
 	}
 	
 	/**
