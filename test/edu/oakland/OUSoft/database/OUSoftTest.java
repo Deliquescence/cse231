@@ -15,6 +15,9 @@ import static org.junit.Assert.*;
 public class OUSoftTest {
 	private OUSoft db;
 	
+	private Course testCourse = new Course("TestCourseID1", "test course 100");
+	private Course testCourse2 = new Course("TestCourseID2", "test course 200");
+	
 	@Before
 	public void setUp() throws Exception {
 		db = new OUSoft();
@@ -22,7 +25,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void addCourse() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Instructor testInstructor = new Instructor("TestInstructorID");
 		testCourse.setInstructor(testInstructor);
 		
@@ -32,7 +34,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void addCourseOverload() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Instructor testInstructor = new Instructor("TestInstructorID");
 		
 		db.addCourse(testCourse, testInstructor);
@@ -41,7 +42,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void addCourseNoInstructor() throws Exception {
-		Course testCourse = new Course("testCourse");
 		
 		//Must have an instructor
 		boolean threwExceptionForNoInstructor = false;
@@ -55,7 +55,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void enroll() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
 		db.addPerson(testStudent);
@@ -69,7 +68,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void enrollStudentNotInDB() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
 		try {
@@ -83,7 +81,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void withdraw() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
 		db.addPerson(testStudent);
@@ -96,7 +93,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void getEnrollment() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
 		assertNull("Magically got enrolled somehow", db.getEnrollment(testStudent, testCourse));
@@ -109,7 +105,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void getEnrollmentsForCourse() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		Student testStudent2 = new Student("TestStudentID2");
 		
@@ -129,8 +124,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void getEnrollmentsForStudent() throws Exception {
-		Course testCourse = new Course("testCourse");
-		Course testCourse2 = new Course("testCourse2");
 		Student testStudent = new Student("TestStudentID");
 		
 		assertEquals("getEnrollments (for student) magically obtained an Enrollment", 0, db.getEnrollments(testStudent).size());
@@ -147,7 +140,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void studentIsEnrolled() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		
 		assertFalse("Student magically got enrolled", db.studentIsEnrolled(testStudent, testCourse));
@@ -160,7 +152,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void numberStudentsEnrolled() throws Exception {
-		Course testCourse = new Course("testCourse");
 		Student testStudent = new Student("TestStudentID");
 		Student testStudent2 = new Student("TestStudentID2");
 		
@@ -182,8 +173,6 @@ public class OUSoftTest {
 	
 	@Test
 	public void numberCoursesEnrolled() throws Exception {
-		Course testCourse = new Course("testCourse");
-		Course testCourse2 = new Course("testCourse2");
 		Student testStudent = new Student("TestStudentID");
 		
 		db.addPerson(testStudent);
