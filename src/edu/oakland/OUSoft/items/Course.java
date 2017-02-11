@@ -12,6 +12,7 @@ public class Course implements LLNode<Course> {
 	
 	private Course link;
 	
+	private String ID;
 	private String name;
 	private Instructor instructor;
 	
@@ -23,8 +24,17 @@ public class Course implements LLNode<Course> {
 	 *
 	 * @param name The name of the Course
 	 */
-	public Course(String name) {
+	public Course(String ID, String name) {
+		this.ID = ID;
 		this.name = name;
+	}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 	
 	public String getName() {
