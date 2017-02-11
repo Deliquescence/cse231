@@ -59,6 +59,10 @@ public class TextInterface {
 					} else if (tokens[1].startsWith("s")) { //Student
 						this.db.printAllStudents(true);
 						return true;
+					} else if (tokens[1].startsWith("c")) { //Course
+						System.out.println("Courses in the database: ");
+						this.db.printAllCourses();
+						return true;
 					}
 				}
 				this.db.printAllPeople(true);
