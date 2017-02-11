@@ -344,16 +344,17 @@ public class TextInterface {
 	 * Print the big list of commands
 	 */
 	private void printBigHelp() {
-		StringBuilder helpBuilder = new StringBuilder();
-		helpBuilder.append("Available commands:\n");
-		helpBuilder.append("add [type]\t\tAdd a person to the database\n");
-		helpBuilder.append("get <ID>\t\tRetrieve a person from the database\n");
-		helpBuilder.append("help [command]\tGet help\n");
-		helpBuilder.append("list [type]\t\tList people in the database\n");
-		helpBuilder.append("quit\t\t\tExit the program\n");
-		helpBuilder.append("remove <ID>\t\tRemove a person from the database\n");
+		String help = "Available commands:\n" +
+				"add [type]\t\tAdd a person or course to the database\n" +
+				"enroll\t\t\tEnroll a student in a course\n" +
+				"get <ID>\t\tRetrieve a person from the database\n" +
+				"help [command]\tGet help\n" +
+				"list [type]\t\tList people or courses in the database\n" +
+				"quit\t\t\tExit the program\n" +
+				"remove <ID>\t\tRemove a person or course from the database\n" +
+				"withdraw\t\t\tWithdraw a student from a course\n";
 		
-		System.out.print(helpBuilder.toString());
+		System.out.print(help);
 	}
 	
 }
