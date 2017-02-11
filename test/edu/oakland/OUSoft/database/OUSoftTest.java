@@ -73,6 +73,14 @@ public class OUSoftTest {
 	}
 	
 	@Test
+	public void getCourse() throws Exception {
+		Instructor testInstructor = new Instructor("TestInstructorID");
+		
+		db.addCourse(testCourse, testInstructor);
+		assertEquals(testCourse, db.getCourseByID("TestCourseID1"));
+	}
+	
+	@Test
 	public void enroll() throws Exception {
 		Student testStudent = new Student("TestStudentID");
 		
