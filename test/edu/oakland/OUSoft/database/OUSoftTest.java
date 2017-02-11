@@ -30,6 +30,14 @@ public class OUSoftTest {
 		
 		db.addCourse(testCourse);
 		assertTrue("addCourse did not add a course", db.getCourses().contains(testCourse));
+		
+		//Check duplicate
+		int countBeforeTryAddDuplicate = db.getCourses().size();
+		try {
+			db.addCourse(testCourse);
+			assertEquals("Added a duplicate course", countBeforeTryAddDuplicate, db.getCourses().size());
+		} catch (IllegalArgumentException shouldThrow) {
+		}
 	}
 	
 	@Test
@@ -51,6 +59,17 @@ public class OUSoftTest {
 			threwExceptionForNoInstructor = true;
 		}
 		assertTrue("addCourse did not throw an exception for a course not having a valid Instructor", threwExceptionForNoInstructor);
+	}
+	
+	@Test
+	public void removeCourse() throws Exception {
+		Instructor testInstructor = new Instructor("TestInstructorID");
+		
+		db.addCourse(testCourse, testInstructor);
+		assertTrue(db.getCourses().contains(testCourse));
+		
+		db.removeCourse(testCourse);
+		assertFalse("Did not remove a course", db.getCourses().contains(testCourse));
 	}
 	
 	@Test
@@ -245,11 +264,11 @@ public class OUSoftTest {
 		assertTrue("Did not add a person", db.getPeople().contains(testPerson));
 		assertEquals(1, db.getPeople().size());
 		
-		try{
+		try {
 			db.addPerson(testPerson);
 		} catch (IllegalArgumentException ignore) {
 		}
-		assertEquals("People in database increased after adding the same person again",1, db.getPeople().size());
+		assertEquals("People in database increased after adding the same person again", 1, db.getPeople().size());
 	}
 	
 	@Test
