@@ -44,6 +44,9 @@ public class OUSoft {
 		if (course.getInstructor() == null) {
 			throw new IllegalArgumentException("Course did not have an instructor assigned.");
 		}
+		if (getCourseByID(course.getID()) != null) { //Course is already in DB
+			throw new IllegalArgumentException("A Course with this ID is already in the database");
+		}
 		this.courses.add(course);
 	}
 	
@@ -55,7 +58,20 @@ public class OUSoft {
 	 */
 	public void addCourse(Course course, Instructor instructor) {
 		course.setInstructor(instructor);
-		this.courses.add(course);
+		addCourse(course);
+	}
+	
+	/**
+	 * Remove a course from the database.
+	 * Also withdraw all students from the course.
+	 *
+	 * @param course The course to remove
+	 */
+	public void removeCourse(Course course) {
+		for (Enrollment e : getEnrollments(course)) {
+			withdraw(e.getStudent(), course);
+		}
+		this.courses.remove(course);
 	}
 	
 	/**
@@ -137,6 +153,21 @@ public class OUSoft {
 			}
 		}
 		return enrollmentList;
+	}
+	
+	/**
+	 * Retrieve a course using its ID.
+	 *
+	 * @param ID The ID of the course.
+	 * @return The course, or null if not found.
+	 */
+	public Course getCourseByID(String ID) {
+		for (Course course : this.courses) {
+			if (course.getID().equals(ID)) {
+				return course;
+			}
+		}
+		return null;
 	}
 	
 	/**
