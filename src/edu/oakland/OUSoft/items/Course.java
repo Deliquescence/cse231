@@ -37,6 +37,14 @@ public class Course implements LLNode<Course> {
 		this.ID = ID;
 	}
 	
+	@Override
+	public String toString() {
+		return this.ID + ": " + this.name +
+				", Taught by " + this.getInstructor().getFirstName() + " " + this.getInstructor().getLastName() + ". " +
+				"Start: " + timeStart.toString() +
+				" End: " + timeEnd.toString();
+	}
+	
 	public String getName() {
 		return name;
 	}
