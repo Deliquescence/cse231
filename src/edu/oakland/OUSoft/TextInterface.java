@@ -6,6 +6,7 @@ import edu.oakland.OUSoft.items.Instructor;
 import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
 
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -60,7 +61,7 @@ public class TextInterface {
 						this.db.printAllStudents(true);
 						return true;
 					} else if (tokens[1].startsWith("c")) { //Course
-						System.out.println("Courses in the database: ");
+						System.out.println("Courses in the database: " + db.getCourses().size());
 						this.db.printAllCourses();
 						return true;
 					}
@@ -70,18 +71,18 @@ public class TextInterface {
 			
 			case "add":
 			case "new":
-				String personType;
+				String itemType;
 				if (tokens.length > 1) { //Type is given
-					personType = tokens[1].toLowerCase();
+					itemType = tokens[1].toLowerCase();
 				} else {
-					personType = this.getInput("Student or Instructor?\nadd: ").toLowerCase();
+					itemType = this.getInput("Student, Instructor, or Course?\nadd: ").toLowerCase();
 				}
 				System.out.println("Enter the following information:");
 				String ID = this.getInput("ID: ");
-				String firstName = this.getInput("First Name: ");
-				String lastName = this.getInput("Last Name: ");
 				
-				if (personType.startsWith("s")) { //Student
+				if (itemType.startsWith("s")) { //Student
+					String firstName = this.getInput("First Name: ");
+					String lastName = this.getInput("Last Name: ");
 					Student student = new Student(ID, firstName, lastName);
 					student.setMajor(this.getInput("Major: "));
 					student.setNumYearsAttended(this.getIntegerInput("Years Attended: "));
@@ -103,11 +104,14 @@ public class TextInterface {
 					System.out.println("\nAdd this student?\n" + student.toString());
 					if (this.getBooleanInput()) {
 						this.db.addPerson(student);
+						System.out.println("Added!");
 						return true;
 					}
 					return false;
 					
-				} else if (personType.startsWith("i")) { //Instructor
+				} else if (itemType.startsWith("i")) { //Instructor
+					String firstName = this.getInput("First Name: ");
+					String lastName = this.getInput("Last Name: ");
 					Instructor instructor = new Instructor(ID, firstName, lastName);
 					instructor.setOfficeBuilding(this.getInput("Office Building: "));
 					instructor.setOfficeNumber(this.getInput("Office Number: "));
@@ -117,29 +121,89 @@ public class TextInterface {
 					System.out.println("\nAdd this instructor?\n" + instructor.toString());
 					if (this.getBooleanInput()) {
 						this.db.addPerson(instructor);
+						System.out.println("Added!");
 						return true;
 					}
 					return false;
+					
+				} else if (itemType.startsWith("c")) { //Course
+					String name = this.getInput("Course Name: ");
+					Course course = new Course(ID, name);
+					
+					Instructor instructor = getInstructorFromID("The ID of the instructor of this course: ");
+					if (instructor == null) {
+						return false;
+					}
+					course.setInstructor(instructor);
+					
+					LocalTime startTime = LocalTime.of(
+							this.getIntegerInput("Starting hour (0-23): "),
+							this.getIntegerInput("Starting minute (0-59): ")
+					);
+					
+					LocalTime endTime = LocalTime.of(
+							this.getIntegerInput("Ending hour (0-23): "),
+							this.getIntegerInput("Ending minute (0-59): ")
+					);
+					
+					course.setTimeStart(startTime);
+					course.setTimeEnd(endTime);
+					
+					//Confirmation
+					System.out.println("\nAdd this course?\n" + course.toString());
+					if (this.getBooleanInput()) {
+						this.db.addCourse(course);
+						System.out.println("Added!");
+						return true;
+					}
+					return false;
+					
+				} else {
+					System.out.println("Unexpected type.");
+					return false;
 				}
-				//Other (Not student or instructor)
-				Person person = new Person(ID, firstName, lastName);
-				//Confirmation
-				System.out.println("\nAdd this person?\n" + person.toString());
-				if (this.getBooleanInput()) {
-					this.db.addPerson(person);
-					return true;
+			
+			case "withdraw":
+				Student student = getStudentFromID("Enter the ID of the student: ");
+				if (student == null) {
+					return false;
 				}
-				return false;
+				Course course = getCourseFromID("Enter the ID of the course: ");
+				if (course == null) {
+					return false;
+				}
+				
+				db.withdraw(student, course);
+				System.out.println("Withdrawn!");
+				return true;
+			
+			case "enroll":
+				student = getStudentFromID("Enter the ID of the student: ");
+				if (student == null) {
+					return false;
+				}
+				course = getCourseFromID("Enter the ID of the course: ");
+				if (course == null) {
+					return false;
+				}
+				
+				db.enroll(student, course);
+				System.out.println("Enrolled!");
+				return true;
 			
 			case "get":
 			case "retrieve":
 				if (tokens.length > 1) { //ID is given
 					Person p = this.db.getPersonByID(tokens[1]);
+					Course c = this.db.getCourseByID(tokens[1]);
 					if (p != null) {
-						System.out.println("Found someone with this ID:\n" + p.toString());
+						System.out.println("Found someone with that ID:\n" + p.toString());
+						return true;
+					} else if (c != null) {
+						System.out.println("Found a course with that ID:\n" + c.toString());
 						return true;
 					} else {
-						System.out.println("Could not find someone with that ID!");
+						System.out.println("Could not find anything with that ID!");
 						return false;
 					}
 				}
@@ -151,6 +215,7 @@ public class TextInterface {
 			case "delete":
 				if (tokens.length > 1) { //ID is given
 					Person p = this.db.getPersonByID(tokens[1]);
+					Course c = this.db.getCourseByID(tokens[1]);
 					if (p != null) {
 						System.out.println("Really remove this person?\n" + p.toString());
 						if (this.getBooleanInput()) {
@@ -159,8 +224,16 @@ public class TextInterface {
 							return true;
 						}
 						return false;
+					} else if (c != null) {
+						System.out.println("Really remove this course?\n" + c.toString());
+						if (this.getBooleanInput()) {
+							this.db.removeCourse(c);
+							System.out.println("Removed!");
+							return true;
+						}
+						return false;
 					} else {
-						System.out.println("Could not find someone with that ID!");
+						System.out.println("Could not find anything with that ID!");
 						return false;
 					}
 				}
