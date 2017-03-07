@@ -34,6 +34,17 @@ public class OUSoft {
 	}
 	
 	/**
+	 * Add a course to the database, with the given Instructor assigned.
+	 *
+	 * @param course     The Course to add
+	 * @param instructor The Instructor to assign
+	 */
+	public void addCourse(Course course, Instructor instructor) {
+		course.setInstructor(instructor);
+		addCourse(course);
+	}
+	
+	/**
 	 * Add a course to the database.
 	 * The course MUST have an instructor assigned.
 	 *
@@ -51,14 +62,18 @@ public class OUSoft {
 	}
 	
 	/**
-	 * Add a course to the database, with the given Instructor assigned.
+	 * Retrieve a course using its ID.
 	 *
-	 * @param course     The Course to add
-	 * @param instructor The Instructor to assign
+	 * @param ID The ID of the course.
+	 * @return The course, or null if not found.
 	 */
-	public void addCourse(Course course, Instructor instructor) {
-		course.setInstructor(instructor);
-		addCourse(course);
+	public Course getCourseByID(String ID) {
+		for (Course course : this.courses) {
+			if (course.getID().equals(ID)) {
+				return course;
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -153,21 +168,6 @@ public class OUSoft {
 			}
 		}
 		return enrollmentList;
-	}
-	
-	/**
-	 * Retrieve a course using its ID.
-	 *
-	 * @param ID The ID of the course.
-	 * @return The course, or null if not found.
-	 */
-	public Course getCourseByID(String ID) {
-		for (Course course : this.courses) {
-			if (course.getID().equals(ID)) {
-				return course;
-			}
-		}
-		return null;
 	}
 	
 	/**
@@ -364,6 +364,18 @@ public class OUSoft {
 	}
 	
 	/**
+	 * Remove someone from the database based on ID
+	 * Note they are removed from all sub-databases. This will not be a problem if IDs are unique.
+	 *
+	 * @param ID The persons ID
+	 */
+	public void removePersonByID(String ID) {
+		this.removeInstructorByID(ID);
+		this.removeStudentByID(ID);
+		this.removeOtherByID(ID);
+	}
+	
+	/**
 	 * Remove a student by ID
 	 *
 	 * @param ID The ID of the Student to remove
@@ -388,18 +400,6 @@ public class OUSoft {
 	 */
 	public void removeOtherByID(String ID) {
 		this.others.remove(getOtherByID(ID));
-	}
-	
-	/**
-	 * Remove someone from the database based on ID
-	 * Note they are removed from all sub-databases. This will not be a problem if IDs are unique.
-	 *
-	 * @param ID The persons ID
-	 */
-	public void removePersonByID(String ID) {
-		this.removeInstructorByID(ID);
-		this.removeStudentByID(ID);
-		this.removeOtherByID(ID);
 	}
 	
 	/**
@@ -443,6 +443,19 @@ public class OUSoft {
 	}
 	
 	/**
+	 * Print every person to standard output
+	 */
+	public void printAllPeople(boolean doHeader) {
+		if (doHeader) {
+			int count = this.students.size() + this.instructors.size() + this.others.size();
+			System.out.println("People in the database: " + count);
+		}
+		this.printAllInstructors(false);
+		this.printAllStudents(false);
+		this.printAllOthers(false);
+	}
+	
+	/**
 	 * Print every student to standard output
 	 */
 	public void printAllStudents(boolean doHeader) {
@@ -476,18 +489,5 @@ public class OUSoft {
 		for (Person person : this.others) {
 			System.out.println(person);
 		}
-	}
-	
-	/**
-	 * Print every person to standard output
-	 */
-	public void printAllPeople(boolean doHeader) {
-		if (doHeader) {
-			int count = this.students.size() + this.instructors.size() + this.others.size();
-			System.out.println("People in the database: " + count);
-		}
-		this.printAllInstructors(false);
-		this.printAllStudents(false);
-		this.printAllOthers(false);
 	}
 }
