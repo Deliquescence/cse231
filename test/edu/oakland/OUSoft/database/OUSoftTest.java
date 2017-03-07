@@ -24,6 +24,34 @@ public class OUSoftTest {
 	}
 	
 	@Test
+	public void savePeople() throws Exception {
+		db.addPerson(new Student("S01"));
+		db.addPerson(new Instructor("I01"));
+		db.addPerson(new Person("P01"));
+		
+		db.savePeople(""); //TODO verify worked
+	}
+	
+	@Test
+	public void saveCourses() throws Exception {
+		db.addCourse(testCourse, new Instructor("I01"));
+		db.addCourse(testCourse2, new Instructor("I02"));
+		
+		db.saveCourses(""); //TODO verify worked
+	}
+	
+	@Test
+	public void saveEnrollments() throws Exception {
+		Student testStudent = new Student("S01");
+		db.addPerson(testStudent);
+		
+		db.addCourse(testCourse, new Instructor("I01"));
+		db.enroll(testStudent, testCourse);
+		
+		db.saveEnrollments(""); //TODO verify worked
+	}
+	
+	@Test
 	public void addCourse() throws Exception {
 		Instructor testInstructor = new Instructor("TestInstructorID");
 		testCourse.setInstructor(testInstructor);

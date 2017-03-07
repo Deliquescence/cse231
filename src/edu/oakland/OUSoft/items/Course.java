@@ -2,13 +2,14 @@ package edu.oakland.OUSoft.items;
 
 import edu.oakland.OUSoft.linkedList.LLNode;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 /**
  * "includes information for a course such as course name, instructor, class meeting time, etc.
  * The instructor field of a Course object should reference to a valid Instructor object."
  */
-public class Course implements LLNode<Course> {
+public class Course implements LLNode<Course>, Serializable {
 	
 	private Course link;
 	

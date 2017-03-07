@@ -6,6 +6,7 @@ import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
 import edu.oakland.OUSoft.linkedList.cseLinkedList;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,115 @@ public class OUSoft {
 		this.others = new cseLinkedList<>();
 		this.courses = new cseLinkedList<>();
 		this.enrollments = new cseLinkedList<>();
+	}
+	
+	/**
+	 * Helper to create an ObjectOutputStream at the given file path,
+	 * creating the file and its parent directories if necessary.
+	 *
+	 * @param filePath the path to the file
+	 * @return an ObjectOutputStream that writes to the file
+	 * @throws IOException
+	 */
+	private ObjectOutputStream createObjectOutputStream(String filePath) throws IOException {
+		
+		File file = new File(filePath);
+		file.getParentFile().mkdirs();
+		if (file.createNewFile()) {
+			System.out.println("Created new file: " + file.getPath());
+		}
+		
+		return new ObjectOutputStream(new FileOutputStream(file));
+	}
+	
+	/**
+	 * Save the people in this database to the file at the given path.
+	 * filePath MAY be null, in which case a default path will be used.
+	 *
+	 * @param filePath the path to the file, or null to use default.
+	 */
+	public void savePeople(String filePath) {
+		if (filePath == null || filePath.equals("")) {
+			filePath = System.getProperty("user.home") + "/OUSoft/people.bin";
+		}
+		
+		try {
+			ObjectOutputStream oos = createObjectOutputStream(filePath);
+			oos.writeObject(getPeople());
+		} catch (IOException ex) {
+			System.err.println("Error writing to the file: " + filePath);
+			System.err.println(ex);
+		}
+	}
+	
+	/**
+	 * Load the people in the file at the given path to this database, adding to any existing.
+	 * filePath MAY be null, in which case a default path will be used.
+	 *
+	 * @param filePath the path to the file, or null to use default.
+	 */
+	public void loadPeople(String filePath) {
+		
+	}
+	
+	/**
+	 * Save the courses in this database to the file at the given path.
+	 * filePath MAY be null, in which case a default path will be used.
+	 *
+	 * @param filePath the path to the file, or null to use default.
+	 */
+	public void saveCourses(String filePath) {
+		if (filePath == null || filePath.equals("")) {
+			filePath = System.getProperty("user.home") + "/OUSoft/courses.bin";
+		}
+		
+		try {
+			ObjectOutputStream oos = createObjectOutputStream(filePath);
+			oos.writeObject(getCourses());
+		} catch (IOException ex) {
+			System.err.println("Error writing to the file: " + filePath);
+			System.err.println(ex);
+		}
+	}
+	
+	/**
+	 * Load the courses in the file at the given path to this database, adding to any existing.
+	 * filePath MAY be null, in which case a default path will be used.
+	 *
+	 * @param filePath the path to the file, or null to use default.
+	 */
+	public void loadCourses(String filePath) {
+		
+	}
+	
+	/**
+	 * Save the enrollments in this database to the file at the given path.
+	 * filePath MAY be null, in which case a default path will be used.
+	 *
+	 * @param filePath the path to the file, or null to use default.
+	 */
+	public void saveEnrollments(String filePath) {
+		if (filePath == null || filePath.equals("")) {
+			filePath = System.getProperty("user.home") + "/OUSoft/enrollments.bin";
+		}
+		
+		try {
+			ObjectOutputStream oos = createObjectOutputStream(filePath);
+			oos.writeObject(enrollments);
+		} catch (IOException ex) {
+			System.err.println("Error writing to the file: " + filePath);
+			System.err.println(ex);
+		}
+	}
+	
+	/**
+	 * Load the enrollments in the file at the given path to this database, adding to any existing.
+	 * filePath MAY be null, in which case a default path will be used.
+	 *
+	 * @param filePath the path to the file, or null to use default.
+	 */
+	public void loadEnrollments(String filePath) {
+		
 	}
 	
 	/**

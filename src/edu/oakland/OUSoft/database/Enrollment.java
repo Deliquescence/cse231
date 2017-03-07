@@ -4,12 +4,14 @@ import edu.oakland.OUSoft.items.Course;
 import edu.oakland.OUSoft.items.Student;
 import edu.oakland.OUSoft.linkedList.LLNode;
 
+import java.io.Serializable;
+
 /**
  * "contains at least two fields, one for referencing to the Course object and one referencing to the Student object.
  * Since we will build a linked list of the all enrollment objects,
  * you will add an “Enrollment link” filed in the Enrollment class, the same approach as the LLNode class in the textbook."
  */
-public class Enrollment implements LLNode<Enrollment> {
+public class Enrollment implements LLNode<Enrollment>, Serializable {
 	
 	private Course course;
 	private Student student;

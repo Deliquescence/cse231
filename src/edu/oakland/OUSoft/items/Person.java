@@ -2,12 +2,13 @@ package edu.oakland.OUSoft.items;
 
 import edu.oakland.OUSoft.linkedList.LLNode;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * "The person class should include information such as id, first name, last name, etc."
  */
-public class Person implements LLNode<Person> {
+public class Person implements LLNode<Person>, Serializable {
 	
 	private Person link;
 	

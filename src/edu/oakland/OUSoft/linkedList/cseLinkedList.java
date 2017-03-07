@@ -1,8 +1,9 @@
 package edu.oakland.OUSoft.linkedList;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class cseLinkedList<E extends LLNode> implements List<E> {
+public class cseLinkedList<E extends LLNode> implements List<E>, Serializable {
 	
 	private E indexZero;
 	
