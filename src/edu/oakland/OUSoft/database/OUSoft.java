@@ -126,7 +126,23 @@ public class OUSoft {
 	 * @param filePath the path to the file, or null to use default.
 	 */
 	public void loadCourses(String filePath) {
-		
+		if (filePath == null || filePath.equals("")) {
+			filePath = System.getProperty("user.home") + "/OUSoft/courses.bin";
+		}
+		try {
+			File file = new File(filePath);
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			
+			List<Course> courseList = (List<Course>) ois.readObject();
+			for (Course c : courseList) {
+				addCourse(c);
+			}
+		} catch (IOException ex) {
+			System.err.println("Error loading courses: ");
+			System.err.println(ex);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

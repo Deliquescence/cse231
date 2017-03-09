@@ -46,15 +46,27 @@ public class OUSoftTest {
 	}
 	
 	@Test
-	public void saveCourses() throws Exception {
-		db.addCourse(testCourse, new Instructor("I01"));
-		db.addCourse(testCourse2, new Instructor("I02"));
+	public void saveAndLoadCourses() throws Exception {
+		List<Course> testCourses = new ArrayList<>();
+		testCourses.add(new Course("C001", "test course one", new Instructor("I0011")));
+		testCourses.add(new Course("C002", "test course two", new Instructor("I0012")));
 		
-		db.saveCourses(""); //TODO verify worked
+		for (Course c : testCourses) {
+			db.addCourse(c);
+		}
+		
+		db.saveCourses("");
+		
+		db = new OUSoft();
+		assertEquals(0, db.getCourses().size());
+		
+		db.loadCourses("");
+		
+		assertTrue("Loaded courses did not contain saved courses", db.getCourses().containsAll(testCourses));
 	}
 	
 	@Test
-	public void saveEnrollments() throws Exception {
+	public void saveAndLoadEnrollments() throws Exception {
 		Student testStudent = new Student("S01");
 		db.addPerson(testStudent);
 		
