@@ -172,7 +172,23 @@ public class OUSoft {
 	 * @param filePath the path to the file, or null to use default.
 	 */
 	public void loadEnrollments(String filePath) {
-		
+		if (filePath == null || filePath.equals("")) {
+			filePath = System.getProperty("user.home") + "/OUSoft/enrollments.bin";
+		}
+		try {
+			File file = new File(filePath);
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			
+			List<Enrollment> enrollmentList = (List<Enrollment>) ois.readObject();
+			for (Enrollment e : enrollmentList) {
+				enrollments.add(e);
+			}
+		} catch (IOException ex) {
+			System.err.println("Error loading enrollments: ");
+			System.err.println(ex);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -273,7 +289,7 @@ public class OUSoft {
 	 */
 	public Enrollment getEnrollment(Student student, Course course) {
 		for (Enrollment e : this.enrollments) {
-			if (e.getCourse() == course && e.getStudent() == student) {
+			if (e.getCourse().equals(course) && e.getStudent().equals(student)) {
 				return e;
 			}
 		}

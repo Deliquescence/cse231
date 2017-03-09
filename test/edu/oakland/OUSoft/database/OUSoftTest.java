@@ -73,7 +73,14 @@ public class OUSoftTest {
 		db.addCourse(testCourse, new Instructor("I01"));
 		db.enroll(testStudent, testCourse);
 		
-		db.saveEnrollments(""); //TODO verify worked
+		db.saveEnrollments("");
+		
+		db = new OUSoft();
+		assertEquals(0, db.getCourses().size());
+		
+		db.loadEnrollments("");
+		
+		assertTrue("Loaded enrollments did not match saved enrollments", db.studentIsEnrolled(testStudent, testCourse));
 	}
 	
 	@Test
