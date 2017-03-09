@@ -4,6 +4,7 @@ import edu.oakland.OUSoft.linkedList.LLNode;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * "The person class should include information such as id, first name, last name, etc."
@@ -37,6 +38,18 @@ public class Person implements LLNode<Person>, Serializable {
 		this.ID = ID;
 		this.firstName = firstName;
 		this.lastName = lastName;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Person)) {
+			return false;
+		}
+		Person o = (Person) obj;
+		return this.ID.equals(o.ID) &&
+		       Objects.equals(this.firstName, o.firstName) &&
+		       Objects.equals(this.lastName, o.lastName) &&
+		       Objects.equals(this.Birthday, o.Birthday);
 	}
 	
 	@Override

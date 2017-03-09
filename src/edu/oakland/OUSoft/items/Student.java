@@ -1,5 +1,7 @@
 package edu.oakland.OUSoft.items;
 
+import java.util.Objects;
+
 /**
  * "A student class should contain more information such as the number of years in college,"
  */
@@ -29,6 +31,17 @@ public class Student extends Person {
 	 */
 	public Student(String ID, String firstName, String lastName) {
 		super(ID, firstName, lastName);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!super.equals(obj) || !(obj instanceof Student)) {
+			return false;
+		}
+		Student o = (Student) obj;
+		return Objects.equals(this.major, o.major) &&
+		       Objects.equals(this.numYearsAttended, o.numYearsAttended) &&
+		       Objects.equals(this.GPA, o.GPA);
 	}
 	
 	@Override
