@@ -30,6 +30,19 @@ public class Course implements LLNode<Course>, Serializable {
 		this.name = name;
 	}
 	
+	/**
+	 * Create a new Course
+	 *
+	 * @param ID         the ID of the course
+	 * @param name       the name of the Course
+	 * @param instructor the instructor of the course
+	 */
+	public Course(String ID, String name, Instructor instructor) {
+		this.ID = ID;
+		this.name = name;
+		this.instructor = instructor;
+	}
+	
 	public String getID() {
 		return ID;
 	}
