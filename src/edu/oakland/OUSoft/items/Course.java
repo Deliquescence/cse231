@@ -23,7 +23,8 @@ public class Course implements LLNode<Course>, Serializable {
 	/**
 	 * Create a new Course
 	 *
-	 * @param name The name of the Course
+	 * @param ID   the ID of the course
+	 * @param name the name of the Course
 	 */
 	public Course(String ID, String name) {
 		this.ID = ID;
@@ -53,10 +54,18 @@ public class Course implements LLNode<Course>, Serializable {
 	
 	@Override
 	public String toString() {
-		return this.ID + ": " + this.name +
-				", Taught by " + this.getInstructor().getFirstName() + " " + this.getInstructor().getLastName() + ". " +
-				"Start: " + timeStart.toString() +
-				" End: " + timeEnd.toString();
+		return this.ID +
+		       ": " +
+		       this.name +
+		       ", Taught by " +
+		       this.getInstructor().getFirstName() +
+		       " " +
+		       this.getInstructor().getLastName() +
+		       ". " +
+		       "Start: " +
+		       timeStart.toString() +
+		       " End: " +
+		       timeEnd.toString();
 	}
 	
 	public String getName() {
