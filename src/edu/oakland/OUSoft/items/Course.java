@@ -4,6 +4,7 @@ import edu.oakland.OUSoft.linkedList.LLNode;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.Objects;
 
 /**
  * "includes information for a course such as course name, instructor, class meeting time, etc.
@@ -44,12 +45,17 @@ public class Course implements LLNode<Course>, Serializable {
 		this.instructor = instructor;
 	}
 	
-	public String getID() {
-		return ID;
-	}
-	
-	public void setID(String ID) {
-		this.ID = ID;
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Course)) {
+			return false;
+		}
+		Course o = (Course) obj;
+		return this.ID.equals(o.ID) &&
+		       Objects.equals(this.name, o.name) &&
+		       Objects.equals(this.instructor, o.instructor) &&
+		       Objects.equals(this.timeStart, o.timeStart) &&
+		       Objects.equals(this.timeEnd, o.timeEnd);
 	}
 	
 	@Override
@@ -66,6 +72,14 @@ public class Course implements LLNode<Course>, Serializable {
 		       timeStart.toString() +
 		       " End: " +
 		       timeEnd.toString();
+	}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 	
 	public String getName() {
