@@ -7,6 +7,7 @@ import edu.oakland.OUSoft.items.Student;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -24,12 +25,24 @@ public class OUSoftTest {
 	}
 	
 	@Test
-	public void savePeople() throws Exception {
-		db.addPerson(new Student("S01"));
-		db.addPerson(new Instructor("I01"));
-		db.addPerson(new Person("P01"));
+	public void saveAndLoadPeople() throws Exception {
+		List<Person> testPeople = new ArrayList<>();
+		testPeople.add(new Student("S01"));
+		testPeople.add(new Instructor("I01"));
+		testPeople.add(new Person("P01"));
 		
-		db.savePeople(""); //TODO verify worked
+		for (Person p : testPeople) {
+			db.addPerson(p);
+		}
+		
+		db.savePeople("");
+		
+		db = new OUSoft();
+		assertEquals(0, db.getPeople().size());
+		
+		db.loadPeople("");
+		
+		assertTrue("Loaded people did not contain saved people", db.getPeople().containsAll(testPeople));
 	}
 	
 	@Test

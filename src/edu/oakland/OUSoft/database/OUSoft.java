@@ -80,7 +80,23 @@ public class OUSoft {
 	 * @param filePath the path to the file, or null to use default.
 	 */
 	public void loadPeople(String filePath) {
-		
+		if (filePath == null || filePath.equals("")) {
+			filePath = System.getProperty("user.home") + "/OUSoft/people.bin";
+		}
+		try {
+			File file = new File(filePath);
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			
+			List<Person> peopleList = (List<Person>) ois.readObject();
+			for (Person p : peopleList) {
+				addPerson(p);
+			}
+		} catch (IOException ex) {
+			System.err.println("Error loading people: ");
+			System.err.println(ex);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
