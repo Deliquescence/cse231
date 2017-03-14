@@ -161,7 +161,16 @@ public class cseArrayLinkedListTest {
 		assertEquals(testPerson1, list.get(0));
 		assertEquals(testPerson3, list.get(1));
 		assertFalse(list.contains(testStudent2));
+		assertEquals(2, list.size());
 		
+		assertTrue(list.remove(testPerson1));
+		assertEquals(testPerson3, list.get(0));
+		assertFalse(list.contains(testPerson1));
+		assertEquals(1, list.size());
+		
+		assertTrue(list.remove(testPerson3));
+		assertFalse(list.contains(testPerson3));
+		assertEquals(0, list.size());
 	}
 	
 	@Test
