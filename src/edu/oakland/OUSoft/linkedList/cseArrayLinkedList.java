@@ -512,7 +512,21 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public void add(int index, E element) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		Node<E> node = data[dataIndex];
+		for (int i = 0; i < index - 1; i++) {
+			node = data[node.nextIndex];
+		}
+		Node<E> newEelement = data[emptyIndex];
+		int newIndex = emptyIndex;
+		emptyIndex = data[emptyIndex].nextIndex;
+		
+		newEelement.element = element;
+		newEelement.nextIndex = node.nextIndex;
+		node.nextIndex = newIndex;
 	}
 	
 	/**
