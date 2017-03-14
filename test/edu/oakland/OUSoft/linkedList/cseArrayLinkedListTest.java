@@ -32,8 +32,8 @@ public class cseArrayLinkedListTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		list = new cseArrayLinkedList<>(10);
-		list2 = new cseArrayLinkedList<>(10);
+		list = new cseArrayLinkedList<>(5);
+		list2 = new cseArrayLinkedList<>(5);
 	}
 	
 	@Test
@@ -204,11 +204,6 @@ public class cseArrayLinkedListTest {
 		
 		assertTrue(list.addAll(testCollection1));
 		assertTrue(list.containsAll(testCollection1));
-		
-		
-		Collection<Person> testCollection2 = new ArrayList<>();
-		testCollection2.add(null);
-		
 	}
 	
 	@Test
