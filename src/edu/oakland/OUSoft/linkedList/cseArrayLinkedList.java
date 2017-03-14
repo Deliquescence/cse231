@@ -251,22 +251,32 @@ public class cseArrayLinkedList<E> implements List<E> {
 			return false;
 		}
 		
-		boolean found = false;
+		if (data[dataIndex].element.equals(o)) { //First element case
+			Node<E> oldFirstEmpty = data[emptyIndex];
+			emptyIndex = dataIndex; //Set empty index to new free spot
+			dataIndex = data[dataIndex].nextIndex; //Update data index to what the removed pointed to
+			data[emptyIndex].nextIndex = oldFirstEmpty.nextIndex; //Update the new empty spot so it points to the old chain
+			return true;
+		}
+		
 		Node<E> previous = data[dataIndex];
+		boolean found = false;
+		
 		while (previous.nextIndex != -1) {
-			if (data[previous.nextIndex].equals(o)) {
+			if (data[previous.nextIndex].element.equals(o)) {
 				found = true;
 				break;
 			}
 			previous = data[previous.nextIndex];
 		}
+		
 		if (!found) {
 			return false;
 		}
 		Node<E> oldFirstEmpty = data[emptyIndex];
-		emptyIndex = previous.nextIndex; //Empty index to new free spot
-		previous.nextIndex = data[previous.nextIndex].nextIndex; //Update previous to point to new next node
-		data[emptyIndex].nextIndex = oldFirstEmpty.nextIndex;
+		emptyIndex = previous.nextIndex; //Set empty index to new free spot
+		previous.nextIndex = data[previous.nextIndex].nextIndex; //Update node previous to the removed to point to new next node
+		data[emptyIndex].nextIndex = oldFirstEmpty.nextIndex; //Update the new empty spot so it points to the old chain
 		return true;
 	}
 	
