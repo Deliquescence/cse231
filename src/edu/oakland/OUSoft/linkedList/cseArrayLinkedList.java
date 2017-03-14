@@ -572,7 +572,15 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public int indexOf(Object o) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		int i = -1;
+		Iterator<E> it = this.iterator();
+		while (it.hasNext()) {
+			if (it.next().equals(o)) {
+				return ++i;
+			}
+			i++;
+		}
+		return -1;
 	}
 	
 	/**
@@ -594,7 +602,17 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public int lastIndexOf(Object o) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		int i = -1;
+		int found = -1;
+		Iterator<E> it = this.iterator();
+		while (it.hasNext()) {
+			if (it.next().equals(o)) {
+				found = ++i;
+			} else {
+				i++;
+			}
+		}
+		return found;
 	}
 	
 	/**
