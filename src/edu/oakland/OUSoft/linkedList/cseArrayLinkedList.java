@@ -1,20 +1,33 @@
 package edu.oakland.OUSoft.linkedList;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class cseArrayLinkedList<E> implements List<E> {
 	
+	private Node<E>[] data;
+	
+	private int dataIndex;
+	private int emptyIndex;
+	
 	/**
 	 * Create a new cseArrayLinkedList
-	 * 
+	 *
 	 * @param maxElements the maximum number of elements this list can hold
 	 */
 	public cseArrayLinkedList(int maxElements) {
+		data = (Node<E>[]) new Node[maxElements];
 		
+		for (int i = 0; i < maxElements - 1; i++) {
+			data[i] = new Node<E>();
+			data[i].nextIndex = i + 1;
+		}
+		data[maxElements - 1] = new Node<E>();
+		data[maxElements - 1].nextIndex = -1;
+		
+		emptyIndex = 0;
+		dataIndex = -1;
 	}
+	
 	
 	/**
 	 * Returns the number of elements in this list.  If this list contains
@@ -25,7 +38,13 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public int size() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		int count = 0;
+		Iterator<E> it = this.iterator();
+		while (it.hasNext()) {
+			it.next();
+			count++;
+		}
+		return count;
 	}
 	
 	/**
@@ -35,7 +54,7 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		return dataIndex == -1;
 	}
 	
 	/**
@@ -55,7 +74,12 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean contains(Object o) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		for (E e : this) {
+			if (e.equals(o)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -65,7 +89,28 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		Iterator<E> iterator = new Iterator<E>() {
+			Node<E> current = (dataIndex == -1) ? null : data[dataIndex];
+			
+			@Override
+			public boolean hasNext() {
+				return !(current == null);
+			}
+			
+			@Override
+			public E next() {
+				E previous = current.element;
+				if (current.nextIndex == -1) {
+					current = null;
+				} else {
+					current = data[current.nextIndex];
+				}
+				
+				return previous;
+			}
+		};
+		
+		return iterator;
 	}
 	
 	/**
@@ -157,7 +202,26 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean add(E e) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (dataIndex == -1) {
+			dataIndex = emptyIndex;
+			emptyIndex = data[emptyIndex].nextIndex;
+			
+			
+			data[dataIndex].nextIndex = -1;
+			data[dataIndex].element = e;
+			return true;
+		} else {
+			Node<E> node = data[dataIndex];
+			while (node.nextIndex != -1) {
+				node = data[node.nextIndex];
+			}
+			node.nextIndex = emptyIndex;
+			emptyIndex = data[emptyIndex].nextIndex;
+			
+			data[node.nextIndex].element = e;
+			data[node.nextIndex].nextIndex = -1;
+			return true;
+		}
 	}
 	
 	/**
@@ -337,7 +401,15 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public E get(int index) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		Node<E> node = data[dataIndex];
+		for (int i = 0; i < index; i++) {
+			node = data[node.nextIndex];
+		}
+		return node.element;
 	}
 	
 	/**
@@ -518,5 +590,10 @@ public class cseArrayLinkedList<E> implements List<E> {
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
 		throw new UnsupportedOperationException("Not implemented yet.");
+	}
+	
+	protected class Node<E> {
+		E element;
+		int nextIndex;
 	}
 }
