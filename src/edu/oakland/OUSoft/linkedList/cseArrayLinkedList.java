@@ -247,7 +247,27 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean remove(Object o) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (o == null || dataIndex == -1) {
+			return false;
+		}
+		
+		boolean found = false;
+		Node<E> previous = data[dataIndex];
+		while (previous.nextIndex != -1) {
+			if (data[previous.nextIndex].equals(o)) {
+				found = true;
+				break;
+			}
+			previous = data[previous.nextIndex];
+		}
+		if (!found) {
+			return false;
+		}
+		Node<E> oldFirstEmpty = data[emptyIndex];
+		emptyIndex = previous.nextIndex; //Empty index to new free spot
+		previous.nextIndex = data[previous.nextIndex].nextIndex; //Update previous to point to new next node
+		data[emptyIndex].nextIndex = oldFirstEmpty.nextIndex;
+		return true;
 	}
 	
 	/**
