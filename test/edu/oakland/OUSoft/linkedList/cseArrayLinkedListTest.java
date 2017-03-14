@@ -408,6 +408,8 @@ public class cseArrayLinkedListTest {
 	public void indexOf() throws Exception {
 		list.add(testPerson1);
 		list.add(testInstructor2);
+		list.add(testPerson1);
+		list.add(testInstructor2);
 		
 		assertEquals(0, list.indexOf(testPerson1));
 		assertEquals(1, list.indexOf(testInstructor2));
@@ -416,7 +418,14 @@ public class cseArrayLinkedListTest {
 	
 	@Test
 	public void lastIndexOf() throws Exception {
-		indexOf(); //No duplicate elements, so is same
+		list.add(testPerson1);
+		list.add(testInstructor2);
+		list.add(testPerson1);
+		list.add(testInstructor2);
+		
+		assertEquals(2, list.lastIndexOf(testPerson1));
+		assertEquals(3, list.lastIndexOf(testInstructor2));
+		assertEquals(-1, list.lastIndexOf(testPerson3));
 	}
 	
 }
