@@ -9,12 +9,15 @@ public class cseArrayLinkedList<E> implements List<E> {
 	private int dataIndex;
 	private int emptyIndex;
 	
+	private final int maxElements;
+	
 	/**
 	 * Create a new cseArrayLinkedList
 	 *
 	 * @param maxElements the maximum number of elements this list can hold
 	 */
 	public cseArrayLinkedList(int maxElements) {
+		this.maxElements = maxElements;
 		data = (Node<E>[]) new Node[maxElements];
 		
 		for (int i = 0; i < maxElements - 1; i++) {
@@ -434,7 +437,15 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public void clear() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		for (int i = 0; i < maxElements - 1; i++) {
+			data[i] = new Node<E>();
+			data[i].nextIndex = i + 1;
+		}
+		data[maxElements - 1] = new Node<E>();
+		data[maxElements - 1].nextIndex = -1;
+		
+		emptyIndex = 0;
+		dataIndex = -1;
 	}
 	
 	/**
