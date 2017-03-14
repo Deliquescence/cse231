@@ -478,7 +478,17 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public E set(int index, E element) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		Node<E> node = data[dataIndex];
+		for (int i = 0; i < index; i++) {
+			node = data[node.nextIndex];
+		}
+		E old = node.element;
+		node.element = element;
+		return old;
 	}
 	
 	/**
