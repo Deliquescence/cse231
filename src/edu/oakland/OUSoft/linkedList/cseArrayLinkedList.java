@@ -544,7 +544,13 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public E remove(int index) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (index < 0 || index >= this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		E e = this.get(index);
+		this.remove(e);
+		return e;
 	}
 	
 	/**
