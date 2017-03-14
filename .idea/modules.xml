@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CSE231.iml" filepath="$PROJECT_DIR$/.idea/modules/CSE231.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cse231.iml" filepath="$PROJECT_DIR$/.idea/modules/cse231.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cse231_main.iml" filepath="$PROJECT_DIR$/.idea/modules/cse231_main.iml" group="cse231" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cse231_test.iml" filepath="$PROJECT_DIR$/.idea/modules/cse231_test.iml" group="cse231" />
     </modules>
   </component>
 </project>
