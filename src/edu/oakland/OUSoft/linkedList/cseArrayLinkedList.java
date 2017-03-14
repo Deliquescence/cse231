@@ -300,7 +300,16 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null) {
+			throw new NullPointerException();
+		}
+		
+		for (Object item : c) {
+			if (!this.contains(item)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -326,7 +335,14 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null) {
+			throw new NullPointerException();
+		}
+		
+		for (Object aC : c) {
+			this.add((E) aC);
+		}
+		return true;
 	}
 	
 	/**
