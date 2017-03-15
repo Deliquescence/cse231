@@ -137,6 +137,14 @@ public class cseArrayLinkedListTest {
 		assertEquals(testStudent1, list.get(2));
 		assertEquals(3, list.size());
 		
+		assertTrue(list.add(testStudent1));
+		assertEquals(testStudent1, list.get(3));
+		assertEquals(4, list.size());
+		
+		assertTrue(list.add(testStudent1));
+		assertEquals(testStudent1, list.get(4));
+		assertEquals(5, list.size());
+		
 		
 		assertTrue(list2.add(testStudent1));
 		assertTrue(list2.contains(testStudent1));
@@ -155,22 +163,26 @@ public class cseArrayLinkedListTest {
 		list.add(testPerson1);
 		list.add(testStudent2);
 		list.add(testPerson3);
-		assertEquals(3, list.size());
+		list.add(testPerson1);
+		list.add(testStudent2);
+		assertEquals(5, list.size());
 		
 		assertTrue(list.remove(testStudent2));
 		assertEquals(testPerson1, list.get(0));
 		assertEquals(testPerson3, list.get(1));
-		assertFalse(list.contains(testStudent2));
-		assertEquals(2, list.size());
+		assertEquals(testPerson1, list.get(2));
+		assertEquals(testStudent2, list.get(3));
+		assertEquals(4, list.size());
 		
 		assertTrue(list.remove(testPerson1));
 		assertEquals(testPerson3, list.get(0));
-		assertFalse(list.contains(testPerson1));
-		assertEquals(1, list.size());
+		assertEquals(testPerson1, list.get(1));
+		assertEquals(testStudent2, list.get(2));
+		assertEquals(3, list.size());
 		
 		assertTrue(list.remove(testPerson3));
 		assertFalse(list.contains(testPerson3));
-		assertEquals(0, list.size());
+		assertEquals(2, list.size());
 	}
 	
 	@Test
@@ -251,6 +263,8 @@ public class cseArrayLinkedListTest {
 		testCollection1.add(testPerson1);
 		testCollection1.add(testPerson2);
 		testCollection1.add(testPerson3);
+		testCollection1.add(testPerson2);
+		testCollection1.add(testPerson2);
 		
 		assertFalse("List should not have changed", list.removeAll(testCollection1));
 		
@@ -260,7 +274,8 @@ public class cseArrayLinkedListTest {
 		testCollection1.add(testPerson4); //Not removed because not in list, but removeAll should still return true
 		assertTrue(list.removeAll(testCollection1));
 		assertFalse(list.contains(testPerson1));
-		
+		assertFalse(list.contains(testPerson2));
+		assertFalse(list.contains(testPerson3));
 	}
 	
 	@Test
