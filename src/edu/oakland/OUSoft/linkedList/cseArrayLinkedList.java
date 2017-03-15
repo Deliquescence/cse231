@@ -209,7 +209,6 @@ public class cseArrayLinkedList<E> implements List<E> {
 			dataIndex = emptyIndex;
 			emptyIndex = data[emptyIndex].nextIndex;
 			
-			
 			data[dataIndex].nextIndex = -1;
 			data[dataIndex].element = e;
 			return true;
@@ -219,7 +218,7 @@ public class cseArrayLinkedList<E> implements List<E> {
 				node = data[node.nextIndex];
 			}
 			node.nextIndex = emptyIndex;
-			emptyIndex = data[emptyIndex].nextIndex;
+			emptyIndex = (emptyIndex == -1) ? -1 : data[emptyIndex].nextIndex;
 			
 			data[node.nextIndex].element = e;
 			data[node.nextIndex].nextIndex = -1;
@@ -255,10 +254,10 @@ public class cseArrayLinkedList<E> implements List<E> {
 		}
 		
 		if (data[dataIndex].element.equals(o)) { //First element case
-			Node<E> oldFirstEmpty = data[emptyIndex];
+			int oldEmptyIndex = emptyIndex;
 			emptyIndex = dataIndex; //Set empty index to new free spot
 			dataIndex = data[dataIndex].nextIndex; //Update data index to what the removed pointed to
-			data[emptyIndex].nextIndex = oldFirstEmpty.nextIndex; //Update the new empty spot so it points to the old chain
+			data[emptyIndex].nextIndex = oldEmptyIndex; //Update the new empty spot so it points to the old chain
 			return true;
 		}
 		
@@ -276,10 +275,10 @@ public class cseArrayLinkedList<E> implements List<E> {
 		if (!found) {
 			return false;
 		}
-		Node<E> oldFirstEmpty = data[emptyIndex];
+		int oldEmptyIndex = emptyIndex;
 		emptyIndex = previous.nextIndex; //Set empty index to new free spot
 		previous.nextIndex = data[previous.nextIndex].nextIndex; //Update node previous to the removed to point to new next node
-		data[emptyIndex].nextIndex = oldFirstEmpty.nextIndex; //Update the new empty spot so it points to the old chain
+		data[emptyIndex].nextIndex = oldEmptyIndex; //Update the new empty spot so it points to the old chain
 		return true;
 	}
 	
