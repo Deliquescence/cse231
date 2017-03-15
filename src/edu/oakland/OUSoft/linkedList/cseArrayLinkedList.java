@@ -389,7 +389,15 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null) {
+			throw new NullPointerException();
+		}
+		
+		Iterator it = c.iterator();
+		while (it.hasNext()) {
+			this.add(index++, (E) it.next());
+		}
+		return true;
 	}
 	
 	/**
