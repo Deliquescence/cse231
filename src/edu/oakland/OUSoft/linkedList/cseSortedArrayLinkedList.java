@@ -31,7 +31,30 @@ public class cseSortedArrayLinkedList<E extends Comparable<E>> extends cseArrayL
 	 */
 	@Override
 	public boolean add(E e) {
-		return super.add(e);
+		if (this.dataIndex == -1) {
+			return super.add(e);
+		} else if (e.compareTo(data[dataIndex].element) <= 0) { //Should be new first element
+			int oldDataIndex = dataIndex;
+			dataIndex = emptyIndex; //Get an empty spot
+			emptyIndex = data[emptyIndex].nextIndex; //Bump empty index down
+			
+			data[dataIndex].nextIndex = oldDataIndex; //Link to the rest of the data
+			data[dataIndex].element = e;
+			
+			return true;
+		} else {
+			Node<E> node = data[dataIndex];
+			while (node.nextIndex != -1 && e.compareTo(data[node.nextIndex].element) > 0) {
+				node = data[node.nextIndex];
+			}
+			int oldNextIndex = node.nextIndex;
+			node.nextIndex = emptyIndex;
+			emptyIndex = (emptyIndex == -1) ? -1 : data[emptyIndex].nextIndex;
+			
+			data[node.nextIndex].element = e;
+			data[node.nextIndex].nextIndex = oldNextIndex;
+			return true;
+		}
 	}
 	
 	/**
@@ -78,6 +101,6 @@ public class cseSortedArrayLinkedList<E extends Comparable<E>> extends cseArrayL
 	 */
 	@Override
 	public void add(int index, E element) {
-		super.add(index, element);
+		throw new UnsupportedOperationException("Cannot add by index in a sorted list");
 	}
 }
