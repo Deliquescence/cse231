@@ -134,7 +134,11 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public Object[] toArray() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		Object[] array = new Object[this.size()];
+		for (int i = 0; i < array.length; i++) {
+			array[i] = this.get(i);
+		}
+		return array;
 	}
 	
 	/**
@@ -178,7 +182,16 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public <T> T[] toArray(T[] a) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		//Stolen from ArrayList's implementation
+		Object[] elementData = this.toArray();
+		if (a.length < this.size()) {
+			return (T[]) Arrays.copyOf(elementData, this.size(), a.getClass());
+		}
+		System.arraycopy(elementData, 0, a, 0, this.size());
+		if (a.length > this.size()) {
+			a[this.size()] = null;
+		}
+		return a;
 	}
 	
 	/**
