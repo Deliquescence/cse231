@@ -4,12 +4,12 @@ import java.util.*;
 
 public class cseArrayLinkedList<E> implements List<E> {
 	
-	private Node<E>[] data;
+	protected Node<E>[] data;
 	
-	private int dataIndex;
-	private int emptyIndex;
+	protected int dataIndex;
+	protected int emptyIndex;
 	
-	private final int maxElements;
+	protected final int maxElements;
 	
 	/**
 	 * Create a new cseArrayLinkedList
