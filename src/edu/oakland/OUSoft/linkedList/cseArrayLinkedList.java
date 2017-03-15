@@ -400,7 +400,17 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null) {
+			throw new NullPointerException();
+		}
+		boolean dirty = false;
+		
+		for (Object item : c) {
+			if (this.remove(item)) {
+				dirty = true;
+			}
+		}
+		return dirty;
 	}
 	
 	/**
