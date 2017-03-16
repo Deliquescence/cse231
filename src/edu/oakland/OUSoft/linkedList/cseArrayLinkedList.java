@@ -42,9 +42,7 @@ public class cseArrayLinkedList<E> implements List<E> {
 	@Override
 	public int size() {
 		int count = 0;
-		Iterator<E> it = this.iterator();
-		while (it.hasNext()) {
-			it.next();
+		for (E e : this) {
 			count++;
 		}
 		return count;
@@ -393,9 +391,8 @@ public class cseArrayLinkedList<E> implements List<E> {
 			throw new NullPointerException();
 		}
 		
-		Iterator it = c.iterator();
-		while (it.hasNext()) {
-			this.add(index++, (E) it.next());
+		for (Object aC : c) {
+			this.add(index++, (E) aC);
 		}
 		return true;
 	}
@@ -627,9 +624,8 @@ public class cseArrayLinkedList<E> implements List<E> {
 	@Override
 	public int indexOf(Object o) {
 		int i = -1;
-		Iterator<E> it = this.iterator();
-		while (it.hasNext()) {
-			if (it.next().equals(o)) {
+		for (E e : this) {
+			if (e.equals(o)) {
 				return ++i;
 			}
 			i++;
@@ -658,9 +654,8 @@ public class cseArrayLinkedList<E> implements List<E> {
 	public int lastIndexOf(Object o) {
 		int i = -1;
 		int found = -1;
-		Iterator<E> it = this.iterator();
-		while (it.hasNext()) {
-			if (it.next().equals(o)) {
+		for (E e : this) {
+			if (e.equals(o)) {
 				found = ++i;
 			} else {
 				i++;
