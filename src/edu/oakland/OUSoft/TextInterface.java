@@ -136,15 +136,11 @@ public class TextInterface {
 					}
 					course.setInstructor(instructor);
 					
-					LocalTime startTime = LocalTime.of(
-							this.getIntegerInput("Starting hour (0-23): "),
-							this.getIntegerInput("Starting minute (0-59): ")
-					);
+					LocalTime startTime = LocalTime.of(this.getIntegerInput("Starting hour (0-23): "),
+					                                   this.getIntegerInput("Starting minute (0-59): "));
 					
-					LocalTime endTime = LocalTime.of(
-							this.getIntegerInput("Ending hour (0-23): "),
-							this.getIntegerInput("Ending minute (0-59): ")
-					);
+					LocalTime endTime = LocalTime.of(this.getIntegerInput("Ending hour (0-23): "),
+					                                 this.getIntegerInput("Ending minute (0-59): "));
 					
 					course.setTimeStart(startTime);
 					course.setTimeEnd(endTime);
@@ -421,16 +417,14 @@ public class TextInterface {
 	 * Print the big list of commands
 	 */
 	private void printBigHelp() {
-		System.out.print(
-				"Available commands:\n" +
-						"add [type]\t\tAdd a person or course to the database\n" +
-						"enroll\t\t\tEnroll a student in a course\n" +
-						"get <ID>\t\tRetrieve a person from the database\n" +
-						"help [command]\tGet help\n" +
-						"list [type]\t\tList people or courses in the database\n" +
-						"quit\t\t\tExit the program\n" +
-						"remove <ID>\t\tRemove a person or course from the database\n" +
-						"withdraw\t\tWithdraw a student from a course\n"
-		);
+		System.out.print("Available commands:\n" +
+		                 "add [type]\t\tAdd a person or course to the database\n" +
+		                 "enroll\t\t\tEnroll a student in a course\n" +
+		                 "get <ID>\t\tRetrieve a person from the database\n" +
+		                 "help [command]\tGet help\n" +
+		                 "list [type]\t\tList people or courses in the database\n" +
+		                 "quit\t\t\tExit the program\n" +
+		                 "remove <ID>\t\tRemove a person or course from the database\n" +
+		                 "withdraw\t\tWithdraw a student from a course\n");
 	}
 }
