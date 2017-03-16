@@ -4,12 +4,10 @@ import java.util.*;
 
 public class cseArrayLinkedList<E> implements List<E> {
 	
+	protected final int maxElements;
 	protected Node<E>[] data;
-	
 	protected int dataIndex;
 	protected int emptyIndex;
-	
-	protected final int maxElements;
 	
 	/**
 	 * Create a new cseArrayLinkedList
@@ -75,12 +73,7 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean contains(Object o) {
-		for (E e : this) {
-			if (e.equals(o)) {
-				return true;
-			}
-		}
-		return false;
+		return this.indexOf(o) != -1;
 	}
 	
 	/**
@@ -258,36 +251,11 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public boolean remove(Object o) {
-		if (o == null || dataIndex == -1) {
+		int i = this.indexOf(o);
+		if (i == -1) {
 			return false;
 		}
-		
-		if (data[dataIndex].element.equals(o)) { //First element case
-			int oldEmptyIndex = emptyIndex;
-			emptyIndex = dataIndex; //Set empty index to new free spot
-			dataIndex = data[dataIndex].nextIndex; //Update data index to what the removed pointed to
-			data[emptyIndex].nextIndex = oldEmptyIndex; //Update the new empty spot so it points to the old chain
-			return true;
-		}
-		
-		Node<E> previous = data[dataIndex];
-		boolean found = false;
-		
-		while (previous.nextIndex != -1) {
-			if (data[previous.nextIndex].element.equals(o)) {
-				found = true;
-				break;
-			}
-			previous = data[previous.nextIndex];
-		}
-		
-		if (!found) {
-			return false;
-		}
-		int oldEmptyIndex = emptyIndex;
-		emptyIndex = previous.nextIndex; //Set empty index to new free spot
-		previous.nextIndex = data[previous.nextIndex].nextIndex; //Update node previous to the removed to point to new next node
-		data[emptyIndex].nextIndex = oldEmptyIndex; //Update the new empty spot so it points to the old chain
+		this.remove(i);
 		return true;
 	}
 	
@@ -597,9 +565,30 @@ public class cseArrayLinkedList<E> implements List<E> {
 			throw new IndexOutOfBoundsException();
 		}
 		
-		E e = this.get(index);
-		this.remove(e);
-		return e;
+		E old = this.get(index);
+		
+		if (data[dataIndex].element.equals(old)) { //First element case
+			int oldEmptyIndex = emptyIndex;
+			emptyIndex = dataIndex; //Set empty index to new free spot
+			dataIndex = data[dataIndex].nextIndex; //Update data index to what the removed pointed to
+			data[emptyIndex].nextIndex = oldEmptyIndex; //Update the new empty spot so it points to the old chain
+			return old;
+		}
+		
+		Node<E> previous = data[dataIndex];
+		
+		while (previous.nextIndex != -1) {
+			if (data[previous.nextIndex].element.equals(old)) {
+				break;
+			}
+			previous = data[previous.nextIndex];
+		}
+		
+		int oldEmptyIndex = emptyIndex;
+		emptyIndex = previous.nextIndex; //Set empty index to new free spot
+		previous.nextIndex = data[previous.nextIndex].nextIndex; //Update node previous to the removed to point to new next node
+		data[emptyIndex].nextIndex = oldEmptyIndex; //Update the new empty spot so it points to the old chain
+		return old;
 	}
 	
 	/**
