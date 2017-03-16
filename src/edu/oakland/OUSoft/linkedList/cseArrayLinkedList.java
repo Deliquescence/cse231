@@ -90,7 +90,7 @@ public class cseArrayLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		Iterator<E> iterator = new Iterator<E>() {
+		return new Iterator<E>() {
 			Node<E> current = (dataIndex == -1) ? null : data[dataIndex];
 			
 			@Override
@@ -110,8 +110,6 @@ public class cseArrayLinkedList<E> implements List<E> {
 				return previous;
 			}
 		};
-		
-		return iterator;
 	}
 	
 	/**
