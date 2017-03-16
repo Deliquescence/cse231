@@ -7,6 +7,7 @@ import edu.oakland.OUSoft.items.Person;
 import edu.oakland.OUSoft.items.Student;
 
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -236,6 +237,32 @@ public class TextInterface {
 				System.out.println("Usage: remove <ID>");
 				return false;
 			
+			case "save":
+				String savePath = "";
+				if (tokens.length > 1) { //Path is given
+					savePath = concatArray(Arrays.copyOfRange(tokens, 1, tokens.length)); //Handle spaces in path
+				}
+				this.db.savePeople(savePath);
+				this.db.saveCourses(savePath);
+				this.db.saveEnrollments(savePath);
+				
+				System.out.println("Saved!");
+				
+				return true;
+			
+			case "load":
+				String loadPath = "";
+				if (tokens.length > 1) { //Path is given
+					loadPath = concatArray(Arrays.copyOfRange(tokens, 1, tokens.length)); //Handle spaces in path
+				}
+				this.db.loadPeople(loadPath);
+				this.db.loadCourses(loadPath);
+				this.db.loadEnrollments(loadPath);
+				
+				System.out.println("Loaded!");
+				
+				return true;
+			
 			case "quit":
 			case "exit":
 			case "end":
@@ -414,6 +441,20 @@ public class TextInterface {
 	}
 	
 	/**
+	 * Given an array of strings, concatenate them into one string
+	 *
+	 * @param array the array to concatenate
+	 * @return the concatenated string
+	 */
+	public String concatArray(String[] array) {
+		StringBuilder sb = new StringBuilder();
+		for (String str : array) {
+			sb.append(str);
+		}
+		return sb.toString();
+	}
+	
+	/**
 	 * Print the big list of commands
 	 */
 	private void printBigHelp() {
@@ -423,8 +464,10 @@ public class TextInterface {
 		                 "get <ID>\t\tRetrieve a person from the database\n" +
 		                 "help [command]\tGet help\n" +
 		                 "list [type]\t\tList people or courses in the database\n" +
+		                 "load [path]\t\tLoad the database from the path (default path if not given)\n" +
 		                 "quit\t\t\tExit the program\n" +
 		                 "remove <ID>\t\tRemove a person or course from the database\n" +
+		                 "save [path]\t\tSave the database to the path (default path if not given)\n" +
 		                 "withdraw\t\tWithdraw a student from a course\n");
 	}
 }
