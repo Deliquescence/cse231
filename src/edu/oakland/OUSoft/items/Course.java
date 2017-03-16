@@ -1,6 +1,7 @@
 package edu.oakland.OUSoft.items;
 
 import edu.oakland.OUSoft.linkedList.LLNode;
+import edu.oakland.OUSoft.linkedList.cseSortedArrayLinkedList;
 
 import java.io.Serializable;
 import java.time.LocalTime;
@@ -13,6 +14,15 @@ import java.util.Objects;
 public class Course implements LLNode<Course>, Serializable {
 	
 	private Course link;
+	
+	/**
+	 * See the file
+	 *  src/linkedList/cseSortedArrayLinkedList.java
+	 * and its super class
+	 *  src/linkedList/cseArrayLinkedList.java
+	 * for implementation of an array based linked list.
+	 */
+	private cseSortedArrayLinkedList<Grade> grades;
 	
 	private String ID;
 	private String name;
