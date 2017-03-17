@@ -278,6 +278,7 @@ public class OUSoft {
 	 */
 	public void withdraw(Student student, Course course) {
 		this.enrollments.remove(getEnrollment(student, course));
+		course.removeGrade(student);
 	}
 	
 	/**

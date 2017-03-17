@@ -15,14 +15,14 @@ public class Course implements LLNode<Course>, Serializable {
 	
 	private Course link;
 	
-	/**
+	/*
 	 * See the file
 	 *  src/linkedList/cseSortedArrayLinkedList.java
 	 * and its super class
 	 *  src/linkedList/cseArrayLinkedList.java
 	 * for implementation of an array based linked list.
 	 */
-	private cseSortedArrayLinkedList<Grade> grades;
+	private cseSortedArrayLinkedList<Grade> grades = new cseSortedArrayLinkedList<>(1000);
 	
 	private String ID;
 	private String name;
@@ -122,6 +122,36 @@ public class Course implements LLNode<Course>, Serializable {
 	
 	public void setTimeEnd(LocalTime timeEnd) {
 		this.timeEnd = timeEnd;
+	}
+	
+	/**
+	 * Set the grade of the given student.
+	 *
+	 * @param student the Student
+	 * @param GPA     the Grade
+	 */
+	public void setGrade(Student student, double GPA) {
+		for (Grade g : this.grades) {
+			if (g.student.equals(student)) {
+				g.grade = GPA;
+				return;
+			}
+		}
+		this.grades.add(new Grade(student, GPA));
+	}
+	
+	/**
+	 * Remove the record of a student's grade from this class.
+	 *
+	 * @param student the Student whose grade to remove
+	 */
+	public void removeGrade(Student student) {
+		for (Grade g : this.grades) {
+			if (g.student.equals(student)) {
+				this.grades.remove(g);
+				return;
+			}
+		}
 	}
 	
 	/**

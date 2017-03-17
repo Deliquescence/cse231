@@ -262,6 +262,36 @@ public class TextInterface {
 				System.out.println("Loaded!");
 				
 				return true;
+				
+			case "grade":
+				if (tokens.length != 4) {
+					System.out.println("Usage: grade <course ID> <student ID> <GPA>");
+					return false;
+				}
+				
+				Course gradeCourse = db.getCourseByID(tokens[1]);
+				if (gradeCourse == null) {
+					System.out.printf("Could not find a course with ID '%s', try again\n", tokens[1]);
+					return false;
+				}
+				
+				Student gradeStudent = db.getStudentByID(tokens[2]);
+				if (gradeStudent == null) {
+					System.out.printf("Could not find a student with ID '%s', try again\n", tokens[2]);
+					return false;
+				}
+				
+				double dGPA;
+				try {
+					dGPA = Double.parseDouble(tokens[3]);
+				} catch (IllegalArgumentException ex) {
+					System.out.printf("Error parsing '%s' into GPA, try again\n", tokens[3]);
+					return false;
+				}
+				
+				gradeCourse.setGrade(gradeStudent, dGPA);
+				System.out.println("Grade set!");
+				return true;
 			
 			case "quit":
 			case "exit":
@@ -459,15 +489,16 @@ public class TextInterface {
 	 */
 	private void printBigHelp() {
 		System.out.print("Available commands:\n" +
-		                 "add [type]\t\tAdd a person or course to the database\n" +
-		                 "enroll\t\t\tEnroll a student in a course\n" +
-		                 "get <ID>\t\tRetrieve a person from the database\n" +
-		                 "help [command]\tGet help\n" +
-		                 "list [type]\t\tList people or courses in the database\n" +
-		                 "load [path]\t\tLoad the database from the path (default path if not given)\n" +
-		                 "quit\t\t\tExit the program\n" +
-		                 "remove <ID>\t\tRemove a person or course from the database\n" +
-		                 "save [path]\t\tSave the database to the path (default path if not given)\n" +
-		                 "withdraw\t\tWithdraw a student from a course\n");
+		                 "add [type]\t\t\t\tAdd a person or course to the database\n" +
+		                 "enroll\t\t\t\t\tEnroll a student in a course\n" +
+		                 "get <ID>\t\t\t\tRetrieve a person from the database\n" +
+		                 "grade <cID> <sID> <GPA>\tAssign a grade to a student\n" +
+		                 "help [command]\t\t\tGet help\n" +
+		                 "list [type]\t\t\t\tList people or courses in the database\n" +
+		                 "load [path]\t\t\t\tLoad the database from the path (default path if not given)\n" +
+		                 "quit\t\t\t\t\tExit the program\n" +
+		                 "remove <ID>\t\t\t\tRemove a person or course from the database\n" +
+		                 "save [path]\t\t\t\tSave the database to the path (default path if not given)\n" +
+		                 "withdraw\t\t\t\tWithdraw a student from a course\n");
 	}
 }
