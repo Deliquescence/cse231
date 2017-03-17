@@ -1,7 +1,9 @@
 package edu.oakland.OUSoft.linkedList;
 
 
-public class cseSortedArrayLinkedList<E extends Comparable<E>> extends cseArrayLinkedList<E> {
+import java.io.Serializable;
+
+public class cseSortedArrayLinkedList<E extends Comparable<E>> extends cseArrayLinkedList<E> implements Serializable {
 	
 	public cseSortedArrayLinkedList(int maxSize) {
 		super(maxSize);

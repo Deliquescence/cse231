@@ -1,8 +1,9 @@
 package edu.oakland.OUSoft.linkedList;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class cseArrayLinkedList<E> implements List<E> {
+public class cseArrayLinkedList<E> implements List<E>, Serializable {
 	
 	protected final int maxElements;
 	protected Node<E>[] data;
@@ -722,7 +723,7 @@ public class cseArrayLinkedList<E> implements List<E> {
 		throw new UnsupportedOperationException("Not implemented yet.");
 	}
 	
-	protected class Node<E> {
+	protected class Node<E> implements Serializable {
 		E element;
 		int nextIndex;
 	}
