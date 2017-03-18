@@ -87,20 +87,8 @@ public class TextInterface {
 					Student student = new Student(ID, firstName, lastName);
 					student.setMajor(this.getInput("Major: "));
 					student.setNumYearsAttended(this.getIntegerInput("Years Attended: "));
+					student.setGPA(this.getGPAInput("GPA: "));
 					
-					//Handle GPA validation
-					//NB student.setGPA() has validation checking
-					boolean validGPA = false;
-					while (!validGPA) {
-						String sGPA = this.getInput("GPA: ");
-						try {
-							double dGPA = Double.parseDouble(sGPA);
-							student.setGPA(dGPA);
-							validGPA = true;
-						} catch (IllegalArgumentException ex) {
-							System.out.printf("Error parsing '%s' into GPA, try again\n", sGPA);
-						}
-					}
 					//Confirmation
 					System.out.println("\nAdd this student?\n" + student.toString());
 					if (this.getBooleanInput()) {
@@ -365,6 +353,32 @@ public class TextInterface {
 			}
 		}
 		return integer;
+	}
+	
+	/**
+	 * Print <code>prompt</code> to the screen and then get the user's input.
+	 * Again, and again, until they give a good GPA.
+	 *
+	 * @param prompt The text to write before getting input
+	 * @return The GPA the user enters
+	 */
+	public double getGPAInput(String prompt) {
+		boolean good = false;
+		double dGPA = 0;
+		
+		while (!good) {
+			String sGPA = this.getInput(prompt);
+			try {
+				dGPA = Double.parseDouble(sGPA);
+				if (dGPA < 0 || dGPA > 4.0) {
+					throw new IllegalArgumentException();
+				}
+				good = true;
+			} catch (IllegalArgumentException ex) {
+				System.out.printf("Error parsing '%s' into GPA, try again\n", sGPA);
+			}
+		}
+		return dGPA;
 	}
 	
 	/**
