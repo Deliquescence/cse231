@@ -250,37 +250,50 @@ public class TextInterface {
 				System.out.println("Loaded!");
 				
 				return true;
-				
+			
 			case "grade":
-				if (tokens.length != 4) {
+				if (tokens.length == 4) {
+					Course gradeCourse = db.getCourseByID(tokens[1]);
+					if (gradeCourse == null) {
+						System.out.printf("Could not find a course with ID '%s', try again\n", tokens[1]);
+						return false;
+					}
+					
+					Student gradeStudent = db.getStudentByID(tokens[2]);
+					if (gradeStudent == null) {
+						System.out.printf("Could not find a student with ID '%s', try again\n", tokens[2]);
+						return false;
+					}
+					
+					double dGPA;
+					try {
+						dGPA = Double.parseDouble(tokens[3]);
+					} catch (IllegalArgumentException ex) {
+						System.out.printf("Error parsing '%s' into GPA, try again\n", tokens[3]);
+						return false;
+					}
+					
+					gradeCourse.setGrade(gradeStudent, dGPA);
+					System.out.println("Grade set!");
+					return true;
+				} else if (tokens.length == 1) { //Interactive mode
+					Student gradeStudent = getStudentFromID("Enter the ID of the student: ");
+					if (gradeStudent == null) {
+						return false;
+					}
+					Course gradeCourse = getCourseFromID("Enter the ID of the course: ");
+					if (gradeCourse == null) {
+						return false;
+					}
+					double dGPA = getGPAInput("Enter the grade of the student (GPA): ");
+					
+					gradeCourse.setGrade(gradeStudent, dGPA);
+					System.out.println("Grade set!");
+					return true;
+				} else {
 					System.out.println("Usage: grade <course ID> <student ID> <GPA>");
 					return false;
 				}
-				
-				Course gradeCourse = db.getCourseByID(tokens[1]);
-				if (gradeCourse == null) {
-					System.out.printf("Could not find a course with ID '%s', try again\n", tokens[1]);
-					return false;
-				}
-				
-				Student gradeStudent = db.getStudentByID(tokens[2]);
-				if (gradeStudent == null) {
-					System.out.printf("Could not find a student with ID '%s', try again\n", tokens[2]);
-					return false;
-				}
-				
-				double dGPA;
-				try {
-					dGPA = Double.parseDouble(tokens[3]);
-				} catch (IllegalArgumentException ex) {
-					System.out.printf("Error parsing '%s' into GPA, try again\n", tokens[3]);
-					return false;
-				}
-				
-				gradeCourse.setGrade(gradeStudent, dGPA);
-				System.out.println("Grade set!");
-				return true;
-			
 			case "quit":
 			case "exit":
 			case "end":
