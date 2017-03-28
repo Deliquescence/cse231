@@ -24,6 +24,19 @@ public class cseBST<E extends Comparable<E>> {
 	}
 	
 	public boolean add(E e) {
+		root = addRecurse(root, e);
+		return true;
+	}
+	
+	private Node<E> addRecurse(Node<E> node, E e) {
+		if (node == null) {
+			return new Node<>(e);
+		} else if (e.compareTo(node.element) <= 0) {
+			node.left = addRecurse(node.left, e);
+		} else {
+			node.right = addRecurse(node.right, e);
+		}
+		return node;
 	}
 	
 	public boolean remove(E e) {
