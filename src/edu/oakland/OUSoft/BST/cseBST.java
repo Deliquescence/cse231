@@ -1,6 +1,8 @@
 package edu.oakland.OUSoft.BST;
 
-public class cseBST<E extends Comparable<E>> {
+import java.util.Iterator;
+
+public class cseBST<E extends Comparable<E>> implements Iterable<E> {
 	
 	private Node<E> root;
 	
@@ -53,6 +55,28 @@ public class cseBST<E extends Comparable<E>> {
 	
 	public void clear() {
 		root = new Node<>(null);
+	}
+	
+	/**
+	 * Returns an iterator over elements using Inorder method
+	 *
+	 * @return an Iterator.
+	 */
+	@Override
+	public Iterator<E> iterator() {
+		return new Iterator<E>() {
+			Node<E> node = root;
+			
+			@Override
+			public boolean hasNext() {
+				return false;
+			}
+			
+			@Override
+			public E next() {
+				return null;
+			}
+		};
 	}
 	
 	private class Node<E> {
