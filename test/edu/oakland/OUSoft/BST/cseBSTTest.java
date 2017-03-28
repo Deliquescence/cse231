@@ -49,7 +49,6 @@ public class cseBSTTest {
 		tree.add(testStudent2);
 		assertTrue(tree.contains(testStudent1));
 		assertTrue(tree.contains(testStudent2));
-		assertFalse(tree.contains("Some object"));
 		assertFalse(tree.contains(null));
 	}
 	

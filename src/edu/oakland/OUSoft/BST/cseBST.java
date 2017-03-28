@@ -9,6 +9,9 @@ public class cseBST<E extends Comparable<E>> {
 	}
 	
 	private boolean containsRecurse(Node<E> node, E e) {
+		if (node == null || e == null) {
+			return false;
+		}
 		if (node.element.equals(e)) {
 			return true;
 		} else {
@@ -24,12 +27,15 @@ public class cseBST<E extends Comparable<E>> {
 	}
 	
 	public boolean remove(E e) {
+		throw new UnsupportedOperationException("Not implemented yet.");
 	}
 	
 	public int size() {
+		throw new UnsupportedOperationException("Not implemented yet.");
 	}
 	
 	public boolean isEmpty() {
+		throw new UnsupportedOperationException("Not implemented yet.");
 	}
 	
 	public void clear() {
