@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * "A student class should contain more information such as the number of years in college,"
  */
-public class Student extends Person {
+public class Student extends Person implements Comparable<Student> {
 	
 	private String major;
 	
@@ -74,5 +74,14 @@ public class Student extends Person {
 			throw new IllegalArgumentException("GPA out of bounds");
 		}
 		this.GPA = GPA;
+	}
+	
+	public float getGPAOutOf100() {
+		return (float) (GPA * 25);
+	}
+	
+	@Override
+	public int compareTo(Student o) {
+		return (int) ((this.getGPA() * 1000) - (o.getGPA() * 1000));
 	}
 }
