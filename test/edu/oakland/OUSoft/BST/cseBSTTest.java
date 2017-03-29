@@ -3,6 +3,8 @@ package edu.oakland.OUSoft.BST;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class cseBSTTest {
@@ -116,6 +118,25 @@ public class cseBSTTest {
 		assertEquals(0, tree.size());
 		assertTrue(tree.isEmpty());
 		assertFalse(tree.contains(2));
+	}
+	
+	@Test
+	public void iterator() throws Exception {
+		tree.add(2);
+		tree.add(3);
+		tree.add(1);
+		tree.add(4);
+		Iterator<Integer> iterator = tree.iterator();
+		
+		assertTrue(iterator.hasNext());
+		assertEquals("Iterator didn't give expected first element", (Object) 1, iterator.next());
+		assertTrue(iterator.hasNext());
+		assertEquals("Iterator didn't give expected second element", (Object) 2, iterator.next());
+		assertTrue(iterator.hasNext());
+		assertEquals("Iterator didn't give expected third element", (Object) 3, iterator.next());
+		assertTrue(iterator.hasNext());
+		assertEquals("Iterator didn't give expected second element", (Object) 4, iterator.next());
+		assertFalse(iterator.hasNext());
 	}
 	
 }

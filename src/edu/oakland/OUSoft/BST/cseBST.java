@@ -1,6 +1,8 @@
 package edu.oakland.OUSoft.BST;
 
 import java.util.Iterator;
+import java.util.Stack;
+import java.util.TreeSet;
 
 public class cseBST<E extends Comparable<E>> implements Iterable<E> {
 	
@@ -46,11 +48,19 @@ public class cseBST<E extends Comparable<E>> implements Iterable<E> {
 	}
 	
 	public int size() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		return sizeRecurse(root);
+	}
+	
+	private int sizeRecurse(Node<E> node) {
+		if (node == null) {
+			return 0;
+		} else {
+			return sizeRecurse(node.left) + sizeRecurse(node.right) + 1;
+		}
 	}
 	
 	public boolean isEmpty() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		return root == null;
 	}
 	
 	public void clear() {
@@ -64,19 +74,20 @@ public class cseBST<E extends Comparable<E>> implements Iterable<E> {
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		return new Iterator<E>() {
-			Node<E> node = root;
-			
-			@Override
-			public boolean hasNext() {
-				return false;
-			}
-			
-			@Override
-			public E next() {
-				return null;
-			}
-		};
+		Stack<E> stack = new Stack<E>();
+		nodeToStack(stack, root);
+		
+		return stack.iterator();
+	}
+	
+	private void nodeToStack(Stack<E> stack, Node<E> node) {
+		if (node == null) {
+			return;
+		}
+		
+		nodeToStack(stack, node.left);
+		stack.add(node.element);
+		nodeToStack(stack, node.right);
 	}
 	
 	private class Node<E> {
