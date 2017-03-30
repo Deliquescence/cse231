@@ -87,7 +87,7 @@ public class TextInterface {
 					Student student = new Student(ID, firstName, lastName);
 					student.setMajor(this.getInput("Major: "));
 					student.setNumYearsAttended(this.getIntegerInput("Years Attended: "));
-					student.setGPA(this.getGPAInput("GPA: "));
+					student.setGPA(this.getGPAInput("GPA (out of 100): "));
 					
 					//Confirmation
 					System.out.println("\nAdd this student?\n" + student.toString());

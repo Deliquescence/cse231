@@ -11,6 +11,9 @@ public class Student extends Person implements Comparable<Student> {
 	
 	private int numYearsAttended;
 	
+	/**
+	 * Note: the GPA is out of 100
+	 */
 	private double GPA;
 	
 	/**
@@ -69,15 +72,16 @@ public class Student extends Person implements Comparable<Student> {
 		return GPA;
 	}
 	
+	/**
+	 * Note: the GPA is out of 100
+	 *
+	 * @param GPA the GPA, 0-100
+	 */
 	public void setGPA(double GPA) {
-		if (GPA < 0 || GPA > 4.0) {
+		if (GPA < 0 || GPA > 100.0) {
 			throw new IllegalArgumentException("GPA out of bounds");
 		}
 		this.GPA = GPA;
-	}
-	
-	public float getGPAOutOf100() {
-		return (float) (GPA * 25);
 	}
 	
 	@Override
