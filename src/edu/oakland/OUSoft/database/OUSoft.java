@@ -22,6 +22,11 @@ import java.util.List;
  */
 public class OUSoft {
 	
+	/*
+	 * See the file
+	 *  src/BST/cseBST.java
+	 * for implementation of a binary search tree.
+	 */
 	private final cseBST<Student> students;
 	private final cseLinkedList<Instructor> instructors;
 	private final cseLinkedList<Person> others;
