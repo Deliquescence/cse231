@@ -3,6 +3,9 @@ package edu.oakland.OUSoft.BST;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import static org.junit.Assert.*;
 
 public class cseBSTTest {
@@ -142,4 +145,120 @@ public class cseBSTTest {
 		assertFalse(tree.contains(2));
 	}
 	
+	@Test
+	public void toArray() throws Exception {
+		tree.add(1);
+		tree.add(2);
+		tree.add(3);
+		
+		Object[] array = tree.toArray();
+		assertEquals(1, array[0]);
+		assertEquals(2, array[1]);
+		assertEquals(3, array[2]);
+	}
+	
+	@Test
+	public void toArray1() throws Exception {
+		tree.add(11);
+		tree.add(22);
+		
+		Integer[] array = tree.toArray(new Integer[0]);
+		assertEquals((Object) 11, array[0]);
+		assertEquals((Object) 22, array[1]);
+		
+		Integer[] array2 = new Integer[2];
+		tree.toArray(array2);
+		assertEquals((Object) 11, array2[0]);
+		assertEquals((Object) 22, array2[1]);
+		
+		Integer[] array3 = new Integer[3];
+		array3[2] = 33;
+		tree.toArray(array3);
+		assertEquals((Object) 11, array3[0]);
+		assertEquals((Object) 22, array3[1]);
+		assertNull(array3[2]);
+	}
+	
+	@Test
+	public void containsAll() throws Exception {
+		tree.add(11);
+		tree.add(22);
+		tree.add(33);
+		assertEquals(3, tree.size());
+		
+		Collection<Integer> testCollection1 = new ArrayList<>();
+		Collection<Integer> testCollection2 = new ArrayList<>();
+		Collection<Integer> testCollection3 = new ArrayList<>();
+		
+		testCollection1.add(22);
+		
+		testCollection2.add(11);
+		testCollection2.add(22);
+		testCollection2.add(33);
+		
+		assertTrue(tree.containsAll(testCollection1));
+		assertTrue(tree.containsAll(testCollection2));
+		assertTrue(tree.containsAll(testCollection3));
+		
+		tree.remove(33);
+		assertFalse(tree.containsAll(testCollection2));
+	}
+	
+	@Test
+	public void addAll() throws Exception {
+		Collection<Integer> testCollection1 = new ArrayList<>();
+		
+		testCollection1.add(11);
+		testCollection1.add(22);
+		testCollection1.add(33);
+		
+		assertTrue(tree.addAll(testCollection1));
+		assertTrue(tree.containsAll(testCollection1));
+	}
+	
+	@Test
+	public void removeAll() throws Exception {
+		Collection<Integer> testCollection1 = new ArrayList<>();
+		
+		testCollection1.add(1);
+		testCollection1.add(2);
+		testCollection1.add(3);
+		testCollection1.add(2);
+		testCollection1.add(2);
+		
+		assertFalse("Should not have changed", tree.removeAll(testCollection1));
+		
+		assertTrue(tree.addAll(testCollection1));
+		assertTrue(tree.containsAll(testCollection1));
+		
+		testCollection1.add(4); //Not removed because not in tree, but removeAll should still return true
+		assertTrue(tree.removeAll(testCollection1));
+		assertFalse(tree.contains(1));
+		assertFalse(tree.contains(2));
+		assertFalse(tree.contains(3));
+	}
+	
+	@Test
+	public void retainAll() throws Exception {
+		tree.add(1);
+		tree.add(2);
+		tree.add(3);
+		tree.add(4);
+		
+		Collection<Integer> testCollection1 = new ArrayList<>();
+		testCollection1.add(1);
+		testCollection1.add(2);
+		testCollection1.add(3);
+		testCollection1.add(4);
+		
+		assertFalse(tree.retainAll(testCollection1));
+		
+		testCollection1.remove(2);
+		testCollection1.remove(4);
+		
+		assertTrue(tree.retainAll(testCollection1));
+		assertTrue(tree.contains(1));
+		assertTrue(tree.contains(3));
+		assertEquals(2, tree.size());
+	}
 }
