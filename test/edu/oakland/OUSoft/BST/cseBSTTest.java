@@ -69,9 +69,8 @@ public class cseBSTTest {
 	
 	@Test
 	public void remove() throws Exception {
-		assertFalse(tree.remove(1));
 		tree.add(1);
-		assertTrue(tree.remove(1));
+		tree.remove(1);
 		assertFalse(tree.contains(1));
 		
 		tree.add(44);
@@ -81,28 +80,51 @@ public class cseBSTTest {
 		tree.add(11);
 		assertEquals(5, tree.size());
 		
-		assertTrue(tree.remove(44));
+		tree.remove(44);
 		assertFalse(tree.contains(44));
 		assertEquals(4, tree.size());
 		
-		assertTrue(tree.remove(55));
+		tree.remove(55);
 		assertFalse(tree.contains(55));
 		assertEquals(3, tree.size());
 		
-		assertTrue(tree.remove(11));
+		tree.remove(11);
 		assertFalse(tree.contains(11));
 		assertEquals(2, tree.size());
 		
+		tree.remove(33);
+		assertFalse(tree.contains(33));
+		assertEquals(1, tree.size());
+		
+		tree.remove(22);
+		assertFalse(tree.contains(22));
+		assertEquals(0, tree.size());
+		
+		//Test duplicate elements
+		tree.add(22);
 		tree.add(11);
-		assertTrue(tree.remove(11));
-		assertTrue(tree.contains(11)); //Duplicate element
+		tree.add(44);
+		tree.add(11);
+		tree.add(22);
+		assertEquals(5, tree.size());
+		
+		tree.remove(22);
+		assertTrue(tree.contains(22));
+		assertEquals(4, tree.size());
+		
+		tree.remove(44);
+		assertFalse(tree.contains(44));
+		assertEquals(3, tree.size());
+		
+		tree.remove(11);
+		assertTrue(tree.contains(11));
 		assertEquals(2, tree.size());
 		
-		assertTrue(tree.remove(11));
+		tree.remove(11);
 		assertFalse(tree.contains(11));
 		assertEquals(1, tree.size());
 		
-		assertTrue(tree.remove(22));
+		tree.remove(22);
 		assertFalse(tree.contains(22));
 		assertEquals(0, tree.size());
 	}
