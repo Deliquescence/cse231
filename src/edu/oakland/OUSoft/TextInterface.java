@@ -250,7 +250,24 @@ public class TextInterface {
 				System.out.println("Loaded!");
 				
 				return true;
-			
+				
+			case "average":
+				System.out.printf("Average GPA of all students: \n%.2f\n", db.averageGPA());
+				return true;
+				
+			case "rank":
+				Student studentr;
+				if (tokens.length > 1) { //ID is given
+					studentr = this.db.getStudentByID(tokens[1]);
+				} else {
+					studentr = getStudentFromID("Enter the ID of the student: ");
+					if (studentr == null) {
+						return false;
+					}
+				}
+				System.out.printf("This students rank is: %d\n", db.rank(studentr));
+				return true;
+				
 			case "grade":
 				if (tokens.length == 4) {
 					Course gradeCourse = db.getCourseByID(tokens[1]);
@@ -517,6 +534,7 @@ public class TextInterface {
 	private void printBigHelp() {
 		System.out.print("Available commands:\n" +
 		                 "add [type]\t\t\t\tAdd a person or course to the database\n" +
+		                 "average\t\t\t\t\tDisplay the average GPA of the students in the database\n" +
 		                 "enroll\t\t\t\t\tEnroll a student in a course\n" +
 		                 "get <ID>\t\t\t\tRetrieve a person from the database\n" +
 		                 "grade <cID> <sID> <GPA>\tAssign a grade to a student\n" +
@@ -524,6 +542,7 @@ public class TextInterface {
 		                 "list [type]\t\t\t\tList people or courses in the database\n" +
 		                 "load [path]\t\t\t\tLoad the database from the path (default path if not given)\n" +
 		                 "quit\t\t\t\t\tExit the program\n" +
+		                 "rank <ID>\t\t\t\tDisplay the rank of a student\n" +
 		                 "remove <ID>\t\t\t\tRemove a person or course from the database\n" +
 		                 "save [path]\t\t\t\tSave the database to the path (default path if not given)\n" +
 		                 "withdraw\t\t\t\tWithdraw a student from a course\n");
