@@ -164,7 +164,8 @@ public class cseBSTTest {
 		assertEquals("Iterator didn't give expected second element", (Object) 4, iterator.next());
 		assertFalse(iterator.hasNext());
 	}
-
+	
+	@Test
 	public void toArray() throws Exception {
 		tree.add(1);
 		tree.add(2);
