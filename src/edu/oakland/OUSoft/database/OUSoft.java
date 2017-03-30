@@ -1,5 +1,6 @@
 package edu.oakland.OUSoft.database;
 
+import edu.oakland.OUSoft.BST.cseBST;
 import edu.oakland.OUSoft.items.Course;
 import edu.oakland.OUSoft.items.Instructor;
 import edu.oakland.OUSoft.items.Person;
@@ -8,6 +9,7 @@ import edu.oakland.OUSoft.linkedList.cseLinkedList;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -20,14 +22,14 @@ import java.util.List;
  */
 public class OUSoft {
 	
-	private final cseLinkedList<Student> students;
+	private final cseBST<Student> students;
 	private final cseLinkedList<Instructor> instructors;
 	private final cseLinkedList<Person> others;
 	private final cseLinkedList<Course> courses;
 	private final cseLinkedList<Enrollment> enrollments;
 	
 	public OUSoft() {
-		this.students = new cseLinkedList<>();
+		this.students = new cseBST<>();
 		this.instructors = new cseLinkedList<>();
 		this.others = new cseLinkedList<>();
 		this.courses = new cseLinkedList<>();
@@ -564,9 +566,9 @@ public class OUSoft {
 	/**
 	 * Get all the students in the database.
 	 *
-	 * @return List of the students in the database
+	 * @return Collection of the students in the database
 	 */
-	public List<Student> getStudents() {
+	public Collection<Student> getStudents() {
 		return students;
 	}
 	
