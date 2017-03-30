@@ -21,8 +21,10 @@ public class cseBSTTest {
 		assertEquals(1, tree.size());
 		tree.add(2);
 		assertEquals(2, tree.size());
-		tree.remove(3);
+		tree.remove(1);
 		assertEquals(1, tree.size());
+		tree.remove(2);
+		assertEquals(0, tree.size());
 	}
 	
 	@Test

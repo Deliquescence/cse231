@@ -80,7 +80,14 @@ public class cseBST<E extends Comparable<E>> implements Iterable<E> {
 	}
 	
 	public int size() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		return sizeRecurse(root);
+	}
+	
+	private int sizeRecurse(Node<E> node) {
+		if (node == null) {
+			return 0;
+		}
+		return sizeRecurse(node.left) + sizeRecurse(node.right) + 1;
 	}
 	
 	public boolean isEmpty() {
