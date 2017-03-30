@@ -91,11 +91,11 @@ public class cseBST<E extends Comparable<E>> implements Iterable<E> {
 	}
 	
 	public boolean isEmpty() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		return root == null;
 	}
 	
 	public void clear() {
-		root = new Node<>(null);
+		root = null;
 	}
 	
 	/**
