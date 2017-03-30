@@ -47,9 +47,9 @@ public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	 * @param o the object to remove
 	 */
 	public boolean remove(Object o) {
+		boolean dirty = contains(o);
 		root = removeRecurse(root, (E) o);
-		
-		return true; //Not implemented yet
+		return dirty;
 	}
 	
 	private Node<E> removeRecurse(Node<E> node, E e) {

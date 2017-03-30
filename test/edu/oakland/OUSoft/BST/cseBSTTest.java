@@ -75,8 +75,11 @@ public class cseBSTTest {
 	
 	@Test
 	public void remove() throws Exception {
+		assertFalse(tree.remove(1));
+		assertFalse(tree.remove("an object"));
+		
 		tree.add(1);
-		tree.remove(1);
+		assertTrue(tree.remove(1));
 		assertFalse(tree.contains(1));
 		
 		tree.add(44);
@@ -86,23 +89,23 @@ public class cseBSTTest {
 		tree.add(11);
 		assertEquals(5, tree.size());
 		
-		tree.remove(44);
+		assertTrue(tree.remove(44));
 		assertFalse(tree.contains(44));
 		assertEquals(4, tree.size());
 		
-		tree.remove(55);
+		assertTrue(tree.remove(55));
 		assertFalse(tree.contains(55));
 		assertEquals(3, tree.size());
 		
-		tree.remove(11);
+		assertTrue(tree.remove(11));
 		assertFalse(tree.contains(11));
 		assertEquals(2, tree.size());
 		
-		tree.remove(33);
+		assertTrue(tree.remove(33));
 		assertFalse(tree.contains(33));
 		assertEquals(1, tree.size());
 		
-		tree.remove(22);
+		assertTrue(tree.remove(22));
 		assertFalse(tree.contains(22));
 		assertEquals(0, tree.size());
 		
@@ -114,23 +117,23 @@ public class cseBSTTest {
 		tree.add(22);
 		assertEquals(5, tree.size());
 		
-		tree.remove(22);
+		assertTrue(tree.remove(22));
 		assertTrue(tree.contains(22));
 		assertEquals(4, tree.size());
 		
-		tree.remove(44);
+		assertTrue(tree.remove(44));
 		assertFalse(tree.contains(44));
 		assertEquals(3, tree.size());
 		
-		tree.remove(11);
+		assertTrue(tree.remove(11));
 		assertTrue(tree.contains(11));
 		assertEquals(2, tree.size());
 		
-		tree.remove(11);
+		assertTrue(tree.remove(11));
 		assertFalse(tree.contains(11));
 		assertEquals(1, tree.size());
 		
-		tree.remove(22);
+		assertTrue(tree.remove(22));
 		assertFalse(tree.contains(22));
 		assertEquals(0, tree.size());
 	}
