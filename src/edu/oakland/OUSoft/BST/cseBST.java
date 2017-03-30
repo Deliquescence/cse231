@@ -1,9 +1,6 @@
 package edu.oakland.OUSoft.BST;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Stack;
-import java.util.TreeSet;
+import java.util.*;
 
 public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	
@@ -185,7 +182,12 @@ public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	 */
 	@Override
 	public Object[] toArray() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		Object[] array = new Object[this.size()];
+		int i = 0;
+		for (E e : this) {
+			array[i++] = e;
+		}
+		return array;
 	}
 	
 	/**
@@ -232,7 +234,16 @@ public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	 */
 	@Override
 	public <T> T[] toArray(T[] a) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		//Stolen from ArrayList's implementation
+		Object[] elementData = this.toArray();
+		if (a.length < this.size()) {
+			return (T[]) Arrays.copyOf(elementData, this.size(), a.getClass());
+		}
+		System.arraycopy(elementData, 0, a, 0, this.size());
+		if (a.length > this.size()) {
+			a[this.size()] = null;
+		}
+		return a;
 	}
 	
 	/**
