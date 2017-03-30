@@ -42,6 +42,32 @@ public class OUSoft {
 	}
 	
 	/**
+	 * Get the average GPA of all students.
+	 * Note GPA is out of 100
+	 *
+	 * @return the average GPA
+	 */
+	public double averageGPA() {
+		return 0;
+	}
+	
+	/**
+	 * Get the rank of this student.
+	 * i.e. 1 if they have they highest GPA, 2 for the next highest, etc.
+	 * Two students with the same GPA have the same rank.
+	 *
+	 * @param student the Student to rank
+	 * @return the rank of the student
+	 * @throws IllegalArgumentException if the student is not in the database.
+	 */
+	public int rank(Student student) {
+		if (getStudentByID(student.getID()) == null) {
+			throw new IllegalArgumentException("Cannot rank a student not in the database");
+		}
+		return -1;
+	}
+	
+	/**
 	 * Helper to create an ObjectOutputStream at the given file path,
 	 * creating the file and its parent directories if necessary.
 	 *

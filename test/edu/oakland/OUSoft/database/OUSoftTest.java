@@ -403,4 +403,59 @@ public class OUSoftTest {
 		assertFalse("Did not remove a person by ID", db.getPeople().contains(testPerson));
 	}
 	
+	@Test
+	public void rank() throws Exception {
+		Student testStudent1 = new Student("S001");
+		Student testStudent2 = new Student("S002");
+		Student testStudent3 = new Student("S003");
+		Student testStudent4 = new Student("S004");
+		
+		testStudent1.setGPA(10);
+		testStudent2.setGPA(50);
+		testStudent3.setGPA(100);
+		testStudent4.setGPA(50);
+		
+		db.addPerson(testStudent1);
+		assertEquals(1, db.rank(testStudent1));
+		
+		db.addPerson(testStudent2);
+		assertEquals(1, db.rank(testStudent2));
+		assertEquals(2, db.rank(testStudent1));
+		
+		db.addPerson(testStudent3);
+		assertEquals(1, db.rank(testStudent3));
+		assertEquals(2, db.rank(testStudent2));
+		assertEquals(3, db.rank(testStudent1));
+		
+		db.addPerson(testStudent4);
+		assertEquals(1, db.rank(testStudent3));
+		assertEquals(2, db.rank(testStudent2));
+		assertEquals(2, db.rank(testStudent4));
+		assertEquals(3, db.rank(testStudent1));
+	}
+	
+	@Test
+	public void averageGPA() throws Exception {
+		Student testStudent1 = new Student("S001");
+		Student testStudent2 = new Student("S002");
+		Student testStudent3 = new Student("S003");
+		Student testStudent4 = new Student("S004");
+		
+		testStudent1.setGPA(10);
+		testStudent2.setGPA(50);
+		testStudent3.setGPA(100);
+		testStudent4.setGPA(50);
+		
+		db.addPerson(testStudent1);
+		assertEquals(10, db.averageGPA(), 0.0001);
+		
+		db.addPerson(testStudent2);
+		assertEquals(30, db.averageGPA(), 0.0001);
+		
+		db.addPerson(testStudent3);
+		assertEquals(53.33, db.averageGPA(), 0.0001);
+		
+		db.addPerson(testStudent4);
+		assertEquals(52.5, db.averageGPA(), 0.0001);
+	}
 }
