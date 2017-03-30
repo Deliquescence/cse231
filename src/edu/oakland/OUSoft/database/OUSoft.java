@@ -11,6 +11,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * includes an array of references to all Students and an array of references to all Instructors,
@@ -48,7 +49,14 @@ public class OUSoft {
 	 * @return the average GPA
 	 */
 	public double averageGPA() {
-		return 0;
+		double sum = 0;
+		int i = 0;
+		
+		for (Student s : this.students) {
+			sum += s.getGPA();
+			i++;
+		}
+		return sum / i;
 	}
 	
 	/**
@@ -64,7 +72,11 @@ public class OUSoft {
 		if (getStudentByID(student.getID()) == null) {
 			throw new IllegalArgumentException("Cannot rank a student not in the database");
 		}
-		return -1;
+		TreeSet<Double> uniqueGPAs = new TreeSet<>();
+		for (Student s : this.students) {
+			uniqueGPAs.add(s.getGPA());
+		}
+		return uniqueGPAs.size() - new ArrayList<>(uniqueGPAs).indexOf(student.getGPA());
 	}
 	
 	/**
