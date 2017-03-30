@@ -519,8 +519,11 @@ public class OUSoft {
 	 * @param person The Person to remove
 	 */
 	public void removePerson(Person person) {
-		this.students.remove(person);
-		this.instructors.remove(person);
+		if (person instanceof Student) {
+			this.students.remove(person);
+		} else if (person instanceof Instructor) {
+			this.instructors.remove(person);
+		}
 		this.others.remove(person);
 	}
 	
