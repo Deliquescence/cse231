@@ -135,7 +135,36 @@ public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		return new Iterator<E>() {
+			Stack<Node<E>> stack = new Stack<>();
+			
+			{
+				Node<E> node = root;
+				while (node != null) {
+					stack.push(node);
+					node = node.left;
+				}
+			}
+			
+			@Override
+			public boolean hasNext() {
+				return !stack.isEmpty();
+			}
+			
+			@Override
+			public E next() {
+				Node<E> node = stack.pop();
+				E element = node.element; //Get element for the current node to return later
+				if (node.right != null) { //Right subtree next
+					node = node.right;
+					while (node != null) { //Go down left tree
+						stack.push(node);
+						node = node.left;
+					}
+				}
+				return element;
+			}
+		};
 	}
 	
 	/**
