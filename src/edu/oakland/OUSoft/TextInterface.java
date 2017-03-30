@@ -383,7 +383,7 @@ public class TextInterface {
 			String sGPA = this.getInput(prompt);
 			try {
 				dGPA = Double.parseDouble(sGPA);
-				if (dGPA < 0 || dGPA > 4.0) {
+				if (dGPA < 0 || dGPA > 100.0) {
 					throw new IllegalArgumentException();
 				}
 				good = true;
