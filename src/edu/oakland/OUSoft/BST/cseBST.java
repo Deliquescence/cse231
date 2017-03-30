@@ -266,7 +266,16 @@ public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	 */
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null) {
+			throw new NullPointerException();
+		}
+		
+		for (Object item : c) {
+			if (!this.contains(item)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -295,7 +304,14 @@ public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	 */
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null) {
+			throw new NullPointerException();
+		}
+		
+		for (Object aC : c) {
+			this.add((E) aC);
+		}
+		return true;
 	}
 	
 	/**
@@ -323,7 +339,17 @@ public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	 */
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null) {
+			throw new NullPointerException();
+		}
+		boolean dirty = false;
+		
+		for (Object item : c) {
+			if (this.remove(item)) {
+				dirty = true;
+			}
+		}
+		return dirty;
 	}
 	
 	/**
@@ -350,7 +376,20 @@ public class cseBST<E extends Comparable<E>> implements Collection<E> {
 	 */
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		if (c == null) {
+			throw new NullPointerException();
+		}
+		boolean dirty = false;
+		
+		for (E element : this) {
+			if (!c.contains(element)) {
+				if (this.remove(element)) {
+					dirty = true;
+				}
+			}
+		}
+		
+		return dirty;
 	}
 	
 	public void clear() {
