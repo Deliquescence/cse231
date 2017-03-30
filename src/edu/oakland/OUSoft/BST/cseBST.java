@@ -41,8 +41,42 @@ public class cseBST<E extends Comparable<E>> implements Iterable<E> {
 		return node;
 	}
 	
-	public boolean remove(E e) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+	public void remove(E e) {
+		root = removeRecurse(root, e);
+	}
+	
+	private Node<E> removeRecurse(Node<E> node, E e) {
+		if (node == null) {
+			return null;
+		}
+		if (e.compareTo(node.element) < 0) {
+			node.left = removeRecurse(node.left, e);
+		} else if (e.compareTo(node.element) > 0) {
+			node.right = removeRecurse(node.right, e);
+		} else {
+			node = removeNode(node);
+		}
+		return node;
+	}
+	
+	private Node<E> removeNode(Node<E> node) {
+		if (node.left == null) {
+			return node.right;
+		} else if (node.right == null) {
+			return node.left;
+		} else {
+			Node<E> predecessor = getPredecessor(node.left);
+			node.element = predecessor.element;
+			node.left = removeRecurse(node.left, node.element);
+			return node;
+		}
+	}
+	
+	private Node<E> getPredecessor(Node<E> node) {
+		while (node.right != null) {
+			node = node.right;
+		}
+		return node;
 	}
 	
 	public int size() {
