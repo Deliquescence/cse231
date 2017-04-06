@@ -551,5 +551,4 @@ public class cseLinkedListTest {
 	public void lastIndexOf() throws Exception {
 		indexOf(); //No duplicate elements, so is same
 	}
-	
 }
