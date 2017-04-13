@@ -33,14 +33,16 @@ public class Heap<T extends Comparable<T>> implements PriQueueInterface<T> {
 	// Current lastIndex position is empty.
 	// Inserts element into the tree and ensures shape and order properties.
 	private void reheapUp(T element) {
-		int hole = lastIndex;
-		while ((hole > 0)    // hole is not root and element > hole's parent
-		       && (element.compareTo(elements.get((hole - 1) / 2)) > 0)) {
-			// move hole's parent down and then move hole up
+		reheapUpRecurse(element, lastIndex);
+	}
+	
+	private void reheapUpRecurse(T element, int hole) {
+		if (hole > 0 && (element.compareTo(elements.get((hole - 1) / 2)) > 0)) {
 			elements.set(hole, elements.get((hole - 1) / 2));
-			hole = (hole - 1) / 2;
+			reheapUpRecurse(element, (hole - 1) / 2);
+		} else {
+			elements.set(hole, element);  // place element into final hole
 		}
-		elements.set(hole, element);  // place element into final hole
 	}
 	
 	// Throws PriQOverflowException if this priority queue is full;
