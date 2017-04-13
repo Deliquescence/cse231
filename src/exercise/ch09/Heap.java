@@ -21,21 +21,18 @@ public class Heap<T extends Comparable<T>> implements PriQueueInterface<T> {
 	}
 	
 	// Returns true if this priority queue is empty; otherwise, returns false.
-	public boolean isEmpty()
-	{
+	public boolean isEmpty() {
 		return (lastIndex == -1);
 	}
 	
 	// Returns true if this priority queue is full; otherwise, returns false.
-	public boolean isFull()
-	{
+	public boolean isFull() {
 		return (lastIndex == maxIndex);
 	}
 	
 	// Current lastIndex position is empty.
 	// Inserts element into the tree and ensures shape and order properties.
-	private void reheapUp(T element)
-	{
+	private void reheapUp(T element) {
 		int hole = lastIndex;
 		while ((hole > 0)    // hole is not root and element > hole's parent
 		       && (element.compareTo(elements.get((hole - 1) / 2)) > 0)) {
@@ -48,8 +45,7 @@ public class Heap<T extends Comparable<T>> implements PriQueueInterface<T> {
 	
 	// Throws PriQOverflowException if this priority queue is full;
 	// otherwise, adds element to this priority queue.
-	public void enqueue(T element) throws PriQOverflowException
-	{
+	public void enqueue(T element) throws PriQOverflowException {
 		if (lastIndex == maxIndex) {
 			throw new PriQOverflowException("Priority queue is full");
 		} else {
@@ -61,8 +57,7 @@ public class Heap<T extends Comparable<T>> implements PriQueueInterface<T> {
 	
 	// If either child of hole is larger than element, return the index
 	// of the larger child; otherwise, return the index of hole.
-	private int newHole(int hole, T element)
-	{
+	private int newHole(int hole, T element) {
 		int left = (hole * 2) + 1;
 		int right = (hole * 2) + 2;
 		
@@ -111,16 +106,16 @@ public class Heap<T extends Comparable<T>> implements PriQueueInterface<T> {
 	
 	// Current root position is "empty";
 	// Inserts element into the tree and ensures shape and order properties.
-	private void reheapDown(T element)
-	{
-		int hole = 0;      // current index of hole
-		int newhole;       // index where hole should move to
-		
-		newhole = newHole(hole, element);   // find next hole
-		while (newhole != hole) {
+	private void reheapDown(T element) {
+		reheapDownRecurse(element, 0);
+	}
+	
+	private void reheapDownRecurse(T element, int hole) {
+		int newhole = newHole(hole, element);
+		if (newhole != hole) {
 			elements.set(hole, elements.get(newhole));  // move element up
 			hole = newhole;                            // move hole down
-			newhole = newHole(hole, element);          // find next hole
+			reheapDownRecurse(element, newHole(hole, element));
 		}
 		elements.set(hole, element);           // fill in the final hole
 	}
@@ -128,8 +123,7 @@ public class Heap<T extends Comparable<T>> implements PriQueueInterface<T> {
 	// Throws PriQUnderflowException if this priority queue is empty;
 	// otherwise, removes element with highest priority from this
 	// priority queue and returns it.
-	public T dequeue() throws PriQUnderflowException
-	{
+	public T dequeue() throws PriQUnderflowException {
 		T hold;      // element to be dequeued and returned
 		T toMove;    // element to move down heap
 		
@@ -147,8 +141,7 @@ public class Heap<T extends Comparable<T>> implements PriQueueInterface<T> {
 	}
 	
 	// Returns a string of all the heap elements.
-	public String toString()
-	{
+	public String toString() {
 		String theHeap = new String("the heap is:\n");
 		for (int index = 0; index <= lastIndex; index++) {
 			theHeap = theHeap + index + ". " + elements.get(index) + "\n";
